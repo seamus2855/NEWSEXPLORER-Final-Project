@@ -1,0 +1,61 @@
+@import url('https://googleapis.com');
+
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%; /* Prevents font-size adjustments after orientation changes on iOS */
+  -ms-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  color: #1A1B22;
+  font-family: 'Roboto', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reset default link styles globally */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Reset default button behaviors globally to make customization easier */
+button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* Global page layout container to ensure footers stay anchored at the bottom */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Helper accessibility layout class for screen-readers only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
