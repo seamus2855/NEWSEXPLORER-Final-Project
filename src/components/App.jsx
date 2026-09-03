@@ -1,28 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Main from './components/Main/Main';
-import SavedNews from './components/SavedNews/SavedNews'; 
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import { searchNews } from './utils/newsApi'; 
+import Main from './Main/Main';
+import SavedNews from './SavedNews/SavedNews';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
+import { searchNews } from '../utils/newsApi';
 
 function App() {
-  // --- Search UI State ---
-  const [articles, setArticles] = useState([]);         // All fetched articles
-  const [isLoading, setIsLoading] = useState(false);     // Preloader visibility
-  const [hasSearched, setHasSearched] = useState(false);   // Has a search been attempted?
-  const [searchError, setSearchError] = useState('');     // API error messages
-  const [visibleCount, setVisibleCount] = useState(3);   // Pagination tracker
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [searchError, setSearchError] = useState('');
+  const [visibleCount, setVisibleCount] = useState(3);
 
-  // --- Simulated Authentication & User States ---
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
-  const [currentUser, setCurrentUser] = useState(null); // Stores logged-in profile data
-  
-  // --- Simulated Database Storage ---
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
   const [savedArticles, setSavedArticles] = useState([]);
-  const [currentKeyword, setCurrentKeyword] = useState(''); // Tracks active keyword for attaching to saved tags
+  const [currentKeyword, setCurrentKeyword] = useState('');
 
-  // 1. STUB: Check for an authentication token on browser startup
   useEffect(() => {
     const token = localStorage.getItem('mock_jwt');
     if (token) {
@@ -31,37 +27,32 @@ function App() {
     }
   }, []);
 
-  // 2. STUB: Login handler simulation
   const handleLogin = (email, password) => {
     localStorage.setItem('mock_jwt', 'simulated-session-web-token');
     setIsLoggedIn(true);
-    setCurrentUser({ name: 'Explorer', email: email });
+    setCurrentUser({ name: 'Explorer', email });
   };
 
-  // 3. STUB: Logout handler simulation
   const handleLogout = () => {
     localStorage.removeItem('mock_jwt');
     setIsLoggedIn(false);
     setCurrentUser(null);
-    // Unmark all visual card bookmark state indicators on logout
-    setArticles((prev) => prev.map(art => ({ ...art, isSaved: false })));
+    setArticles((prev) => prev.map((art) => ({ ...art, isSaved: false })));
   };
 
-  // --- API Search Request Trigger ---
   const handleSearchSubmit = (keyword) => {
     setIsLoading(true);
     setHasSearched(true);
     setSearchError('');
     setArticles([]);
-    setVisibleCount(3); 
-    setCurrentKeyword(keyword); // Keep track of the active search query string for keyword tagging
+    setVisibleCount(3);
+    setCurrentKeyword(keyword);
 
     searchNews(keyword)
       .then((data) => {
         if (data.articles) {
-          // Cross-reference with existing saved articles to keep bookmark states matched
           const mappedArticles = data.articles.map((apiArticle) => {
-            const isAlreadySaved = savedArticles.some(saved => saved.url === apiArticle.url);
+            const isAlreadySaved = savedArticles.some((saved) => saved.url === apiArticle.url);
             return { ...apiArticle, isSaved: isAlreadySaved };
           });
           setArticles(mappedArticles);
@@ -72,43 +63,34 @@ function App() {
         setSearchError('Sorry, something went wrong during the request. Please try again later.');
       })
       .finally(() => {
-        setIsLoading(false); // Remove preloader
+        setIsLoading(false);
       });
   };
 
-  // --- Pagination Trigger ---
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 3);
   };
 
-  // 4. STUB: Save Card simulation with keyword tag injection
   const handleCardSave = (card) => {
-    // If the article is already marked as saved, intercept the action and delete it (toggles flag)
     if (card.isSaved) {
       handleCardDelete(card);
       return;
     }
 
-    const cardWithMeta = { 
-      ...card, 
+    const cardWithMeta = {
+      ...card,
       isSaved: true,
-      keyword: currentKeyword || 'General' // Populates specific custom keyword badge for Figma matching
+      keyword: currentKeyword || 'General',
     };
 
     setSavedArticles((prev) => [cardWithMeta, ...prev]);
-
-    // Instantly reflect blue saved state changes in the main search list grid
     setArticles((prev) =>
       prev.map((item) => (item.url === card.url ? { ...item, isSaved: true } : item))
     );
   };
 
-  // 5. STUB: Delete Card simulation with multi-view state matching
   const handleCardDelete = (card) => {
-    // Remove card from saved list stack array
     setSavedArticles((prev) => prev.filter((item) => item.url !== card.url));
-
-    // Turn blue bookmark icon element back to white in active search results
     setArticles((prev) =>
       prev.map((item) => (item.url === card.url ? { ...item, isSaved: false } : item))
     );
@@ -118,14 +100,13 @@ function App() {
     <div className="page">
       <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} currentUser={currentUser} />
       <Routes>
-        {/* Main home route receives search results state & functions */}
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
-            <Main 
+            <Main
               onSearchSubmit={handleSearchSubmit}
               onShowMore={handleShowMore}
-              cards={articles} 
+              cards={articles}
               isLoading={isLoading}
               hasSearched={hasSearched}
               searchError={searchError}
@@ -133,22 +114,20 @@ function App() {
               onCardSave={handleCardSave}
               onCardDelete={handleCardDelete}
               isLoggedIn={isLoggedIn}
-              onAuthModalOpen={() => handleLogin('explorer@news.com', 'password')} // Simulated direct login for click testing
+              onAuthModalOpen={() => handleLogin('explorer@news.com', 'password')}
             />
-          } 
+          }
         />
-        
-        {/* Saved news layout route */}
-        <Route 
-          path="/saved-news" 
+        <Route
+          path="/saved-news"
           element={
-            <SavedNews 
-              savedCards={savedArticles} 
-              onCardDelete={handleCardDelete} 
+            <SavedNews
+              savedCards={savedArticles}
+              onCardDelete={handleCardDelete}
               isLoggedIn={isLoggedIn}
               currentUser={currentUser}
             />
-          } 
+          }
         />
       </Routes>
       <Footer />
@@ -157,3 +136,4 @@ function App() {
 }
 
 export default App;
+
