@@ -1,0 +1,80 @@
+/* Universal Border-Box Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Base Body and Document Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f6f7;
+  color: #1a1b22;
+}
+
+/* Master Layout Wrapper */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Forces footer to the bottom of the view */
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Sticky Footer Strategy */
+.page > main,
+.page > routes,
+.page > .main {
+  flex: 1; /* Pushes footer down if page content is short */
+}
+
+/* Optional State Modifiers for Dark/Light Theme Switching */
+.page_theme_dark {
+  background-color: #1a1b22;
+  color: #ffffff;
+}
+
+.page_theme_light {
+  background-color: #ffffff;
+  color: #1a1b22;
+}
+
+/* Global Interactive Resets */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  transition: opacity 0.2s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease-in-out;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
