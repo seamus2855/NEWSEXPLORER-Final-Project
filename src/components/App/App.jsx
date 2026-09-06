@@ -1,60 +1,32 @@
-import { useState, useEffect } from "react"; // Fixed: Added missing React hooks hooks
-import { Routes, Route } from "react-router-dom"; // Fixed: Added missing router routing tokens
+import { useState } from "react"; 
+import { Routes, Route } from "react-router-dom"; 
 import Main from "../Main/Main"; 
 import SavedNews from "../SavedNews/SavedNews"; 
 import Header from "../Header/Header"; 
 import Footer from "../Footer/Footer"; 
-import { searchNews } from "../../utils/NewsAPI"; 
+import { searchNews } from "../../utils/newsApi.js"; 
 
 function App() { 
   // --- Search UI State --- 
-  const [articles, setArticles] = useState([]); // All fetched articles 
-  const [isLoading, setIsLoading] = useState(false); // Preloader visibility 
-  const [hasSearched, setHasSearched] = useState(false); // Has a search been attempted? 
-  const [searchError, setSearchError] = useState(''); // API error messages 
-  const [visibleCount, setVisibleCount] = useState(3); // Pagination tracker 
+  const [articles, setArticles] = useState([]); 
+  const [isLoading, setIsLoading] = useState(false); 
+  const [hasSearched, setHasSearched] = useState(false); 
+  const [searchError, setSearchError] = useState(''); 
+  const [visibleCount, setVisibleCount] = useState(3); 
   
   // --- Simulated Authentication & User States --- 
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
-  const [currentUser, setCurrentUser] = useState(null); // Stores logged-in profile data 
+  // Fixed: Derived initial state natively to satisfy react-hooks/set-state-in-effect
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem('mock_jwt') !== null;
+  });
+  const [currentUser, setCurrentUser] = useState(() => {
+    const token = localStorage.getItem('mock_jwt');
+    return token ? { name: 'Explorer', email: 'explorer@news.com' } : null;
+  }); 
   
   // --- Simulated Database Storage --- 
   const [savedArticles, setSavedArticles] = useState([]); 
-  const [currentKeyword, setCurrentKeyword] = useState(''); // Tracks active keyword for attaching to saved tags 
-
-  // 1. STUB: Check for an authentication token on browser startup 
-  useEffect(() => { 
-    const token = localStorage.getItem('mock_jwt'); 
-    if (token) { 
-      setIsLoggedIn(true); 
-      setCurrentUser({ name: 'Explorer', email: 'explorer@news.com' }); 
-    } 
-  }, []); 
-
-  // Sync main articles search cards whenever saved articles change behind the scenes 
-  useEffect(() => { 
-    setArticles((prevArticles) => 
-      prevArticles.map((apiArticle) => { 
-        const isAlreadySaved = savedArticles.some((saved) => saved.url === apiArticle.url); 
-        return { ...apiArticle, isSaved: isAlreadySaved }; 
-      }) 
-    ); 
-  }, [savedArticles]); 
-
-  // 2. STUB: Login handler simulation 
-  const handleLogin = (email, password) => { 
-    localStorage.setItem('mock_jwt', 'simulated-session-web-token'); 
-    setIsLoggedIn(true); 
-    setCurrentUser({ name: 'Explorer', email: email }); 
-  }; 
-
-  // 3. STUB: Logout handler simulation 
-  const handleLogout = () => { 
-    localStorage.removeItem('mock_jwt'); 
-    setIsLoggedIn(false); 
-    setCurrentUser(null); 
-    setSavedArticles([]); // Clear saved grid display data on user profile exit 
-  }; 
+  const [currentKeyword, setCurrentKeyword] = useState(''); 
 
   // --- API Search Request Trigger --- 
   const handleSearchSubmit = (keyword) => { 
@@ -63,12 +35,12 @@ function App() {
     setSearchError(''); 
     setArticles([]); 
     setVisibleCount(3); 
-    setCurrentKeyword(keyword); // Keep track of the active search query string for keyword tagging 
+    setCurrentKeyword(keyword); 
     
     searchNews(keyword) 
       .then((data) => { 
         if (data.articles) { 
-          // Cross-reference with existing saved articles to keep bookmark states matched 
+          // Match bookmark indicators immediately upon fetching data
           const mappedArticles = data.articles.map((apiArticle) => { 
             const isAlreadySaved = savedArticles.some((saved) => saved.url === apiArticle.url); 
             return { ...apiArticle, isSaved: isAlreadySaved }; 
@@ -81,7 +53,7 @@ function App() {
         setSearchError('Sorry, something went wrong during the request. Please try again later.'); 
       }) 
       .finally(() => { 
-        setIsLoading(false); // Remove preloader 
+        setIsLoading(false); 
       }); 
   }; 
 
@@ -90,9 +62,8 @@ function App() {
     setVisibleCount((prevCount) => prevCount + 3); 
   }; 
 
-  // 4. STUB: Save Card simulation with keyword tag injection 
+  // Fixed: Synchronized bookmarked states natively inside handlers to bypass cascading render errors
   const handleCardSave = (card) => { 
-    // If the article is already marked as saved, intercept the action and delete it (toggles flag) 
     if (card.isSaved) { 
       handleCardDelete(card); 
       return; 
@@ -100,29 +71,44 @@ function App() {
     const cardWithMeta = { 
       ...card, 
       isSaved: true, 
-      keyword: currentKeyword || 'General' // Populates specific custom keyword badge for Figma matching 
+      keyword: currentKeyword || 'General' 
     }; 
-    setSavedArticles((prev) => [cardWithMeta, ...prev]); 
+    setSavedArticles((prev) => [cardWithMeta, ...prev]);
+    setArticles((prev) => 
+      prev.map((item) => (item.url === card.url ? { ...item, isSaved: true } : item))
+    );
   }; 
 
-  // 5. STUB: Delete Card simulation with multi-view state matching 
   const handleCardDelete = (card) => { 
-    // Remove card from saved list stack array 
     setSavedArticles((prev) => prev.filter((item) => item.url !== card.url)); 
+    setArticles((prev) => 
+      prev.map((item) => (item.url === card.url ? { ...item, isSaved: false } : item))
+    );
+  }; 
+
+  // Fixed: Removed the unused 'password' argument to satisfy the no-unused-vars requirement
+  const handleLogin = (email) => { 
+    localStorage.setItem('mock_jwt', 'simulated-session-web-token'); 
+    setIsLoggedIn(true); 
+    setCurrentUser({ name: 'Explorer', email: email }); 
+  }; 
+
+  const handleLogout = () => { 
+    localStorage.removeItem('mock_jwt'); 
+    setIsLoggedIn(false); 
+    setCurrentUser(null); 
+    setSavedArticles([]); 
   }; 
 
   return ( 
     <div className="page"> 
-      {/* Fixed: Synced prop names with Header component definitions to map user profile text */}
       <Header 
         isLoggedIn={isLoggedIn} 
         userName={currentUser?.name} 
         onLogoutClick={handleLogout} 
-        onSignInClick={() => handleLogin('explorer@news.com', 'password')} 
+        onSignInClick={() => handleLogin('explorer@news.com')} 
       /> 
-      
       <Routes> 
-        {/* Main home route receives search results state & functions */} 
         <Route 
           path="/" 
           element={ 
@@ -137,12 +123,10 @@ function App() {
               onCardSave={handleCardSave} 
               onCardDelete={handleCardDelete} 
               isLoggedIn={isLoggedIn} 
-              onAuthModalOpen={() => handleLogin('explorer@news.com', 'password')} // Simulated direct login for click testing 
+              onAuthModalOpen={() => handleLogin('explorer@news.com')} 
             /> 
           } 
         /> 
-        
-        {/* Saved news layout route */} 
         <Route 
           path="/saved-news" 
           element={ 
@@ -155,7 +139,6 @@ function App() {
           } 
         /> 
       </Routes> 
-      
       <Footer /> 
     </div> 
   ); 

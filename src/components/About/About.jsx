@@ -1,4 +1,3 @@
-import { useState } from "react"; // Added standard hooks setup, removed React import
 import "./About.css";
 
 function About() {
