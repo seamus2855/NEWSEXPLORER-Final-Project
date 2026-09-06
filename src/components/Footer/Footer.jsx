@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
-import githubIcon from "../../images/github.svg";
-import facebookIcon from "../../images/facebook.svg";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
