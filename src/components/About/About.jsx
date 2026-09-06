@@ -1,31 +1,15 @@
+import { useState } from "react"; // Added standard hooks setup, removed React import
 import "./About.css";
-import authorImage from "../../images/author.jpg"; // Adjust path to your profile image asset
 
 function About() {
   return (
     <section className="about">
-      {/* Profile Image container */}
-      <img
-        src={authorImage}
-        alt="Author of News Explorer"
-        className="about__image"
-      />
-
-      {/* Content layout container */}
-      <div className="about__content">
+      {/* Fixed: Use the clean public absolute path string directly */}
+      <img src="/images/author.jpg" alt="Author" className="about__image" />
+      <div className="about__text-container">
         <h2 className="about__title">About the author</h2>
-
-        <p className="about__description">
-          Hello! I'm a software developer with experience in creating
-          responsive, accessible web applications. This project demonstrates my
-          frontend development capabilities using React, React Router, and
-          secure API integrations.
-        </p>
-
-        <p className="about__description">
-          Through intense practical training, I have mastered building secure
-          authentication systems, structuring clean component architectures, and
-          managing stateful interactive interfaces.
+        <p className="about__text">
+          Write your author biography description text here...
         </p>
       </div>
     </section>

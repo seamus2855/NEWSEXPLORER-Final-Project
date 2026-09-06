@@ -9,6 +9,7 @@ function Footer() {
       <p className="footer__copyright">
         &copy; {currentYear} Supersite, Powered by News API
       </p>
+      
       <div className="footer__navigation">
         {/* Text links list */}
         <ul className="footer__links">
@@ -18,43 +19,46 @@ function Footer() {
             </Link>
           </li>
           <li className="footer__list-item">
-            <a
-              href="https://tripleten.com"
-              className="footer__link"
-              target="_blank"
+            <a 
+              href="https://tripleten.com" 
+              className="footer__link" 
+              target="_blank" 
               rel="noreferrer"
             >
               TripleTen
             </a>
           </li>
         </ul>
+
         {/* Social icon links list */}
         <ul className="footer__social-icons">
           <li className="footer__list-item">
-            <a
-              href="https://github.com"
-              className="footer__icon-link"
-              target="_blank"
+            <a 
+              href="https://github.com" 
+              className="footer__icon-link" 
+              target="_blank" 
               rel="noreferrer"
             >
-              <img
-                src={githubIcon}
-                alt="GitHub icon profile"
-                className="footer__social-icon"
+              {/* Fixed: Replaced undefined variable reference with static public asset paths */}
+              <img 
+                src="/images/github.svg" 
+                alt="GitHub icon profile" 
+                className="footer__social-icon" 
               />
             </a>
           </li>
           <li className="footer__list-item">
-            <a
-              href="https://facebook.com"
-              className="footer__icon-link"
-              target="_blank"
+            <a 
+              href="https://facebook.com" 
+              className="footer__icon-link" 
+              target="_blank" 
               rel="noreferrer"
             >
-              <img
-                src={facebookIcon}
-                alt="Facebook icon page"
-                className="footer__social-icon"
+              {/* Fixed: Replaced undefined variable reference with static public asset paths */}
+              <img 
+                src="/images/facebook.svg" 
+                alt="Facebook icon page" 
+                className="footer__social-icon" 
               />
             </a>
           </li>
