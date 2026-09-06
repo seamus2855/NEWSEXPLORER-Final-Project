@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import ModalWithForm from "./ModalWithForm";
 import { useForm } from "../../hooks/useForm"; // Adjust this path to match your custom hooks location
 import "./RegisterModal.css";
@@ -29,15 +29,16 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister({ 
-      email: values.email, 
-      password: values.password, 
-      name: values.username 
+    onRegister({
+      email: values.email,
+      password: values.password,
+      name: values.username,
     });
   };
 
   // Check if form fields have passed minimal HTML5 layout validation constraints
-  const isFormValid = values.email && values.password && values.username.length >= 2;
+  const isFormValid =
+    values.email && values.password && values.username.length >= 2;
 
   // Render a completely clean success window markup context variant if specified by parent loop state
   if (isRegistrationSuccess) {

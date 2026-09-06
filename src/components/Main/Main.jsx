@@ -1,10 +1,8 @@
-import React from "react";
 import "./Main.css";
 import SearchForm from "../SearchForm/SearchForm";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import About from "../About/About";
 import Preloader from "../Preloader/Preloader"; // Uncommented if these exist
-import NotFound from "../NotFound/NotFound";   // Uncommented if these exist
 
 function Main({
   onSearchSubmit,
@@ -38,9 +36,7 @@ function Main({
           {!isLoading && (
             <>
               {/* 2. Error Message handler */}
-              {searchError && (
-                <p className="main__error-text">{searchError}</p>
-              )}
+              {searchError && <p className="main__error-text">{searchError}</p>}
 
               {/* 3. Nothing Found handling */}
               {hasSearched && cards.length === 0 && !searchError && (
@@ -57,7 +53,7 @@ function Main({
               {cards.length > 0 && (
                 <>
                   <h2 className="main__title">Search results</h2>
-                  
+
                   {/* Slices array directly up to the current visible count */}
                   <NewsCardList
                     cards={cards.slice(0, visibleCount)}

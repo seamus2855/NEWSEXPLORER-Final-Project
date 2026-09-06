@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Fixed: Added missing React hooks hooks
+import { useState, useEffect } from "react"; // Fixed: Added missing React hooks hooks
 import { Routes, Route } from "react-router-dom"; // Fixed: Added missing router routing tokens
 import Main from "../Main/Main"; 
 import SavedNews from "../SavedNews/SavedNews"; 

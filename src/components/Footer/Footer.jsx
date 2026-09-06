@@ -1,7 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
-import githubIcon from "../../images/github.svg"; 
+import githubIcon from "../../images/github.svg";
 import facebookIcon from "../../images/facebook.svg";
 
 function Footer() {
@@ -21,10 +20,10 @@ function Footer() {
             </Link>
           </li>
           <li className="footer__list-item">
-            <a 
-              href="https://tripleten.com" 
-              className="footer__link" 
-              target="_blank" 
+            <a
+              href="https://tripleten.com"
+              className="footer__link"
+              target="_blank"
               rel="noreferrer"
             >
               TripleTen
@@ -34,23 +33,31 @@ function Footer() {
         {/* Social icon links list */}
         <ul className="footer__social-icons">
           <li className="footer__list-item">
-            <a 
-              href="https://github.com" 
-              className="footer__icon-link" 
-              target="_blank" 
+            <a
+              href="https://github.com"
+              className="footer__icon-link"
+              target="_blank"
               rel="noreferrer"
             >
-              <img src={githubIcon} alt="GitHub icon profile" className="footer__social-icon" />
+              <img
+                src={githubIcon}
+                alt="GitHub icon profile"
+                className="footer__social-icon"
+              />
             </a>
           </li>
           <li className="footer__list-item">
-            <a 
-              href="https://facebook.com" 
-              className="footer__icon-link" 
-              target="_blank" 
+            <a
+              href="https://facebook.com"
+              className="footer__icon-link"
+              target="_blank"
               rel="noreferrer"
             >
-              <img src={facebookIcon} alt="Facebook icon page" className="footer__social-icon" />
+              <img
+                src={facebookIcon}
+                alt="Facebook icon page"
+                className="footer__social-icon"
+              />
             </a>
           </li>
         </ul>

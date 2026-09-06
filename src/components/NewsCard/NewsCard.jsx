@@ -1,12 +1,10 @@
-import React from 'react';
-
-function NewsCard({ 
-  card, 
-  isLoggedIn, 
-  isSavedNewsPage, 
-  onBookmarkClick, 
-  onDeleteClick, 
-  onAuthModalOpen 
+function NewsCard({
+  card,
+  isLoggedIn,
+  isSavedNewsPage,
+  onBookmarkClick,
+  onDeleteClick,
+  onAuthModalOpen,
 }) {
   // Extract and adapt properties safely
   const title = card.title;
@@ -21,14 +19,14 @@ function NewsCard({
   // Format date matching standard guidelines (e.g., "August 2, 2026")
   const formatDate = (dateString) => {
     if (!dateString) return "";
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   const handleActionButtonClick = (e) => {
     e.preventDefault(); // Stop click from firing anchor link
     e.stopPropagation(); // Prevent event bubbling up into wrapper links
-    
+
     // 1. If user is logged out, show login modal immediately
     if (!isLoggedIn) {
       onAuthModalOpen();
@@ -48,8 +46,17 @@ function NewsCard({
   return (
     <article className="news-card">
       {/* Article image link */}
-      <a href={link} target="_blank" rel="noreferrer" className="news-card__link">
-        <img src={image} alt={title || "News article"} className="news-card__image" />
+      <a
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+        className="news-card__link"
+      >
+        <img
+          src={image}
+          alt={title || "News article"}
+          className="news-card__image"
+        />
       </a>
 
       {/* Top action panel overlay */}
@@ -65,13 +72,13 @@ function NewsCard({
             type="button"
             className={`news-card__button ${
               isSavedNewsPage
-                ? 'news-card__button_type_trash'
+                ? "news-card__button_type_trash"
                 : isSaved
-                ? 'news-card__button_type_bookmark-marked'
-                : 'news-card__button_type_bookmark'
+                  ? "news-card__button_type_bookmark-marked"
+                  : "news-card__button_type_bookmark"
             }`}
             onClick={handleActionButtonClick}
-            aria-label={isSavedNewsPage ? 'Delete article' : 'Save article'}
+            aria-label={isSavedNewsPage ? "Delete article" : "Save article"}
           />
 
           {/* Contextual tooltips placed after button for adjacent selector compatibility */}
@@ -85,7 +92,12 @@ function NewsCard({
       </div>
 
       {/* Main card description text context link wrapper */}
-      <a href={link} target="_blank" rel="noreferrer" className="news-card__text-container">
+      <a
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+        className="news-card__text-container"
+      >
         <p className="news-card__date">{formatDate(date)}</p>
         <h3 className="news-card__title">{title}</h3>
         <p className="news-card__text">{text}</p>

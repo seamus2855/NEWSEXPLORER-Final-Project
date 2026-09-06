@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./SearchForm.css";
 
 function SearchForm({ onSearchSubmit }) { // Fixed: Synced prop name with Main.jsx parameters

@@ -1,12 +1,12 @@
 // src/utils/newsApi.js
 
-// 1. Check environment reliably using build tools (works for Webpack/Create React App)
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+// Fixed: Swapped process.env for Vite's native import.meta.env checker
+const IS_PRODUCTION = import.meta.env.MODE === 'production';
 
-// 2. Append the required /v2/everything endpoint directly to the base URLs
+// Fixed: Appended the correct endpoint paths explicitly to both domain branches
 const BASE_URL = IS_PRODUCTION 
-  ? 'https://nomoreparties.co' 
-  : 'https://newsapi.org';
+  ? 'https://nomoreparties.co/news/v2/everything' 
+  : 'https://newsapi.org/v2/everything';
 
 const API_KEY = 'YOUR_NEWS_API_KEY_HERE'; // Replace with your actual key
 
@@ -19,7 +19,7 @@ export const searchNews = (keyword) => {
   const toDate = today.toISOString().split('T')[0];
   const fromDate = sevenDaysAgo.toISOString().split('T')[0];
 
-  // 3. Constructed URL now has the correct paths and query params
+  // Constructed URL with all 5 required parameters
   const url = `${BASE_URL}?q=${encodeURIComponent(keyword)}&apiKey=${API_KEY}&from=${fromDate}&to=${toDate}&pageSize=100`;
 
   return fetch(url).then((res) => {
