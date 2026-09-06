@@ -1,0 +1,145 @@
+/* Layout container inherited from basic modal setups */ 
+.modal__form { 
+  display: flex; 
+  flex-direction: column; 
+  width: 100%; 
+} 
+
+.modal__title { 
+  font-family: 'Roboto', Arial, sans-serif; 
+  font-size: 24px; 
+  font-weight: 900; 
+  line-height: 28px; 
+  color: #1a1b22; 
+  margin: 0 0 22px 0; 
+} 
+
+/* Stacked label and input structure */ 
+.modal__label-container { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
+  margin-bottom: 24px; 
+  position: relative; 
+} 
+
+.modal__label { 
+  font-family: 'Inter', Arial, sans-serif; 
+  font-size: 12px; 
+  font-weight: 400; 
+  line-height: 14px; 
+  color: #2f71e5; 
+} 
+
+.modal__input { 
+  width: 100%; 
+  border: none; 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); 
+  padding: 8px 0; 
+  font-family: 'Inter', Arial, sans-serif; 
+  font-size: 14px; 
+  font-weight: 400; 
+  line-height: 17px; 
+  color: #000000; 
+  background-color: transparent; 
+  outline: none; 
+  transition: border-bottom-color 0.2s ease; 
+  box-sizing: border-box; /* Fixed: Prevents inputs from running off screen edges */
+} 
+
+.modal__input:focus { 
+  border-bottom-color: #2f71e5; 
+} 
+
+/* Validation error text styling */ 
+.modal__error-message { 
+  font-family: 'Inter', Arial, sans-serif; 
+  font-size: 12px; 
+  font-weight: 400; 
+  line-height: 14px; 
+  color: #ff0000; 
+  min-height: 14px; 
+  margin-top: 3px; 
+} 
+
+/* Control area for submit buttons and secondary redirects */ 
+.modal__submit-container { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 16px; 
+  margin-top: 10px; 
+} 
+
+.modal__submit-btn { 
+  width: 100%; 
+  height: 64px; 
+  background-color: #2f71e5; 
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2); 
+  border-radius: 80px; 
+  border: none; /* Fixed: Removes default platform border rendering */
+  font-family: 'Inter', Arial, sans-serif; 
+  font-size: 18px; 
+  font-weight: 500; 
+  line-height: 22px; 
+  color: #ffffff; 
+  text-align: center; 
+  cursor: pointer; /* Fixed: Enhances UX pointer indicator */
+  transition: background-color 0.2s ease-in-out; 
+} 
+
+.modal__submit-btn:hover:not(:disabled) { 
+  background-color: #2a64cc; 
+} 
+
+.modal__submit-btn:disabled { 
+  background-color: #e6e8eb; 
+  color: #b6bcbf; 
+  box-shadow: none; 
+  cursor: not-allowed; 
+} 
+
+/* Redirect link line (e.g. "or Sign up") */ 
+.modal__redirect { 
+  font-family: 'Inter', Arial, sans-serif; 
+  font-size: 14px; 
+  font-weight: 400; 
+  line-height: 17px; 
+  color: #000000; 
+} 
+
+.modal__redirect-btn { 
+  background: none; /* Fixed: Strips browser specific styles */
+  border: none; /* Fixed: Strips browser specific styles */
+  padding: 0; /* Fixed: Keeps button spacing flush with helper text */
+  font-family: 'Inter', Arial, sans-serif; /* Fixed: Ensures font consistency */
+  font-size: 14px; /* Fixed: Matches text alignment */
+  color: #2f71e5; 
+  font-weight: 500; 
+  margin-left: 8px; 
+  cursor: pointer; /* Fixed: Restores action state context */
+  transition: opacity 0.2s ease; 
+} 
+
+.modal__redirect-btn:hover { 
+  opacity: 0.7; 
+} 
+
+/* Mobile Layout Responsive Adjustments */ 
+@media screen and (max-width: 580px) { 
+  .modal__title { 
+    font-size: 22px; 
+    line-height: 26px; 
+    margin-bottom: 20px; 
+  } 
+
+  .modal__submit-btn { 
+    height: 56px; 
+    font-size: 16px; 
+  } 
+  
+  /* Fixed: Adds automatic margin flow to snap layouts clean on high-aspect screens */
+  .modal__submit-container {
+    margin-top: 24px; 
+  }
+}

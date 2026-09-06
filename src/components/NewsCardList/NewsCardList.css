@@ -1,0 +1,40 @@
+/* NewsCardList.css */
+
+/* Clean layout grid specifically targeting the <ul> container */
+.news-card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+  gap: 16px;
+  width: 100%;
+  list-style: none; /* Removes bullet points from standard <ul> elements */
+  padding: 0;      /* Clears default browser indentations */
+  margin: 0 auto 64px; /* Centers the list block smoothly */
+  max-width: 1440px;
+}
+
+/* Individual list item wrapper settings */
+.news-card-list__item {
+  display: flex;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Responsive Adaptation Guidelines (Breakpoints)
+   ========================================================================== */
+
+/* Tablet Viewports */
+@media screen and (max-width: 1024px) {
+  .news-card-list {
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+}
+
+/* Mobile Viewports */
+@media screen and (max-width: 620px) {
+  .news-card-list {
+    grid-template-columns: 1fr; /* Stacks the cards vertically into a single column layout */
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+}

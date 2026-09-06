@@ -1,0 +1,98 @@
+.main {
+  width: 100%;
+  background-color: #f5f6f7;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container for search result card grids */
+.main__results-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 104px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Prevents side padding from expanding width past 100% */
+}
+
+.main__title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+  color: #1a1b22;
+  margin: 0 0 32px 0;
+}
+
+/* Card layout grid config */
+.main__cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 16px;
+  margin-bottom: 64px;
+}
+
+/* Fixed: Renamed from .main__more-btn to match Main.jsx class name */
+.main__show-more-button {
+  align-self: center;
+  width: 288px;
+  height: 64px;
+  background-color: #ffffff;
+  border: none; /* Fixed: Clears default native browser button borders */
+  border-radius: 80px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #1a1b22;
+  cursor: pointer; /* Fixed: Adds a hand pointer on hover */
+  transition: background-color 0.2s ease-in-out;
+}
+
+.main__show-more-button:hover {
+  background-color: #e6e8eb;
+}
+
+/* Tablet Screen Breakpoint */
+@media screen and (max-width: 1024px) {
+  .main__results-container {
+    padding: 40px 40px 48px;
+  }
+
+  .main__title {
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 24px;
+  }
+
+  .main__cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(224px, 1fr));
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  /* Fixed: Renamed match class */
+  .main__show-more-button {
+    width: 240px;
+    height: 56px;
+    font-size: 16px;
+  }
+}
+
+/* Mobile Screen Breakpoint */
+@media screen and (max-width: 640px) {
+  .main__results-container {
+    padding: 32px 16px 40px;
+  }
+
+  .main__cards-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Fixed: Renamed match class */
+  .main__show-more-button {
+    width: 100%;
+  }
+}

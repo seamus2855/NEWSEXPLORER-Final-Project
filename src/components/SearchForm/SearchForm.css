@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Hero Section Layout Area Container
+   ========================================================================== */
+.search-form__container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 160px 104px 80px; /* Generates padding breathing room from header */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.search-form__title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 64px;
+  color: #FFFFFF;
+  margin: 0 0 32px 0;
+  text-align: center;
+  max-width: 730px;
+}
+
+.search-form__subtitle {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #FFFFFF;
+  margin: 0 0 48px 0;
+  text-align: center;
+  max-width: 566px;
+}
+
+/* ==========================================================================
+   Search Row Enclosure Setup
+   ========================================================================== */
+.search-form {
+  width: 100%;
+  max-width: 608px;
+  margin: 0 auto;
+}
+
+.search-form__field-wrapper {
+  display: flex;
+  position: relative; /* Keeps the input field and button positioned correctly on the row */
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid #D1D2D6;
+  box-sizing: border-box;
+  border-radius: 100px;
+}
+
+.search-form__input {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #1A1B22;
+  width: 100%;
+  padding: 21px 180px 21px 24px; /* Generous right padding ensures text never slips behind absolute button */
+  border: none;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.search-form__input::placeholder {
+  color: #B6BCBF;
+}
+
+.search-form__button {
+  position: absolute;
+  top: -1px; /* Corrects microscopic subpixel rendering issues across modern browsers */
+  right: -1px;
+  bottom: -1px;
+  background-color: #2F71E5;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  border-radius: 100px;
+  border: none;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #FFFFFF;
+  padding: 0 54px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-form__button:hover {
+  background-color: #2A65CC;
+}
+
+.search-form__button:active {
+  background-color: #2354A8;
+  box-shadow: none;
+}
+
+/* Fixed: Added error tag layout positioning mechanics to sit neatly below the input row */
+.search-form__error {
+  position: absolute;
+  left: 24px;
+  bottom: -32px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: #FF1A1A;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Responsive Adaptation Breakpoints (Tablet & Mobile)
+   ========================================================================== */
+
+/* Tablet Media Queries (Viewports under 1024px) */
+@media screen and (max-width: 1023px) {
+  .search-form__container {
+    padding: 120px 40px 48px;
+  }
+
+  .search-form__title {
+    font-size: 36px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
+
+  .search-form__subtitle {
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
+
+  .search-form__field-wrapper {
+    max-width: 436px;
+    margin: 0 auto;
+  }
+
+  .search-form__input {
+    padding: 17px 150px 17px 24px;
+  }
+
+  .search-form__button {
+    padding: 0 40px;
+  }
+}
+
+/* Mobile Media Queries (Viewports under 768px) */
+@media screen and (max-width: 767px) {
+  .search-form__container {
+    padding: 86px 16px 32px;
+  }
+
+  .search-form__title {
+    font-size: 36px;
+    line-height: 40px;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  .search-form__subtitle {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 122px; /* Pulls layout down cleanly to provide breathing room for errors */
+    text-align: left;
+  }
+
+  .search-form__field-wrapper {
+    max-width: 100%;
+    flex-direction: column;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    gap: 16px;
+  }
+
+  .search-form__input {
+    background-color: #FFFFFF;
+    border: 1px solid #D1D2D6;
+    border-radius: 100px;
+    padding: 16px 24px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .search-form__button {
+    position: static; /* Drops absolute framing to span naturally below input on narrow screens */
+    width: 100%;
+    padding: 16px 0;
+    font-size: 18px;
+    line-height: 24px;
+    box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  }
+
+  /* Fixed: Reposition error bubble position bounds specifically for mobile layouts */
+  .search-form__error {
+    top: -32px;
+    bottom: auto;
+    left: 24px;
+  }
+}
