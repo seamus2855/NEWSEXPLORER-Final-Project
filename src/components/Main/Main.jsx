@@ -41,7 +41,7 @@ function Main({
               {/* 3. Nothing Found handling */}
               {hasSearched && cards.length === 0 && !searchError && (
                 <div className="main__not-found-container">
-                  <NotFound />
+                  {/* Fixed: Removed the undefined <NotFound /> tag to stop lint compiler crashes */}
                   <h3 className="main__not-found-title">Nothing Found</h3>
                   <p className="main__status-text">
                     Sorry, but nothing matched your search terms.
@@ -53,7 +53,7 @@ function Main({
               {cards.length > 0 && (
                 <>
                   <h2 className="main__title">Search results</h2>
-
+                  
                   {/* Slices array directly up to the current visible count */}
                   <NewsCardList
                     cards={cards.slice(0, visibleCount)}

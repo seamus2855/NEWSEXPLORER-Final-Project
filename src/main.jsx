@@ -1,15 +1,14 @@
-
+import { StrictMode } from 'react'; // Swapped from importing whole React object
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-// Fixed: Corrected the relative path structure to look inside the active directory directory
 import App from './components/App/App.jsx'; 
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <StrictMode> {/* Fixed: Removed the "React." prefix */}
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  </StrictMode>
 );
