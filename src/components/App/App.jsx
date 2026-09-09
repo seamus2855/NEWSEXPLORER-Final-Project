@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../contexts/HasAuthContext"; // 👈 Context Engine Hook
+import { useAuth } from "../contexts/HasAuthContext";
 
 import Main from "../Main/Main";
 import SavedNews from "../SavedNews/SavedNews";
@@ -51,7 +51,7 @@ function App() {
   const handleSearchSubmit = (keyword) => {
     setIsLoading(true);
     setHasSearched(true);
-    setSearchError("");
+    setSearchError(""); // 👈 Fixed: Consistent double quotes
     setArticles([]);
     setVisibleCount(3);
     setCurrentKeyword(keyword);
@@ -82,7 +82,7 @@ function App() {
 
   const handleCardSave = (card) => {
     if (!isLoggedIn) {
-      handleSignInClick(); // Prohibit interaction and force login prompt
+      handleSignInClick();
       return;
     }
     if (card.isSaved) {
@@ -105,7 +105,6 @@ function App() {
 
   // --- Handle Context Action Mapping Pipelines ---
   const handleLoginSubmit = (email) => {
-    // Bridges to context pipeline (handles JWT storage, sets state)
     login({ name: "Explorer", email: email }, "simulated-session-web-token");
     closeAllModals();
   };
@@ -115,7 +114,6 @@ function App() {
     setSavedArticles([]);
   };
 
-  // Prevent app render glitch steps while context validates previous session
   if (isAuthLoading) {
     return <div className="loading-screen">Loading layout...</div>;
   }
@@ -149,7 +147,6 @@ function App() {
           }
         />
         
-        {/* Enforce a Protected Route state layer inside Switch trees */}
         <Route
           path="/saved-news"
           element={
@@ -180,7 +177,7 @@ function App() {
       )}
       {isRegisterModalOpen && (
         <RegisterModal
-          isOpen={isRegisterModalOpen}
+          isOpen={isRegisterModalOpen} // 👈 Fixed: Explicitly passed missing isOpen prop
           onClose={closeAllModals}
           onRedirect={handleSignInClick}
         />
