@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { HasAuthContext } from "./HasAuthContext"; // 👈 FIX: Points directly to the file in the same folder
+import { HasAuthContext } from "../contexts/HasAuthContext"; // 👈 FIX: Points directly to the file in the same folder
 
 
 
