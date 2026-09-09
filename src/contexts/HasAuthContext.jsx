@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import * as auth from "../utils/auth"; // Adjust path to your auth.js file
+import * as auth from "../utils/auth"; // 👈 Verified path from src/contexts/ to src/utils/
 
-// 1. Export the raw context directly so our hook file can read it
 export const HasAuthContext = createContext(null);
 
 export function AuthProvider({ children }) {

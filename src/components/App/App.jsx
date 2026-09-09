@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../../contexts/HasAuthContext";
+import { useAuth } from "../../hooks/useAuth";
 import Main from "../Main/Main";
 import SavedNews from "../SavedNews/SavedNews";
 import Header from "../Header/Header";
