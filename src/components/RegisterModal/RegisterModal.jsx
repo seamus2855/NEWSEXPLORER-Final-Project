@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import ModalWithForm from "./ModalWithForm";
-import { useForm } from "../../hooks/useForm"; // Adjust this path to match your custom hooks location
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormAndValidation } from "../../hooks/UseFormAndValidation"; // Leverage validation states
 import "./RegisterModal.css";
 
 function RegisterModal({
@@ -11,58 +11,50 @@ function RegisterModal({
   serverError,
   isRegistrationSuccess,
   onSignInLinkClick,
-  isLoading, // Added: Supports changing submission text during active network calls
+  isLoading,
 }) {
-  // Use the shared useForm hook with your initial schema structures
-  const { values, handleChange, setValues } = useForm({
-    email: "",
-    password: "",
-    username: "",
-  });
+  // Use structured values, errors, and validation states
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
-  // Clear component input data fields whenever the modal resets or opens
+  // Reset inputs when modal opens or closes
   useEffect(() => {
     if (isOpen) {
-      setValues({ email: "", password: "", username: "" });
+      resetForm({ email: "", password: "", username: "" });
     }
-  }, [isOpen, setValues]);
+  }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister({
-      email: values.email,
-      password: values.password,
-      name: values.username,
-    });
+    if (isValid) {
+      onRegister({
+        email: values.email,
+        password: values.password,
+        name: values.username,
+      });
+    }
   };
 
-  // Check if form fields have passed minimal HTML5 layout validation constraints
-  const isFormValid =
-    values.email && values.password && values.username.length >= 2;
-
-  // Render a completely clean success window markup context variant if specified by parent loop state
+  // High-Fidelity Success Modal View Context
   if (isRegistrationSuccess) {
     return (
-      <div className={`modal modal_opened`}>
-        <div className="modal__container">
+      <div className={`modal modal_opened`} role="dialog">
+        <div className="modal__container register-modal__success-card">
           <button
             type="button"
             className="modal__close-button"
             onClick={onClose}
             aria-label="Close success overlay"
           />
-          <div className="register-modal__success-container">
-            <h2 className="register-modal__success-title">
-              Registration successfully completed!
-            </h2>
-            <button
-              type="button"
-              className="register-modal__link"
-              onClick={onSignInLinkClick}
-            >
-              Sign in
-            </button>
-          </div>
+          <h2 className="register-modal__success-title">
+            Registration successfully completed!
+          </h2>
+          <button
+            type="button"
+            className="register-modal__link"
+            onClick={onSignInLinkClick}
+          >
+            Sign in
+          </button>
         </div>
       </div>
     );
@@ -71,59 +63,70 @@ function RegisterModal({
   return (
     <ModalWithForm
       title="Sign up"
+      name="register"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText={isLoading ? "Saving..." : "Sign up"} // Fixed: Dynamically renders loading indicators
+      buttonText={isLoading ? "Signing up..." : "Sign up"}
       altButtonText="Sign in"
       onAltButtonClick={handleAltClick}
-      isValid={isFormValid}
+      isValid={isValid}
     >
-      <label className="modal__label">
-        Email
+      {/* Email input field */}
+      <div className="modal__label-container">
+        <label className="modal__label">Email</label>
         <input
           type="email"
           name="email"
-          className="modal__input"
+          className={`modal__input ${errors.email ? "modal__input_type_error" : ""}`}
           placeholder="Enter email"
           required
-          value={values.email}
+          value={values.email || ""}
           onChange={handleChange}
         />
-        <span className="modal__error"></span>
-      </label>
+        <span className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}>
+          {errors.email}
+        </span>
+      </div>
 
-      <label className="modal__label">
-        Password
+      {/* Password input field */}
+      <div className="modal__label-container">
+        <label className="modal__label">Password</label>
         <input
           type="password"
           name="password"
-          className="modal__input"
+          className={`modal__input ${errors.password ? "modal__input_type_error" : ""}`}
           placeholder="Enter password"
           required
-          value={values.password}
+          minLength="4"
+          value={values.password || ""}
           onChange={handleChange}
         />
-        <span className="modal__error"></span>
-      </label>
+        <span className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}>
+          {errors.password}
+        </span>
+      </div>
 
-      <label className="modal__label">
-        Username
+      {/* Username input field */}
+      <div className="modal__label-container">
+        <label className="modal__label">Username</label>
         <input
           type="text"
           name="username"
-          className="modal__input"
+          className={`modal__input ${errors.username ? "modal__input_type_error" : ""}`}
           placeholder="Enter your username"
           required
           minLength="2"
           maxLength="30"
-          value={values.username}
+          value={values.username || ""}
           onChange={handleChange}
         />
-        <span className="modal__error"></span>
-      </label>
+        <span className={`modal__error-message ${errors.username ? "modal__error-message_visible" : ""}`}>
+          {errors.username}
+        </span>
+      </div>
 
-      {/* Fixed: Positioned inside the form element so it flows above the submit container safely */}
+      {/* Shared Server Fallback Exception Messaging */}
       {serverError && (
         <span className="register-modal__form-error">{serverError}</span>
       )}

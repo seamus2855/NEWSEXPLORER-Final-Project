@@ -13,7 +13,14 @@
   padding: 80px 104px;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box; /* Prevents side padding from expanding width past 100% */
+  box-sizing: border-box;
+}
+
+/* State modifier to align Preloader, Errors, and Nothing Found items perfectly center */
+.main__results-container_status {
+  align-items: center;
+  justify-content: center;
+  padding: 86px 104px;
 }
 
 .main__title {
@@ -25,28 +32,70 @@
   margin: 0 0 32px 0;
 }
 
-/* Card layout grid config */
-.main__cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 16px;
-  margin-bottom: 64px;
+/* Status-related containers */
+.main__loader-container,
+.main__not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 395px;
+  text-align: center;
 }
 
-/* Fixed: Renamed from .main__more-btn to match Main.jsx class name */
+/* Placeholder for the magnifying glass illustration from Figma */
+.main__not-found-icon {
+  width: 96px;
+  height: 96px;
+  background-image: url("../../images/not-found.svg"); /* Ensure path matches your project assets */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-bottom: 24px;
+}
+
+.main__not-found-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 30px;
+  color: #1a1b22;
+  margin: 0 0 16px 0;
+}
+
+.main__status-text {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #b6bcbf;
+  margin: 0;
+}
+
+/* Search Error text styling */
+.main__error-text {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ff4040;
+  text-align: center;
+  margin: 0;
+}
+
+/* Button setup */
 .main__show-more-button {
   align-self: center;
   width: 288px;
   height: 64px;
   background-color: #ffffff;
-  border: none; /* Fixed: Clears default native browser button borders */
+  border: none;
   border-radius: 80px;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
   color: #1a1b22;
-  cursor: pointer; /* Fixed: Adds a hand pointer on hover */
+  cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
 
@@ -60,19 +109,21 @@
     padding: 40px 40px 48px;
   }
 
+  .main__results-container_status {
+    padding: 48px 40px;
+  }
+
   .main__title {
     font-size: 30px;
     line-height: 40px;
     margin-bottom: 24px;
   }
 
-  .main__cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(224px, 1fr));
-    gap: 8px;
-    margin-bottom: 32px;
+  .main__not-found-title {
+    font-size: 22px;
+    line-height: 26px;
   }
 
-  /* Fixed: Renamed match class */
   .main__show-more-button {
     width: 240px;
     height: 56px;
@@ -86,12 +137,14 @@
     padding: 32px 16px 40px;
   }
 
-  .main__cards-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+  .main__results-container_status {
+    padding: 50px 16px;
   }
 
-  /* Fixed: Renamed match class */
+  .main__title {
+    margin-bottom: 20px;
+  }
+
   .main__show-more-button {
     width: 100%;
   }

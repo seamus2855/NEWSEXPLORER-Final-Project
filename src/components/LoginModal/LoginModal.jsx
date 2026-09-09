@@ -1,89 +1,73 @@
 import { useEffect } from "react";
-import { useForm } from "../../hooks/useForm"; // Adjust the relative path as needed
+import { useFormAndValidation } from "../../hooks/UseFormAndValidation"; // Use a combined state hook if available, or pass values from useForm
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
 function LoginModal({ isOpen, onClose, onRedirectClick, onSubmit, isLoading }) {
-  // Use the shared useForm hook with initial values
-  const { values, handleChange, setValues } = useForm({
-    email: "",
-    password: "",
-  });
+  // Recommendation: Use a form hook that outputs values, errors, and form validity
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
-  // Automatically reset the form fields to empty strings whenever the modal opens
+  // Reset form inputs and errors every time the modal mounts or toggles open
   useEffect(() => {
     if (isOpen) {
-      setValues({ email: "", password: "" });
+      resetForm({ email: "", password: "" });
     }
-  }, [isOpen, setValues]);
+  }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(values);
+    if (isValid) {
+      onSubmit(values);
+    }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="modal">
-      <div className="modal__container">
-        <button 
-          type="button" 
-          className="modal__close-btn" 
-          onClick={onClose} 
-          aria-label="Close modal" 
+    <ModalWithForm
+      title="Sign in"
+      name="login"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      buttonText={isLoading ? "Signing in..." : "Sign in"}
+      isButtonDisabled={!isValid}
+      redirectText="Sign up"
+      onRedirectClick={onRedirectClick}
+    >
+      {/* Email input field */}
+      <div className="modal__label-container">
+        <label className="modal__label">Email</label>
+        <input
+          type="email"
+          name="email"
+          className={`modal__input ${errors.email ? "modal__input_type_error" : ""}`}
+          placeholder="Enter email"
+          value={values.email || ""}
+          onChange={handleChange}
+          required
         />
-        <h2 className="modal__title">Sign in</h2>
-        
-        <form className="modal__form" onSubmit={handleSubmit}>
-          {/* Email input field */}
-          <div className="modal__label-container">
-            <label className="modal__label">Email</label>
-            <input 
-              type="email" 
-              name="email" 
-              className="modal__input" 
-              placeholder="Enter email" 
-              value={values.email} 
-              onChange={handleChange} 
-              required 
-            />
-            <span className="modal__error-message"></span>
-          </div>
-
-          {/* Password input field */}
-          <div className="modal__label-container">
-            <label className="modal__label">Password</label>
-            <input 
-              type="password" 
-              name="password" 
-              className="modal__input" 
-              placeholder="Enter password" 
-              value={values.password} 
-              onChange={handleChange} 
-              required 
-            />
-            <span className="modal__error-message"></span>
-          </div>
-
-          {/* Control submit button area */}
-          <div className="modal__submit-container">
-            <button type="submit" className="modal__submit-btn">
-              {isLoading ? "Saving..." : "Sign in"}
-            </button>
-            <p className="modal__redirect">
-              or{" "}
-              <button 
-                type="button" 
-                className="modal__redirect-btn" 
-                onClick={onRedirectClick}
-              >
-                Sign up
-              </button>
-            </p>
-          </div>
-        </form>
+        <span className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}>
+          {errors.email}
+        </span>
       </div>
-    </div>
+
+      {/* Password input field */}
+      <div className="modal__label-container">
+        <label className="modal__label">Password</label>
+        <input
+          type="password"
+          name="password"
+          className={`modal__input ${errors.password ? "modal__input_type_error" : ""}`}
+          placeholder="Enter password"
+          value={values.password || ""}
+          onChange={handleChange}
+          minLength="4"
+          required
+        />
+        <span className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}>
+          {errors.password}
+        </span>
+      </div>
+    </ModalWithForm>
   );
 }
 
