@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext } from "react";
 import * as auth from "../utils/auth"; // 👈 Verified path from src/contexts/ to src/utils/
 
 export const HasAuthContext = createContext(null);
