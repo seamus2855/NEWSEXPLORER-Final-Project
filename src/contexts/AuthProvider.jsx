@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { HasAuthContext } from "./HasAuthContext.js";
-import * as auth from "../../utils/NewsApi.js";
+import * as auth from "../utils/NewsApi.js";
 
 
 export function AuthProvider({ children }) {
