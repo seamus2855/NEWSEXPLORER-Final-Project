@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 // 🍏 FIX 1: Point to the hook file inside your contexts folder
-import { useAuth } from "../../contexts/useAuth.js";
+import { useAuth } from "../../hooks/useAuth.js";
 
 import Main from "../Main/Main";
 import SavedNews from "../SavedNews/SavedNews";
