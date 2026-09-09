@@ -14,7 +14,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 
 // 🍏 FIX 2: Correct path and case-sensitivity for your News API utility
-import { searchNews } from "../../NewsApi.js";
+import { searchNews } from "../../utils/newsApi.js";
 
 function App() {
   // --- Destructure Globally Managed Global Auth Context States ---
