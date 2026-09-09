@@ -9,7 +9,7 @@ import Footer from "../Footer/Footer";
 // Modals layer
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import { searchNews } from "../utils/newsApi.js";
+import { searchNews } from "../../utils/NewsAPI";
 
 function App() {
   // --- Destructure Globally Managed Global Auth Context States ---
