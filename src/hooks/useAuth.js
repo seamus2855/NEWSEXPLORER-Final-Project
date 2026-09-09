@@ -1,5 +1,7 @@
 import { useContext } from "react";
-import { HasAuthContext } from "../contexts/HasAuthContext";
+import { HasAuthContext } from "./HasAuthContext"; // 👈 FIX: Points directly to the file in the same folder
+
+
 
 export function useAuth() {
   const context = useContext(HasAuthContext);
