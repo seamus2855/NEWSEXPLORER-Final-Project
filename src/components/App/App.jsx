@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+
+// 🍏 FIX 1: Point to the hook file inside your contexts folder
+import { useAuth } from "../../contexts/useAuth.js";
+
 import Main from "../Main/Main";
 import SavedNews from "../SavedNews/SavedNews";
 import Header from "../Header/Header";
@@ -9,11 +12,19 @@ import Footer from "../Footer/Footer";
 // Modals layer
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import { searchNews } from "../../utils/NewsAPI";
+
+// 🍏 FIX 2: Correct path and case-sensitivity for your News API utility
+import { searchNews } from "../../utils/NewsApi.js";
 
 function App() {
   // --- Destructure Globally Managed Global Auth Context States ---
-  const { isLoggedIn, currentUser, login, logout, isLoading: isAuthLoading } = useAuth();
+  const {
+    isLoggedIn,
+    currentUser,
+    login,
+    logout,
+    isLoading: isAuthLoading,
+  } = useAuth();
 
   // --- Core Layout & Search Engine UI State ---
   const [articles, setArticles] = useState([]);
@@ -59,7 +70,9 @@ function App() {
       .then((data) => {
         if (data.articles) {
           const mappedArticles = data.articles.map((apiArticle) => {
-            const isAlreadySaved = savedArticles.some((saved) => saved.url === apiArticle.url);
+            const isAlreadySaved = savedArticles.some(
+              (saved) => saved.url === apiArticle.url,
+            );
             return { ...apiArticle, isSaved: isAlreadySaved };
           });
           setArticles(mappedArticles);
@@ -67,7 +80,9 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
-        setSearchError("Sorry, something went wrong during the request. Please try again later.");
+        setSearchError(
+          "Sorry, something went wrong during the request. Please try again later.",
+        );
       })
       .finally(() => {
         setIsLoading(false);
@@ -88,17 +103,25 @@ function App() {
       handleCardDelete(card);
       return;
     }
-    const cardWithMeta = { ...card, isSaved: true, keyword: currentKeyword || "General" };
+    const cardWithMeta = {
+      ...card,
+      isSaved: true,
+      keyword: currentKeyword || "General",
+    };
     setSavedArticles((prev) => [cardWithMeta, ...prev]);
     setArticles((prev) =>
-      prev.map((item) => (item.url === card.url ? { ...item, isSaved: true } : item))
+      prev.map((item) =>
+        item.url === card.url ? { ...item, isSaved: true } : item,
+      ),
     );
   };
 
   const handleCardDelete = (card) => {
     setSavedArticles((prev) => prev.filter((item) => item.url !== card.url));
     setArticles((prev) =>
-      prev.map((item) => (item.url === card.url ? { ...item, isSaved: false } : item))
+      prev.map((item) =>
+        item.url === card.url ? { ...item, isSaved: false } : item,
+      ),
     );
   };
 
@@ -125,7 +148,7 @@ function App() {
         onLogoutClick={handleLogoutClick}
         onSignInClick={handleSignInClick}
       />
-      
+
       <Routes>
         <Route
           path="/"
@@ -145,7 +168,7 @@ function App() {
             />
           }
         />
-        
+
         <Route
           path="/saved-news"
           element={
@@ -162,7 +185,7 @@ function App() {
           }
         />
       </Routes>
-      
+
       <Footer />
 
       {/* --- Overlay Modals Injection Layer --- */}
