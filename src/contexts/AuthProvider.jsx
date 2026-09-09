@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { HasAuthContext } from "./HasAuthContext.js";
-import * as auth from "../utils/auth";
+import * as auth from "../utils/auth.js";
 
 export function AuthProvider({ children }) {
   const hasToken = localStorage.getItem("jwt") !== null;
