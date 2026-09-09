@@ -12,9 +12,10 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    if (!token) return; 
+    if (!token) return;
 
-    auth.checkToken(token)
+    auth
+      .checkToken(token)
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
@@ -39,7 +40,16 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <HasAuthContext.Provider value={{ isLoggedIn, currentUser, isLoading, login, logout, setCurrentUser }}>
+    <HasAuthContext.Provider
+      value={{
+        isLoggedIn,
+        currentUser,
+        isLoading,
+        login,
+        logout,
+        setCurrentUser,
+      }}
+    >
       {children}
     </HasAuthContext.Provider>
   );
