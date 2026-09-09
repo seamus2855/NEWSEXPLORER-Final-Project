@@ -1,14 +1,17 @@
-import { StrictMode } from 'react'; // Swapped from importing whole React object
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './components/App/App.jsx'; 
-import './index.css';
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./components/App/App.jsx";
+import { AuthProvider } from "./contexts/AuthProvider.jsx"; // 🍏 FIX: Import your unified context wrapper
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <StrictMode> {/* Fixed: Removed the "React." prefix */}
+  <StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthProvider> {/* 🍏 FIX: Wrap App so context hooks are accessible globally */}
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </StrictMode>
 );
