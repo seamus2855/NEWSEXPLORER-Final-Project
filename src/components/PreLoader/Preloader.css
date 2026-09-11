@@ -1,0 +1,46 @@
+/* Preloader.css */
+
+/* Parent block layout wrapper container */
+.preloader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  width: 100%;
+}
+
+/* Visual CSS loading spinner ring */
+.circle-preloader {
+  display: block;
+  width: 50px;
+  height: 50px;
+  /* Fixed: Swapped dark grays for your brand blue (#2f71e5) and light gray (#e6e8eb) background */
+  border: 4px solid #e6e8eb; 
+  border-bottom-color: #2f71e5; 
+  border-radius: 50%; 
+  /* Fixed: Removed position absolute to prevent text layout overlapping */
+  margin-bottom: 16px; 
+  animation: spin 0.75s infinite linear; 
+} 
+
+/* Accessible context label description matching main text styles */
+.preloader__text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #b6bcbf; /* Soft standard gray tone for background text alerts */
+  margin: 0;
+  text-align: center;
+}
+
+/* Spin animation frame sequence */
+@keyframes spin { 
+  0% {
+    transform: rotate(0deg);
+  }
+  100% { 
+    transform: rotate(360deg); 
+  } 
+}
