@@ -16,7 +16,8 @@
   object-fit: cover;
 }
 
-.about__content {
+/* Fixed: Renamed from .about__content to match JSX structure */
+.about__text-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -31,7 +32,8 @@
   margin: 0;
 }
 
-.about__description {
+/* Fixed: Renamed from .about__description to match JSX structure */
+.about__text {
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -40,13 +42,12 @@
   margin: 0;
 }
 
-/* Mobile Responsive Adjustments */
+/* Tablet & Mobile Responsive Adjustments */
 @media screen and (max-width: 768px) {
   .about {
     flex-direction: column;
     padding: 40px 16px;
     gap: 24px;
-    text-align: left;
   }
 
   .about__image {

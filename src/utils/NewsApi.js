@@ -9,7 +9,7 @@ const BASE_URL = IS_PRODUCTION
 // 🍏 Authentication backend server domain endpoint
 const AUTH_URL = 'https://register.nomoreparties.co'; 
 
-const API_KEY = 'YOUR_NEWS_API_KEY_HERE'; // Replace with your actual key
+const API_KEY = c439d4c4faca4b44ab62aa05607b0f88; // Replace with your actual key
 
 // --- 1. News Search Request Logic ---
 // src/utils/newsApi.js
