@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-// 🍏 FIX 1: Point to the hook file inside your contexts folder
+// Point to the hook file inside your contexts folder
 import { useAuth } from "../../hooks/useAuth.js";
 
 import Main from "../Main/Main";
@@ -13,7 +13,7 @@ import Footer from "../Footer/Footer";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 
-// 🍏 FIX 2: Correct path and case-sensitivity for your News API utility
+// Correct path and case-sensitivity for your News API utility
 import { searchNews } from "../../utils/newsApi.js";
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
-  const [searchError, setSearchError] = useState("");
+  const [searchError, setSearchError] = "";
   const [visibleCount, setVisibleCount] = useState(3);
 
   // --- Structural Context Modals Layer ---
@@ -61,7 +61,7 @@ function App() {
   const handleSearchSubmit = (keyword) => {
     setIsLoading(true);
     setHasSearched(true);
-    setSearchError(""); // 👈 Fixed: Consistent double quotes
+    setSearchError(""); 
     setArticles([]);
     setVisibleCount(3);
     setCurrentKeyword(keyword);
@@ -94,6 +94,15 @@ function App() {
     setVisibleCount((prevCount) => prevCount + 3);
   };
 
+  const handleCardDelete = (card) => {
+    setSavedArticles((prev) => prev.filter((item) => item.url !== card.url));
+    setArticles((prev) =>
+      prev.map((item) =>
+        item.url === card.url ? { ...item, isSaved: false } : item,
+      ),
+    );
+  };
+
   const handleCardSave = (card) => {
     if (!isLoggedIn) {
       handleSignInClick();
@@ -116,18 +125,11 @@ function App() {
     );
   };
 
-  const handleCardDelete = (card) => {
-    setSavedArticles((prev) => prev.filter((item) => item.url !== card.url));
-    setArticles((prev) =>
-      prev.map((item) =>
-        item.url === card.url ? { ...item, isSaved: false } : item,
-      ),
-    );
-  };
-
   // --- Handle Context Action Mapping Pipelines ---
-  const handleLoginSubmit = (email) => {
-    login({ name: "Explorer", email: email }, "simulated-session-web-token");
+  const handleLoginSubmit = (email, password) => {
+    // 💡 Added password argument here to safely pass to your auth submission layer
+    // if your original validation step complained about 'password' being unused or misaligned.
+    login({ name: "Explorer", email: email, password: password }, "simulated-session-web-token");
     closeAllModals();
   };
 
@@ -199,7 +201,7 @@ function App() {
       )}
       {isRegisterModalOpen && (
         <RegisterModal
-          isOpen={isRegisterModalOpen} // 👈 Fixed: Explicitly passed missing isOpen prop
+          isOpen={isRegisterModalOpen}
           onClose={closeAllModals}
           onRedirect={handleSignInClick}
         />

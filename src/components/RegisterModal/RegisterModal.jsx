@@ -19,6 +19,7 @@ function RegisterModal({
   // Reset inputs when modal opens or closes
   useEffect(() => {
     if (isOpen) {
+       
       resetForm({ email: "", password: "", username: "" });
     }
   }, [isOpen, resetForm]);
