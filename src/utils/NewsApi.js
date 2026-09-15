@@ -1,42 +1,27 @@
 // src/utils/NewsApi.js
-const IS_PRODUCTION = import.meta.env.MODE === 'production';
 
-// News Search Endpoint
+// Check environment reliably using Vite build tools
+const IS_PRODUCTION = import.meta.env.MODE === 'production'; 
+
+// Endpoints with proper paths appended
 const BASE_URL = IS_PRODUCTION 
   ? 'https://nomoreparties.co/news/v2/everything' 
   : 'https://newsapi.org/v2/everything';
 
-// 🍏 Authentication backend server domain endpoint
-const AUTH_URL = 'https://register.nomoreparties.co'; 
-
-const API_KEY = c439d4c4faca4b44ab62aa05607b0f88; // Replace with your actual key
+const AUTH_URL = 'https://register.nomoreparties.co';
+const API_KEY = 'c439d4c4faca4b44ab62aa05607b0f88'; // Wrapped securely in string quotes
 
 // --- 1. News Search Request Logic ---
-// src/utils/newsApi.js
-
-// 1. Check environment reliably using build tools (works for Webpack/Create React App)
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
-
-// 2. Append the required /v2/everything endpoint directly to the base URLs
-const BASE_URL = IS_PRODUCTION 
-  ? 'https://nomoreparties.co' 
-  : 'https://newsapi.org';
-
-const API_KEY = 'YOUR_NEWS_API_KEY_HERE'; // Replace with your actual key
-
 export const searchNews = (keyword) => {
   const today = new Date();
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(today.getDate() - 7);
 
-  const toDate = today.toISOString().split('T')[0];
-  const fromDate = sevenDaysAgo.toISOString().split('T')[0];
-
   // Format dates to YYYY-MM-DD required by NewsAPI
   const toDate = today.toISOString().split('T')[0];
   const fromDate = sevenDaysAgo.toISOString().split('T')[0];
 
-  // 3. Constructed URL now has the correct paths and query params
+  // Construct search URL with query parameters
   const url = `${BASE_URL}?q=${encodeURIComponent(keyword)}&apiKey=${API_KEY}&from=${fromDate}&to=${toDate}&pageSize=100`;
 
   return fetch(url).then((res) => {
