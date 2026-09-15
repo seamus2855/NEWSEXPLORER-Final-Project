@@ -1,0 +1,67 @@
+/* Placeholder styling matching Figma design rules */
+.modal__input::placeholder {
+  color: #b6bcbf;
+  opacity: 1;
+}
+
+/* Ensure absolute positioning so error messaging doesn't shift the buttons */
+.modal__label-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 34px; /* Expanded slightly to account for the absolute error below */
+  position: relative;
+}
+
+.modal__label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  color: #b6bcbf; /* Adjusted from blue to match neutral gray unfocused layout states */
+  margin-bottom: 8px;
+}
+
+.modal__input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  color: #000000;
+  background-color: transparent;
+  outline: none;
+  transition: border-bottom-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.modal__input:focus {
+  border-bottom-color: #1a1b22; /* High contrast active focus state matching standard layouts */
+}
+
+/* Enhanced error state color toggles */
+.modal__input_type_error {
+  border-bottom-color: #ff0000;
+}
+
+/* Validation error text positioned perfectly without shifting surrounding layout cards */
+.modal__error-message {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  color: #ff0000;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.modal__error-message_visible {
+  opacity: 1;
+}
+
+/* Move global structures (.modal__form, .modal__submit-btn, etc.) out to ModalWithForm.css */

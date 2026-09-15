@@ -1,21 +1,66 @@
-# React + Vite
+# NewsExplorer — Final Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive, responsive single-page news aggregation search engine application built with React and Vite. Users can query worldwide news topics using the NewsAPI system, read articles, and securely authenticate simulated profiles to manage saved bookmark structures.
 
-Currently, two official plugins are available:
+## 🔗 Project Links
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+*   **Live Deployment (GitHub Pages):** [https://github.io](https://github.io)
+*   **Project Repository:** [https://github.com/seamus2855/NEWSEXPLORER-Final-Project](https://github.com/seamus2855/NEWSEXPLORER-Final-Project)
+*   **Project Video Demonstration (Loom):** [https://www.loom.com/share/1b23e2911c21477c829fc65326e934c4](https://www.loom.com/share/1b23e2911c21477c829fc65326e934c4)
 
-https://github.com/seamus2855/NEWSEXPLORER-Final-Project/tree/stage-1-frontend-api
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Infrastructure & Tech Stack
 
-https://console.cloud.google.com/compute/instances?onCreate=true&facet_url=https:%2F%2Fcloud.google.com%2Ffree&project=final-project-newsexplorer
+*   **Frontend Library:** React 19 (Functional architecture with custom Hooks and Context Providers)
+*   **Build Utility & Local Server:** Vite 8 (Configured with optimized single-page asset pipelines)
+*   **Routing Architecture:** React Router v7 (`HashRouter`/`BrowserRouter` layout switching)
+*   **Data Integration:** NewsAPI Proxy Services (`https://nomoreparties.co`)
+*   **Code Verification:** ESLint 10 (Strict validation configuration matching code quality policies)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📥 Local Installation and Execution Instructions
 
-https://www.loom.com/share/1b23e2911c21477c829fc65326e934c4
+Follow these instructions to run the application workspace inside your local development environment:
+
+1. **Clone the project repository branch:**
+   ```bash
+   git clone https://github.com
+   cd NEWSEXPLORER-Final-Project
+   ```
+
+2. **Install the node module packages:**
+   ```bash
+   npm install
+   ```
+
+3. **Verify code quality benchmarks (Run the Linter):**
+   ```bash
+   npm run lint
+   ```
+
+4. **Initialize the local Vite development server:**
+   ```bash
+   npm run dev
+   ```
+   *Open the printed local network loopback address (typically `http://localhost:5173`) inside your browser window.*
+
+5. **Compile a production build manually:**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🔒 Environment Variable Configuration
+
+The application uses an conditional module checking routine inside `src/utils/constants.js` to automatically redirect endpoints based on the deployment target environment:
+
+```javascript
+const IS_PRODUCTION = import.meta.env.MODE === 'production';
+
+export const NEWS_API_BASE_URL = IS_PRODUCTION 
+  ? 'https://nomoreparties.co' 
+  : 'https://newsapi.org';
+```
