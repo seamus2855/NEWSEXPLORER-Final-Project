@@ -9,7 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <StrictMode>
-    <BrowserRouter>
+    {/* Added the basename attribute here */}
+    <BrowserRouter basename="/NEWSEXPLORER-Final-Project">
       <AuthProvider>
         <App />
       </AuthProvider>
