@@ -1,3 +1,5 @@
+import "./NewsCard.css";
+
 function NewsCard({
   card,
   isLoggedIn,
@@ -7,11 +9,12 @@ function NewsCard({
   onAuthModalOpen,
 }) {
   // Extract and adapt properties safely
-  const title = card.title;
-  const text = card.description || "No preview description available.";
-  const date = card.publishedAt;
-  const source = card.source?.name || "Unknown Source";
-  const image = card.urlToImage || card.image || "https://unsplash.com"; // Fallback generic news image
+  const title = card.title || "No Title Provided";
+  const text =
+    card.description || card.text || "No preview description available.";
+  const date = card.publishedAt || card.date;
+  const source = card.source?.name || card.source || "Unknown Source";
+  const image = card.urlToImage || card.image || "https://unsplash.com"; // Reliable fallback news image
   const link = card.url || card.link;
   const isSaved = card.isSaved || false;
   const keyword = card.keyword || "";
@@ -20,54 +23,55 @@ function NewsCard({
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString("en-US", options);
+    const parsedDate = new Date(dateString);
+    return isNaN(parsedDate)
+      ? ""
+      : parsedDate.toLocaleDateString("en-US", options);
   };
 
   const handleActionButtonClick = (e) => {
-    e.preventDefault(); // Stop click from firing anchor link
-    e.stopPropagation(); // Prevent event bubbling up into wrapper links
+    e.preventDefault();
+    e.stopPropagation(); // Stops the card click handler from triggering
 
-    // 1. If user is logged out, show login modal immediately
     if (!isLoggedIn) {
       onAuthModalOpen();
       return;
     }
 
-    // 2. If logged in and on the Saved News route, call delete
     if (isSavedNewsPage) {
       onDeleteClick(card);
       return;
     }
 
-    // 3. If logged in and on the Main News page, toggle the bookmark handler
     onBookmarkClick(card);
   };
 
+  const handleCardClick = () => {
+    if (link) {
+      window.open(link, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
-    <article className="news-card">
-      {/* Article image link */}
-      <a
-        href={link}
-        target="_blank"
-        rel="noreferrer"
-        className="news-card__link"
-      >
-        <img
-          src={image}
-          alt={title || "News article"}
-          className="news-card__image"
-        />
-      </a>
+    <article
+      className="news-card"
+      onClick={handleCardClick}
+      style={{ cursor: "pointer" }}
+    >
+      {/* Article image layout */}
+      <img src={image} alt={title} className="news-card__image" />
 
       {/* Top action panel overlay */}
-      <div className="news-card__top-container">
+      <div
+        className="news-card__top-container"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Render keyword block only on Saved News page */}
         {isSavedNewsPage && keyword && (
           <div className="news-card__keyword">{keyword}</div>
         )}
 
         <div className="news-card__action-container">
-          {/* Button placed first so CSS sibling combinator (~) can target tooltips */}
           <button
             type="button"
             className={`news-card__button ${
@@ -81,7 +85,7 @@ function NewsCard({
             aria-label={isSavedNewsPage ? "Delete article" : "Save article"}
           />
 
-          {/* Contextual tooltips placed after button for adjacent selector compatibility */}
+          {/* Tooltips targetable via general sibling selector (~) */}
           {!isLoggedIn && !isSavedNewsPage && (
             <span className="news-card__tooltip">Sign in to save articles</span>
           )}
@@ -91,18 +95,13 @@ function NewsCard({
         </div>
       </div>
 
-      {/* Main card description text context link wrapper */}
-      <a
-        href={link}
-        target="_blank"
-        rel="noreferrer"
-        className="news-card__text-container"
-      >
+      {/* Main card description text context */}
+      <div className="news-card__text-container">
         <p className="news-card__date">{formatDate(date)}</p>
         <h3 className="news-card__title">{title}</h3>
         <p className="news-card__text">{text}</p>
         <p className="news-card__source">{source}</p>
-      </a>
+      </div>
     </article>
   );
 }

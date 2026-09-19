@@ -3,8 +3,12 @@ import "./About.css";
 function About() {
   return (
     <section className="about">
-      {/* Fixed: Pointed to the actual file 'about-author.svg' found in your public/images directory */}
-      <img src="/images/about-author.svg" alt="Author" className="about__image" />
+      {/* Fixed: Prefixed with import.meta.env.BASE_URL to prevent 404 errors on GitHub Pages */}
+      <img 
+        src={`${import.meta.env.BASE_URL}images/about-author.svg`} 
+        alt="Author" 
+        className="about__image" 
+      />
       <div className="about__text-container">
         <h2 className="about__title">About the author</h2>
         <p className="about__text">
