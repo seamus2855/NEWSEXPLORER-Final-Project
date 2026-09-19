@@ -50,10 +50,9 @@
 .news-card__action-container {
   pointer-events: auto;
   display: flex;
-  flex-direction: row; /* Fixed: standard row alignment for predictable sibling target selectors */
+  flex-direction: row-reverse; /* Reverses horizontal layout so tooltip sits left of button */
   align-items: center;
   margin-left: auto;
-  gap: 4px; /* Native flex gap handles horizontal separation safely */
 }
 
 /* Tooltip message adjustments */
@@ -71,6 +70,7 @@
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
   white-space: nowrap;
+  margin-right: 4px; /* Space between tooltip bubble and button */
 }
 
 /* Round Action Buttons (Bookmark & Trash) */
@@ -79,7 +79,7 @@
   height: 40px;
   background-color: #FFFFFF;
   border: none;
-  border-radius: 8px; /* Note: adjust to circular if required by your Figma mockup (e.g. 50%) */
+  border-radius: 8px; /* Set to 50% if circular buttons are required by your Figma mockup */
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -87,12 +87,6 @@
   box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
   padding: 0;
   flex-shrink: 0;
-  order: 2; /* Fixed: Explicit CSS flex ordering visually places button on the right */
-}
-
-/* Tooltip targeting rule */
-.news-card__tooltip {
-  order: 1; /* Places the tooltip on the left visually */
 }
 
 /* Show tooltip when hovering over button */
@@ -101,30 +95,30 @@
   visibility: visible;
 }
 
-/* Bookmark Button Icon States */
+/* Bookmark Button Icon States - Fixed Asset Paths */
 .news-card__button_type_bookmark {
-  background-image: url('../../images/bookmark-normal.svg');
+  background-image: url('/images/bookmark-normal.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .news-card__button_type_bookmark:hover {
-  background-image: url('../../images/bookmark-hover.svg');
+  background-image: url('/images/bookmark-hover.svg');
 }
 
 .news-card__button_type_bookmark-marked {
-  background-image: url('../../images/bookmark-marked.svg');
+  background-image: url('/images/bookmark-marked.svg');
 }
 
-/* Trash Button Icon States (Saved News Page) */
+/* Trash Button Icon States (Saved News Page) - Fixed Asset Paths */
 .news-card__button_type_trash {
-  background-image: url('../../images/trash-normal.svg');
+  background-image: url('/images/trash-normal.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .news-card__button_type_trash:hover {
-  background-image: url('../../images/trash-hover.svg');
+  background-image: url('/images/trash-hover.svg');
 }
 
 /* Card Content Description Area */
