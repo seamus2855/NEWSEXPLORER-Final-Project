@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useFormAndValidation } from "../../hooks/UseFormAndValidation"; // Leverage validation states
+import { useFormAndValidation } from "../../hooks/useFormAndValidation"; // FIX: Changed 'UseFormAndValidation' to lowercase 'useFormAndValidation'
 import "./RegisterModal.css";
 
 function RegisterModal({
@@ -19,7 +19,6 @@ function RegisterModal({
   // Reset inputs when modal opens or closes
   useEffect(() => {
     if (isOpen) {
-       
       resetForm({ email: "", password: "", username: "" });
     }
   }, [isOpen, resetForm]);
@@ -38,27 +37,13 @@ function RegisterModal({
   // High-Fidelity Success Modal View Context
   if (isRegistrationSuccess) {
     return (
-      <div 
-        className={`modal modal_opened`} 
-        role="dialog" 
-        aria-modal="true" 
-        aria-labelledby="success-title"
-      >
+      <div className={`modal modal_opened`} role="dialog" aria-modal="true" aria-labelledby="success-title">
         <div className="modal__container register-modal__success-card">
-          <button 
-            type="button" 
-            className="modal__close-button" 
-            onClick={onClose} 
-            aria-label="Close success overlay" 
-          />
+          <button type="button" className="modal__close-button" onClick={onClose} aria-label="Close success overlay" />
           <h2 id="success-title" className="register-modal__success-title">
             Registration successfully completed!
           </h2>
-          <button 
-            type="button" 
-            className="register-modal__link" 
-            onClick={onSignInLinkClick}
-          >
+          <button type="button" className="register-modal__link" onClick={onSignInLinkClick}>
             Sign in
           </button>
         </div>
@@ -93,8 +78,8 @@ function RegisterModal({
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "register-email-error" : undefined}
         />
-        <span 
-          id="register-email-error" 
+        <span
+          id="register-email-error"
           className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}
         >
           {errors.email}
@@ -117,8 +102,8 @@ function RegisterModal({
           aria-invalid={!!errors.password}
           aria-describedby={errors.password ? "register-password-error" : undefined}
         />
-        <span 
-          id="register-password-error" 
+        <span
+          id="register-password-error"
           className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}
         >
           {errors.password}
@@ -142,8 +127,8 @@ function RegisterModal({
           aria-invalid={!!errors.username}
           aria-describedby={errors.username ? "register-username-error" : undefined}
         />
-        <span 
-          id="register-username-error" 
+        <span
+          id="register-username-error"
           className={`modal__error-message ${errors.username ? "modal__error-message_visible" : ""}`}
         >
           {errors.username}

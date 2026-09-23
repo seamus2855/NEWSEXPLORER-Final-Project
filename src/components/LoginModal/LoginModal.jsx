@@ -1,13 +1,19 @@
 import { useEffect } from "react";
-import { useFormAndValidation } from "../../hooks/UseFormAndValidation"; // Use a combined state hook if available, or pass values from useForm
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
-function LoginModal({ isOpen, onClose, onRedirectClick, onSubmit, isLoading }) {
-  // Recommendation: Use a form hook that outputs values, errors, and form validity
+function LoginModal({
+  isOpen,
+  onClose,
+  handleAltClick, // Renamed to match alternative link actions across modals
+  onLogin,        // Explicit form submission handler
+  isLoading,
+  serverError,    // Included server fallback messaging
+}) {
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
-  // Reset form inputs and errors every time the modal mounts or toggles open
+  // Reset inputs and validation metrics when modal visibility changes
   useEffect(() => {
     if (isOpen) {
       resetForm({ email: "", password: "" });
@@ -17,56 +23,78 @@ function LoginModal({ isOpen, onClose, onRedirectClick, onSubmit, isLoading }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isValid) {
-      onSubmit(values);
+      onLogin({
+        email: values.email,
+        password: values.password,
+      });
     }
   };
 
   return (
     <ModalWithForm
-      title="Sign in"
+      title="Log in"
       name="login"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText={isLoading ? "Signing in..." : "Sign in"}
-      isButtonDisabled={!isValid}
-      redirectText="Sign up"
-      onRedirectClick={onRedirectClick}
+      buttonText={isLoading ? "Logging in..." : "Log in"}
+      altButtonText="Sign up"
+      onAltButtonClick={handleAltClick}
+      isValid={isValid}
     >
       {/* Email input field */}
       <div className="modal__label-container">
-        <label className="modal__label">Email</label>
+        <label className="modal__label" htmlFor="login-email">Email</label>
         <input
+          id="login-email"
           type="email"
           name="email"
           className={`modal__input ${errors.email ? "modal__input_type_error" : ""}`}
           placeholder="Enter email"
+          required
           value={values.email || ""}
           onChange={handleChange}
-          required
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? "login-email-error" : undefined}
         />
-        <span className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}>
+        <span 
+          id="login-email-error" 
+          className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}
+        >
           {errors.email}
         </span>
       </div>
 
       {/* Password input field */}
       <div className="modal__label-container">
-        <label className="modal__label">Password</label>
+        <label className="modal__label" htmlFor="login-password">Password</label>
         <input
+          id="login-password"
           type="password"
           name="password"
           className={`modal__input ${errors.password ? "modal__input_type_error" : ""}`}
           placeholder="Enter password"
+          required
+          minLength="4"
           value={values.password || ""}
           onChange={handleChange}
-          minLength="4"
-          required
+          aria-invalid={!!errors.password}
+          aria-describedby={errors.password ? "login-password-error" : undefined}
         />
-        <span className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}>
+        <span 
+          id="login-password-error" 
+          className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}
+        >
           {errors.password}
         </span>
       </div>
+
+      {/* Shared Server Fallback Exception Messaging */}
+      {serverError && (
+        <span className="register-modal__form-error" role="alert">
+          {serverError}
+        </span>
+      )}
     </ModalWithForm>
   );
 }

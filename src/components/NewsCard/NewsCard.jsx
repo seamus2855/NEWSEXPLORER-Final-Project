@@ -1,5 +1,3 @@
-import "./NewsCard.css";
-
 function NewsCard({
   card,
   isLoggedIn,
@@ -8,30 +6,24 @@ function NewsCard({
   onDeleteClick,
   onAuthModalOpen,
 }) {
-  // Extract and adapt properties safely
-  const title = card.title || "No Title Provided";
-  const text =
-    card.description || card.text || "No preview description available.";
-  const date = card.publishedAt || card.date;
-  const source = card.source?.name || card.source || "Unknown Source";
-  const image = card.urlToImage || card.image || "https://unsplash.com"; // Reliable fallback news image
+  const title = card.title || "Untitled Article";
+  const text = card.description || "No preview description available.";
+  const date = card.publishedAt;
+  const source = card.source?.name || "Unknown Source";
+  const image = card.urlToImage || card.image || "https://unsplash.com"; // Added a functional generic news image fallback
   const link = card.url || card.link;
   const isSaved = card.isSaved || false;
   const keyword = card.keyword || "";
 
-  // Format date matching standard guidelines (e.g., "August 2, 2026")
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const options = { year: "numeric", month: "long", day: "numeric" };
-    const parsedDate = new Date(dateString);
-    return isNaN(parsedDate)
-      ? ""
-      : parsedDate.toLocaleDateString("en-US", options);
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   const handleActionButtonClick = (e) => {
     e.preventDefault();
-    e.stopPropagation(); // Stops the card click handler from triggering
+    e.stopPropagation();
 
     if (!isLoggedIn) {
       onAuthModalOpen();
@@ -46,27 +38,21 @@ function NewsCard({
     onBookmarkClick(card);
   };
 
-  const handleCardClick = () => {
-    if (link) {
-      window.open(link, "_blank", "noopener,noreferrer");
-    }
-  };
-
   return (
-    <article
-      className="news-card"
-      onClick={handleCardClick}
-      style={{ cursor: "pointer" }}
-    >
-      {/* Article image layout */}
-      <img src={image} alt={title} className="news-card__image" />
+    <article className="news-card">
+      <a href={link} target="_blank" rel="noreferrer" className="news-card__link">
+        <img
+          src={image}
+          alt={title}
+          className="news-card__image"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://unsplash.com";
+          }}
+        />
+      </a>
 
-      {/* Top action panel overlay */}
-      <div
-        className="news-card__top-container"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Render keyword block only on Saved News page */}
+      <div className="news-card__top-container">
         {isSavedNewsPage && keyword && (
           <div className="news-card__keyword">{keyword}</div>
         )}
@@ -78,14 +64,12 @@ function NewsCard({
               isSavedNewsPage
                 ? "news-card__button_type_trash"
                 : isSaved
-                  ? "news-card__button_type_bookmark-marked"
-                  : "news-card__button_type_bookmark"
+                ? "news-card__button_type_bookmark-marked"
+                : "news-card__button_type_bookmark"
             }`}
             onClick={handleActionButtonClick}
             aria-label={isSavedNewsPage ? "Delete article" : "Save article"}
           />
-
-          {/* Tooltips targetable via general sibling selector (~) */}
           {!isLoggedIn && !isSavedNewsPage && (
             <span className="news-card__tooltip">Sign in to save articles</span>
           )}
@@ -95,13 +79,12 @@ function NewsCard({
         </div>
       </div>
 
-      {/* Main card description text context */}
-      <div className="news-card__text-container">
+      <a href={link} target="_blank" rel="noreferrer" className="news-card__text-container">
         <p className="news-card__date">{formatDate(date)}</p>
         <h3 className="news-card__title">{title}</h3>
         <p className="news-card__text">{text}</p>
         <p className="news-card__source">{source}</p>
-      </div>
+      </a>
     </article>
   );
 }
