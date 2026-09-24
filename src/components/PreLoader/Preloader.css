@@ -6,8 +6,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 0;
+  padding: 80px 24px; /* Enhanced vertical padding for better section isolation */
   width: 100%;
+  min-height: 280px;  /* Added explicit min-height to prevent layout shifting during loads */
+  background-color: #F5F6F7; /* Matches standard clean section backgrounds */
+  box-sizing: border-box;
 }
 
 /* Visual CSS loading spinner ring */
@@ -16,12 +19,13 @@
   width: 50px;
   height: 50px;
   /* Fixed: Swapped dark grays for your brand blue (#2f71e5) and light gray (#e6e8eb) background */
-  border: 4px solid #e6e8eb; 
-  border-bottom-color: #2f71e5; 
+  border: 4px solid #E6E8EB; 
+  border-bottom-color: #2F71E5; 
   border-radius: 50%; 
   /* Fixed: Removed position absolute to prevent text layout overlapping */
-  margin-bottom: 16px; 
+  margin: 0 0 24px 0; /* Increased margin for cleaner whitespace distribution */
   animation: spin 0.75s infinite linear; 
+  box-sizing: border-box;
 } 
 
 /* Accessible context label description matching main text styles */
@@ -30,7 +34,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
-  color: #b6bcbf; /* Soft standard gray tone for background text alerts */
+  color: #B6BCBF; /* Soft standard gray tone for background text alerts */
   margin: 0;
   text-align: center;
 }

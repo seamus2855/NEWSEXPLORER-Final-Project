@@ -89,8 +89,8 @@
   flex-shrink: 0;
 }
 
-/* Show tooltip when hovering over button */
-.news-card__button:hover ~ .news-card__tooltip {
+/* FIX: Show tooltip when parent contains a hovered action button */
+.news-card__action-container:has(.news-card__button:hover) .news-card__tooltip {
   opacity: 1;
   visibility: visible;
 }

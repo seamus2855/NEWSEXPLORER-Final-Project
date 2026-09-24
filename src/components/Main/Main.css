@@ -40,6 +40,7 @@
   align-items: center;
   max-width: 395px;
   text-align: center;
+  box-sizing: border-box; /* Added to keep internal text bounds tight */
 }
 
 /* Placeholder for the magnifying glass illustration from Figma */
@@ -96,7 +97,9 @@
   line-height: 24px;
   color: #1a1b22;
   cursor: pointer;
+  margin-top: 32px; /* Fixed: Safely pushes button down below card grids without absolute overlaps */
   transition: background-color 0.2s ease-in-out;
+  box-sizing: border-box;
 }
 
 .main__show-more-button:hover {
@@ -147,5 +150,6 @@
 
   .main__show-more-button {
     width: 100%;
+    margin-top: 24px; /* Slightly condensed margin to pull card blocks closer together */
   }
 }

@@ -52,14 +52,17 @@
     position: relative;
     top: auto;
     left: auto;
-    transform: none;
+    transform: none; /* Fixed: Clears desktop positioning properties entirely */
     background-color: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* Fixed: Explicitly handles the light theme behavior on mobile layout */
-  .header.header_theme_light {
+  /* Fixed: Kept simple class selector sequence to prevent specificity overrides */
+  .header_theme_light {
     position: relative; 
+    top: auto;
+    left: auto;
+    transform: none;
     background-color: #ffffff;
     border-bottom: 1px solid #e6e8eb;
   }

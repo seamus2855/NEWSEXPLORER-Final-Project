@@ -42,7 +42,7 @@
   border-bottom-color: #1A1B22; 
 } 
 
-/* Fixed: Grouped both specific React buttons to replace missing .navigation__button layout */ 
+/* React interaction buttons */ 
 .navigation__logout-btn,
 .navigation__signin-btn { 
   font-family: 'Roboto', Arial, sans-serif; 
@@ -59,7 +59,8 @@
   align-items: center; 
   justify-content: center;
   gap: 8px; 
-  transition: background-color 0.2s ease, color 0.2s ease; 
+  box-sizing: border-box; /* Added to normalize padding button models */
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; 
 } 
 
 .navigation__logout-btn:hover,
@@ -78,23 +79,23 @@
   background-color: rgba(0, 0, 0, 0.05); 
 } 
 
-/* Logout Icon */ 
+/* Logout Icon styling */ 
 .navigation__logout-icon { 
   width: 18px; 
   height: 18px; 
-  background-image: url('../../images/logout-white.svg'); /* Update path as needed */ 
+  background-image: url('../../images/logout-white.svg'); 
   background-repeat: no-repeat; 
   background-position: center; 
 } 
 
 .navigation_theme_light .navigation__logout-icon { 
-  background-image: url('../../images/logout-black.svg'); /* Update path as needed */ 
+  background-image: url('../../images/logout-black.svg'); 
 } 
 
 /* ==========================================================================
    Responsive Tablet & Mobile Media Queries
    ========================================================================== */
-@media screen and (max-width: 1023px) { 
+@media screen and (max-width: 1024px) { /* Updated from 1023px to match your standard project grids */
   .navigation { 
     gap: 20px; 
   } 
@@ -103,7 +104,6 @@
     font-size: 16px; 
   } 
   
-  /* Fixed: Synchronized tablet buttons */
   .navigation__logout-btn,
   .navigation__signin-btn { 
     font-size: 16px; 
@@ -111,13 +111,13 @@
   } 
 } 
 
-@media screen and (max-width: 767px) { 
+@media screen and (max-width: 640px) { /* Updated from 767px to sync seamlessly with Header.css mobile breakpoints */
   /* Overlay/Dropdown state when mobile menu is opened */ 
-  .navigation_mobile_opened { 
+  .navigation.navigation_mobile_opened { /* Fixed: Chained selectors seamlessly together (no spaces) */
     display: flex; 
     flex-direction: column; 
     position: absolute; 
-    top: 56px; /* Height of mobile Header */ 
+    top: 56px; 
     left: 0; 
     width: 100%; 
     background-color: #1A1B22; 
@@ -149,7 +149,7 @@
     border-bottom: none; 
   } 
   
-  /* Fixed: Synchronized mobile drawer action spacing buttons */
+  /* Synchronized mobile drawer buttons */
   .navigation__logout-btn,
   .navigation__signin-btn { 
     font-size: 18px; 
@@ -161,8 +161,17 @@
     border-color: #FFFFFF; 
     color: #FFFFFF; 
   } 
-  
-  .navigation_theme_light .navigation_mobile_opened { 
-    background-color: #FFFFFF; /* Matches light header when dropdown opens */ 
+
+  /* Fixed: Correctly chain light theme configuration for full-panel mobile overrides */
+  .navigation_theme_light.navigation_mobile_opened { 
+    background-color: #FFFFFF; 
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05); /* Added slight shadow separating white list from white page backdrop */
   } 
+
+  /* Fixed: Enforces appropriate dark typography contrast inside light mobile drawers */
+  .navigation_theme_light.navigation_mobile_opened .navigation__logout-btn,
+  .navigation_theme_light.navigation_mobile_opened .navigation__signin-btn {
+    color: #1A1B22;
+    border-color: #1A1B22;
+  }
 }
