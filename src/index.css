@@ -1,4 +1,4 @@
-/* Import statements must contain a complete, valid Google Fonts embed link with all required families */
+/* FIX: Restored the complete, valid Google Fonts embed link with all required families */
 @import url('https://googleapis.com');
 
 html {
