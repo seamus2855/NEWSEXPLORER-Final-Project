@@ -1,6 +1,6 @@
 .main {
   width: 100%;
-  background-color: #f5f6f7;
+  background-color: #F5F6F7;
   display: flex;
   flex-direction: column;
 }
@@ -28,7 +28,7 @@
   font-size: 40px;
   font-weight: 400;
   line-height: 46px;
-  color: #1a1b22;
+  color: #1A1B22;
   margin: 0 0 32px 0;
 }
 
@@ -47,7 +47,8 @@
 .main__not-found-icon {
   width: 96px;
   height: 96px;
-  background-image: url("../../images/not-found.svg"); /* Ensure path matches your project assets */
+  /* FIX: Changed path to absolute root-relative format to clear Vite production build warnings */
+  background-image: url("/images/not-found.svg"); 
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -59,7 +60,7 @@
   font-size: 26px;
   font-weight: 400;
   line-height: 30px;
-  color: #1a1b22;
+  color: #1A1B22;
   margin: 0 0 16px 0;
 }
 
@@ -68,7 +69,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
-  color: #b6bcbf;
+  color: #B6BCBF;
   margin: 0;
 }
 
@@ -78,7 +79,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
-  color: #ff4040;
+  color: #FF4040;
   text-align: center;
   margin: 0;
 }
@@ -88,14 +89,14 @@
   align-self: center;
   width: 288px;
   height: 64px;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   border: none;
   border-radius: 80px;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
-  color: #1a1b22;
+  color: #1A1B22;
   cursor: pointer;
   margin-top: 32px; /* Fixed: Safely pushes button down below card grids without absolute overlaps */
   transition: background-color 0.2s ease-in-out;
@@ -103,11 +104,15 @@
 }
 
 .main__show-more-button:hover {
-  background-color: #e6e8eb;
+  background-color: #E6E8EB;
 }
 
+/* ==========================================================================
+   Responsive Adaptation Breakpoints (Tablet & Mobile)
+   ========================================================================== */
+
 /* Tablet Screen Breakpoint */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) { /* FIX: Synced from 1024px to match project layout */
   .main__results-container {
     padding: 40px 40px 48px;
   }
@@ -135,7 +140,7 @@
 }
 
 /* Mobile Screen Breakpoint */
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 767px) { /* FIX: Synced from 640px to line up with news grid collapses */
   .main__results-container {
     padding: 32px 16px 40px;
   }
