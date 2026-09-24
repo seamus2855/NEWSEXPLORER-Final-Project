@@ -3,7 +3,7 @@
   position: fixed;
   inset: 0;
   background-color: rgb(0 0 0 / 50%);
-  z-index: 1000; /* Added: Ensures the modal sits on top of all page layers */
+  z-index: 1000; /* Ensures the modal sits on top of all page layers */
 }
 
 .modal_opened {
@@ -15,11 +15,10 @@
 .modal__container {
   position: relative;
   width: min(430px, calc(100% - 40px));
-  padding: 34px 36px 36px;
+  padding: 34px 36px 28px; /* Balanced base padding rules */
   background-color: #fff;
-  border-radius: 80px; /* Fixed: Matches your project's smooth round border geometry */
-  border-radius: 16px; /* Note: If you want standard cards, 16px looks best, adjust to match your cards */
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15); /* Added: Soft drop shadow for visual depth */
+  border-radius: 16px; /* Fixed: Cleared duplicate 80px radius conflict rule */
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15); 
   box-sizing: border-box;
 }
 
@@ -34,6 +33,11 @@
   background: transparent;
   cursor: pointer;
   z-index: 10;
+  transition: opacity 0.2s ease;
+}
+
+.modal__close-button:hover {
+  opacity: 0.7;
 }
 
 .modal__close-button::before,
@@ -44,7 +48,7 @@
   left: 2px;
   width: 20px;
   height: 2px;
-  background-color: #000;
+  background-color: #d1d2d6; /* Updated to neutral layout close hue matching standard mockups */
   transform: rotate(45deg);
 }
 
@@ -53,26 +57,25 @@
 }
 
 .modal__title {
-  font-family: 'Roboto', Arial, sans-serif; /* Added: Core layout typography mapping */
+  font-family: 'Roboto', Arial, sans-serif; 
   font-size: 24px;
   font-weight: 900;
   line-height: 28px;
   color: #1a1b22;
-  margin: 0 0 24px;
+  margin: 0 0 22px;
 }
 
 .modal__form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
-/* Fixed: Styled the newly added wrapper container to centralize actions */
+/* Wrapper container to centralize actions */
 .modal__submit-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 12px;
+  margin-top: 14px;
   width: 100%;
 }
 
@@ -80,7 +83,7 @@
   width: 100%;
   height: 64px;
   background-color: #2f71e5;
-  border: none; /* Fixed: Clears native browser outline borders */
+  border: none; 
   border-radius: 80px;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 18px;
@@ -88,19 +91,20 @@
   line-height: 22px;
   color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  box-shadow: 0px 5px 15px rgba(47, 113, 229, 0.2); /* Added subtle button drop shadow */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .modal__submit-button:hover:not(:disabled) {
   background-color: #2a64cc;
 }
 
-.modal__submit-button_disabled {
-  background-color: #e6e8eb !important;
-  color: #b6bcbf !important;
-  box-shadow: none !important;
+/* Fixed: Structured selector cascading order to naturally eliminate need for !important tags */
+.modal__submit-button:disabled {
+  background-color: #e6e8eb;
+  color: #b6bcbf;
+  box-shadow: none;
   cursor: not-allowed;
-  opacity: 1; /* Fixed: Changed from opacity 0.5 to solid disabled style matching your layout guidelines */
 }
 
 .modal__alt-text {
@@ -131,9 +135,9 @@
 /* ==========================================================================
    Responsive Mobile Fluidity Layout (Breakpoints)
    ========================================================================== */
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 640px) { /* Fixed: Unified to match your project's 640px grid standard */
   .modal_opened {
-    align-items: flex-start; /* Forces screen alignment to top edge to prevent content clipping */
+    align-items: flex-start; 
   }
 
   .modal__container {
@@ -146,13 +150,15 @@
     flex-direction: column;
   }
 
+  /* Fixed: Removed flex-grow block setting that risked pinching input columns on shorter viewports */
   .modal__form {
-    flex-grow: 1; /* Stretches the form to fill layout area */
+    width: 100%;
+    gap: 16px; 
   }
 
   .modal__submit-container {
-    margin-top: auto; /* Fixed: Pushes submit and alternate redirect action elements cleanly to base of mobile viewport */
-    padding-top: 24px;
+    margin-top: 24px; 
+    padding-top: 8px;
   }
 
   .modal__submit-button {

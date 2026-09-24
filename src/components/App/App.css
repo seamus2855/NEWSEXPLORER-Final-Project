@@ -35,6 +35,32 @@ body {
   flex: 1 0 auto; /* Keeps the middle content growing dynamically */
 }
 
+/* ==========================================================================
+   Hero / Search Section Background Implementation
+   ========================================================================== */
+.hero-search-section {
+  /* Replace with your exact image filename/path from your project directory */
+  background-image: url('../images/Overlay.svg');
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  /* Layout padding to give the title and search form breathing room */
+  padding: 80px 24px;
+  width: 100%;
+  
+  /* Centers the page title and search form inside the container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  /* Text color override so your title remains readable against the background */
+  color: #FFFFFF; 
+}
+
 /* Optional State Modifiers for Dark/Light Theme Switching */
 .page_theme_dark {
   background-color: #1A1B22;

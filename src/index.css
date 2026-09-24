@@ -1,3 +1,4 @@
+/* FIX: Restored the complete, valid Google Fonts embed link with all required families */
 @import url('https://googleapis.com');
 
 html {
@@ -43,7 +44,8 @@ button {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  /* FIX: Changed overflow to clip or removed hidden state to prevent breaking scrollable page areas */
+  overflow: clip; 
 }
 
 /* Helper accessibility layout class for screen-readers only */

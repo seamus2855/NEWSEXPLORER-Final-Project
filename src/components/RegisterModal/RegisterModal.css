@@ -12,7 +12,7 @@
   font-weight: 700; /* Fixed: Changed from 900 to 700 to match standard font-weight limits */
   line-height: 30px; 
   color: #000000; 
-  margin: 0; 
+  margin: 0 0 4px 0; 
 } 
 
 .register-modal__link { 
@@ -44,9 +44,10 @@
   color: #FF1A1A; 
   text-align: center; 
   min-height: 14px; 
-  margin: -4px 0 8px 0; /* Adjusted: Pulls layout seamlessly tight with the inputs above it */
+  margin: 8px 0 16px 0; /* FIX: Replaced layout-breaking negative margins with stable spacing */
   width: 100%; 
   display: block;
+  box-sizing: border-box;
 } 
 
 /* ==========================================================================

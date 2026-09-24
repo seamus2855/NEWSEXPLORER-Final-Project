@@ -8,8 +8,10 @@
 .modal__label-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 34px; /* Expanded slightly to account for the absolute error below */
   position: relative;
+  /* Replaced margin-bottom with bottom padding to safely contain the error text inside its own bounding box */
+  padding-bottom: 22px; 
+  margin-bottom: 12px; 
 }
 
 .modal__label {
@@ -17,7 +19,7 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
-  color: #b6bcbf; /* Adjusted from blue to match neutral gray unfocused layout states */
+  color: #b6bcbf; /* Neutral gray unfocused layout state */
   margin-bottom: 8px;
 }
 
@@ -38,7 +40,7 @@
 }
 
 .modal__input:focus {
-  border-bottom-color: #1a1b22; /* High contrast active focus state matching standard layouts */
+  border-bottom-color: #1a1b22; /* High contrast active focus state */
 }
 
 /* Enhanced error state color toggles */
@@ -54,14 +56,14 @@
   line-height: 14px;
   color: #ff0000;
   position: absolute;
-  bottom: -20px;
+  bottom: 4px; /* Placed exactly within the container's safe padding zone */
   left: 0;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  visibility: hidden; /* Fixed: Prevents screen readers or invisible mouse-clicks from interacting with hidden text */
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .modal__error-message_visible {
   opacity: 1;
+  visibility: visible;
 }
-
-/* Move global structures (.modal__form, .modal__submit-btn, etc.) out to ModalWithForm.css */

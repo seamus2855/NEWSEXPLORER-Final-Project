@@ -14,18 +14,11 @@
   box-shadow: 0px 8px 24px rgba(26, 27, 34, 0.1);
 }
 
-/* Added: Wrap link block to anchor positioning elements perfectly */
-.news-card__link {
-  display: block;
-  width: 100%;
-  text-decoration: none;
-}
-
 .news-card__image {
   width: 100%;
   height: 272px;
   object-fit: cover;
-  display: block; /* Fixed: Prevents unwanted default line-height gap underneath images */
+  display: block; /* Prevents line-height layout gaps underneath images */
 }
 
 /* Badges and Top Actions Layout */
@@ -37,8 +30,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  pointer-events: none; /* Allows clicks to pass through to children */
-  z-index: 2; /* Fixed: Prevents descriptive links from swallowing tooltips or button hover areas */
+  pointer-events: none; /* Allows clicks to pass down safely */
+  z-index: 2; /* Prevents text context from blocking button interactions */
 }
 
 .news-card__keyword {
@@ -57,7 +50,7 @@
 .news-card__action-container {
   pointer-events: auto;
   display: flex;
-  flex-direction: row-reverse; /* Places the tooltip to the left of the button naturally */
+  flex-direction: row-reverse; /* Reverses horizontal layout so tooltip sits left of button */
   align-items: center;
   margin-left: auto;
 }
@@ -77,13 +70,7 @@
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
   white-space: nowrap;
-  margin-right: 4px; /* Generates clean breathing room separating the tip from the icon asset */
-}
-
-/* Show tooltip when hovering over button */
-.news-card__button:hover ~ .news-card__tooltip {
-  opacity: 1;
-  visibility: visible;
+  margin-right: 4px; /* Space between tooltip bubble and button */
 }
 
 /* Round Action Buttons (Bookmark & Trash) */
@@ -92,40 +79,46 @@
   height: 40px;
   background-color: #FFFFFF;
   border: none;
-  border-radius: 8px; /* Note: adjust to circular if required by your Figma mockup (e.g. 50%) */
+  border-radius: 8px; /* Set to 50% if circular buttons are required by your Figma mockup */
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
   padding: 0;
-  flex-shrink: 0; /* Ensures the button never squishes next to long text */
+  flex-shrink: 0;
 }
 
-/* Bookmark Button Icon States */
+/* FIX: Show tooltip when parent contains a hovered action button */
+.news-card__action-container:has(.news-card__button:hover) .news-card__tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Bookmark Button Icon States - Fixed Asset Paths */
 .news-card__button_type_bookmark {
-  background-image: url('../../images/bookmark-normal.svg');
+  background-image: url('/images/bookmark-normal.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .news-card__button_type_bookmark:hover {
-  background-image: url('../../images/bookmark-hover.svg');
+  background-image: url('/images/bookmark-hover.svg');
 }
 
 .news-card__button_type_bookmark-marked {
-  background-image: url('../../images/bookmark-marked.svg');
+  background-image: url('/images/bookmark-marked.svg');
 }
 
-/* Trash Button Icon States (Saved News Page) */
+/* Trash Button Icon States (Saved News Page) - Fixed Asset Paths */
 .news-card__button_type_trash {
-  background-image: url('../../images/trash-normal.svg');
+  background-image: url('/images/trash-normal.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .news-card__button_type_trash:hover {
-  background-image: url('../../images/trash-hover.svg');
+  background-image: url('/images/trash-hover.svg');
 }
 
 /* Card Content Description Area */
@@ -134,13 +127,11 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  text-decoration: none;
-  color: inherit;
-  z-index: 1; /* Sits beneath the absolute overlay actions panel */
+  z-index: 1;
 }
 
 .news-card__date {
-  font-family: 'Source Sans 3', Arial, sans-serif; /* Fixed: Corrected to modern typography standard */
+  font-family: 'Source Sans 3', Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
