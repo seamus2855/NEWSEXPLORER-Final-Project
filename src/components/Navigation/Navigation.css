@@ -79,23 +79,23 @@
   background-color: rgba(0, 0, 0, 0.05); 
 } 
 
-/* Logout Icon styling */ 
+/* Logout Icon styling - FIX: Updated paths to absolute paths to resolve Vite bundle build time errors */ 
 .navigation__logout-icon { 
   width: 18px; 
   height: 18px; 
-  background-image: url('../../images/logout-white.svg'); 
+  background-image: url('/images/logout-white.svg'); 
   background-repeat: no-repeat; 
   background-position: center; 
 } 
 
 .navigation_theme_light .navigation__logout-icon { 
-  background-image: url('../../images/logout-black.svg'); 
+  background-image: url('/images/logout-black.svg'); 
 } 
 
 /* ==========================================================================
    Responsive Tablet & Mobile Media Queries
    ========================================================================== */
-@media screen and (max-width: 1024px) { /* Updated from 1023px to match your standard project grids */
+@media screen and (max-width: 1023px) { /* FIX: Synced from 1024px to match your standard project grids */
   .navigation { 
     gap: 20px; 
   } 
@@ -111,7 +111,7 @@
   } 
 } 
 
-@media screen and (max-width: 640px) { /* Updated from 767px to sync seamlessly with Header.css mobile breakpoints */
+@media screen and (max-width: 767px) { /* FIX: Synced from 640px to line up with Header.css mobile breakpoints */
   /* Overlay/Dropdown state when mobile menu is opened */ 
   .navigation.navigation_mobile_opened { /* Fixed: Chained selectors seamlessly together (no spaces) */
     display: flex; 
@@ -143,6 +143,7 @@
     width: 100%; 
     padding: 0; 
     border-bottom: none; 
+    color: #FFFFFF; /* FIX: Guarantees links are readable inside default dark menu */
   } 
   
   .navigation__link_active { 
@@ -168,10 +169,20 @@
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05); /* Added slight shadow separating white list from white page backdrop */
   } 
 
+  /* FIX: Forces link color typography changes inside open white panels */
+  .navigation_theme_light.navigation_mobile_opened .navigation__link {
+    color: #1A1B22;
+  }
+
   /* Fixed: Enforces appropriate dark typography contrast inside light mobile drawers */
   .navigation_theme_light.navigation_mobile_opened .navigation__logout-btn,
   .navigation_theme_light.navigation_mobile_opened .navigation__signin-btn {
     color: #1A1B22;
     border-color: #1A1B22;
+  }
+
+  /* FIX: Swap to dark logout asset when light theme menu drawer is expanded */
+  .navigation_theme_light.navigation_mobile_opened .navigation__logout-icon {
+    background-image: url('/images/logout-black.svg');
   }
 }
