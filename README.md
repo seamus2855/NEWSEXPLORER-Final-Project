@@ -4,7 +4,7 @@ An interactive, responsive single-page news aggregation search engine applicatio
 
 ## 🔗 Project Links
 
-*   **Live Deployment (GitHub Pages):** [https://github.io](https://github.io)
+*   **Live Deployment (GitHub Pages):** [https://seamus2855.github.io/NEWSEXPLORER-Final-Project](https://YOUR_GITHUB_USERNAME.github.io/NEWSEXPLORER-Final-Project)
 *   **Project Repository:** [https://github.com/seamus2855/NEWSEXPLORER-Final-Project](https://github.com/seamus2855/NEWSEXPLORER-Final-Project)
 *   **Project Video Demonstration (Loom):** [https://www.loom.com/share/1b23e2911c21477c829fc65326e934c4](https://www.loom.com/share/1b23e2911c21477c829fc65326e934c4)
 
@@ -55,7 +55,7 @@ Follow these instructions to run the application workspace inside your local dev
 
 ## 🔒 Environment Variable Configuration
 
-The application uses an conditional module checking routine inside `src/utils/constants.js` to automatically redirect endpoints based on the deployment target environment:
+The application uses a conditional module checking routine inside `src/utils/constants.js` to automatically redirect endpoints based on the deployment target environment:
 
 ```javascript
 const IS_PRODUCTION = import.meta.env.MODE === 'production';
