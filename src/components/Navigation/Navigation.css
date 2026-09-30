@@ -78,17 +78,17 @@
   background-color: rgba(0, 0, 0, 0.05); 
 } 
 
-/* Logout Icon */ 
+/* Logout Icon — FIXED PATHING */ 
 .navigation__logout-icon { 
   width: 18px; 
   height: 18px; 
-  background-image: url('../../images/logout-white.svg'); /* Update path as needed */ 
+  background-image: url('/images/logout-white.svg'); /* 👈 Changed path to public root folder */ 
   background-repeat: no-repeat; 
   background-position: center; 
 } 
 
 .navigation_theme_light .navigation__logout-icon { 
-  background-image: url('../../images/logout-black.svg'); /* Update path as needed */ 
+  background-image: url('/images/logout-black.svg'); /* 👈 Changed path to public root folder */ 
 } 
 
 /* ==========================================================================

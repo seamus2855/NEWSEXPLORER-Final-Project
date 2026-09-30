@@ -42,11 +42,11 @@
   text-align: center;
 }
 
-/* Placeholder for the magnifying glass illustration from Figma */
+/* Placeholder for the magnifying glass illustration from Figma — FIXED PATHING */
 .main__not-found-icon {
   width: 96px;
   height: 96px;
-  background-image: url("../../images/not-found.svg"); /* Ensure path matches your project assets */
+  background-image: url("/images/not-found.svg"); /* 👈 Changed path to public root folder */
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
