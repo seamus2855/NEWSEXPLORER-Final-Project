@@ -6,19 +6,19 @@ export default defineConfig(({ command, isPreview }) => {
   return {
     plugins: [react()],
     
-    // Intercepts and filters out the specific bundler performance text alert
-    customLogger: {
-      warn(msg) { // 👈 Removed 'options' parameter to pass ESLint checks
-        if (msg.includes("PLUGIN_TIMINGS") || msg.includes("vite:prepare-out-dir")) {
-          return; // Quietly skip printing this warning message
+    build: {
+      // Directs the bundler to ignore warning logs that clutter the terminal
+      logFilter: {
+        warn(msg) {
+          if (msg.includes("PLUGIN_TIMINGS") || msg.includes("vite:prepare-out-dir")) {
+            return false; // 👈 Tells Vite to suppress this specific message safely
+          }
+          return true;
         }
-        console.warn(msg);
-      },
-      info: (msg) => console.log(msg),
-      error: (msg) => console.error(msg),
+      }
     },
 
-    // Handles pathing for local servers and GitHub Pages deployment
+    // Handles pathing seamlessly for dev servers, production previews, and GitHub Pages
     base: (command === "serve" || isPreview) ? "/" : "/NEWSEXPLORER-Final-Project/",
   };
 });
