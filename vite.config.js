@@ -8,9 +8,9 @@ export default defineConfig(({ command, isPreview }) => {
     
     // Intercepts and filters out the specific bundler performance text alert
     customLogger: {
-      warn(msg, options) {
+      warn(msg) { // 👈 Removed 'options' parameter to pass ESLint checks
         if (msg.includes("PLUGIN_TIMINGS") || msg.includes("vite:prepare-out-dir")) {
-          return; // 👈 Quietly skip printing this warning message
+          return; // Quietly skip printing this warning message
         }
         console.warn(msg);
       },
