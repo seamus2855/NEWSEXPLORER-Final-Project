@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig(({ command, isPreview }) => {
   return {
     plugins: [react()],
-    
+
     build: {
       // Passes configuration settings down to the underlying Rolldown engine
       rolldownOptions: {
@@ -17,6 +17,7 @@ export default defineConfig(({ command, isPreview }) => {
 
     // Uses absolute root paths '/' for local dev 'serve' AND local production 'preview'
     // Uses the custom subfolder route string exclusively for the final production build
-    base: (command === "serve" || isPreview) ? "/" : "/NEWSEXPLORER-Final-Project/",
+    base:
+      command === "serve" || isPreview ? "/" : "/NEWSEXPLORER-Final-Project/",
   };
 });
