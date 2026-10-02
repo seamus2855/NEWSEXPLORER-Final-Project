@@ -1,0 +1,107 @@
+/* AboutAuthor.css */
+.about-author-section {
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.author-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 56px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 104px;
+  box-sizing: border-box;
+}
+
+.author-image-wrapper {
+  flex-shrink: 0;
+}
+
+.author-photo {
+  width: 464px;
+  height: 464px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-bio-content {
+  display: flex;
+  flex-direction: column;
+  color: #1a1b22;
+}
+
+.author-bio-content__title {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+  margin: 0 0 24px;
+}
+
+.author-name {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0 0 16px;
+}
+
+.author-description {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #4d4f54; /* Slate gray styling for body copy legibility */
+  margin: 0 0 24px;
+}
+
+.author-links {
+  display: flex;
+}
+
+.author-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 24px;
+  background-color: #ffffff;
+  border: 1px solid #1a1b22;
+  border-radius: 80px;
+  color: #1a1b22;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.author-btn:hover {
+  background-color: #1a1b22;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Tablet & Mobile Responsive Framework (Breakpoints)
+   ========================================================================== */
+@media screen and (max-width: 900px) {
+  .author-container {
+    flex-direction: column;
+    padding: 40px 16px;
+    gap: 24px;
+    text-align: left; /* Aligns smoothly with professional left-aligned body text requirements */
+  }
+
+  .author-photo {
+    width: 272px;
+    height: 272px;
+  }
+
+  .author-bio-content__title {
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
+}

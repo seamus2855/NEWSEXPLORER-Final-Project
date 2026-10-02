@@ -1,15 +1,17 @@
 import { useEffect } from "react";
+import "./ModalWithForm.css"; // Ensure standard wrapper styling is pulled in
 
 function ModalWithForm({
   title,
+  name, // Added for semantic naming if needed for CSS or forms
   isOpen,
   onClose,
   onSubmit,
   buttonText,
-  altButtonText,
-  onAltButtonClick,
+  isButtonDisabled = false, // Sync with your modal implementations
+  redirectText,             // Sync with your modal implementations
+  onRedirectClick,         // Sync with your modal implementations
   children,
-  isValid = true, // Pass form validation state if implementing the custom validation hook
 }) {
   // Close modal on Escape key press
   useEffect(() => {
@@ -34,12 +36,16 @@ function ModalWithForm({
     }
   };
 
+  // Generate a clean ID for the screen-reader heading link
+  const titleId = `modal-title-${name || "form"}`;
+
   return (
     <div 
       className={`modal ${isOpen ? "modal_opened" : ""}`} 
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
+      aria-labelledby={titleId}
     >
       <div className="modal__container">
         <button
@@ -48,32 +54,31 @@ function ModalWithForm({
           onClick={onClose}
           aria-label="Close modal"
         />
-        <h2 className="modal__title">{title}</h2>
+        <h2 id={titleId} className="modal__title">{title}</h2>
         
-        <form className="modal__form" onSubmit={onSubmit} noValidate>
+        <form className="modal__form" name={name} onSubmit={onSubmit} noValidate>
           {children}
           
-          {/* Fixed: Grouped the primary and alternate buttons inside a semantic layout container */}
           <div className="modal__submit-container">
             <button
               type="submit"
               className={`modal__submit-button ${
-                !isValid ? "modal__submit-button_disabled" : ""
+                isButtonDisabled ? "modal__submit-button_disabled" : ""
               }`}
-              disabled={!isValid}
+              disabled={isButtonDisabled}
             >
               {buttonText}
             </button>
             
-            {altButtonText && (
+            {redirectText && (
               <p className="modal__alt-text">
                 or{" "}
                 <button
                   type="button"
                   className="modal__alt-button"
-                  onClick={onAltButtonClick}
+                  onClick={onRedirectClick}
                 >
-                  {altButtonText}
+                  {redirectText}
                 </button>
               </p>
             )}
