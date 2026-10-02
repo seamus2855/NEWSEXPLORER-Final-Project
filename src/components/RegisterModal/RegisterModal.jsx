@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useFormAndValidation } from "../../hooks/UseFormAndValidation"; // Leverage validation states
+import { useFormAndValidation } from "../../hooks/useFormAndValidation"; // FIXED: Case-sensitivity
 import "./RegisterModal.css";
 
 function RegisterModal({
@@ -13,20 +13,17 @@ function RegisterModal({
   onSignInLinkClick,
   isLoading,
 }) {
-  // Use structured values, errors, and validation states
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
-  // Reset inputs when modal opens or closes
   useEffect(() => {
     if (isOpen) {
-       
       resetForm({ email: "", password: "", username: "" });
     }
   }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid) {
+    if (isValid && !isLoading) { // FIXED: Stop multiple duplicate submissions
       onRegister({
         email: values.email,
         password: values.password,
@@ -39,10 +36,11 @@ function RegisterModal({
   if (isRegistrationSuccess) {
     return (
       <div 
-        className={`modal modal_opened`} 
+        className="modal modal_opened" 
         role="dialog" 
         aria-modal="true" 
         aria-labelledby="success-title"
+        onClick={(e) => e.target.classList.contains("modal") && onClose()} // FIXED: Close on overlay backdrop click
       >
         <div className="modal__container register-modal__success-card">
           <button 
@@ -74,9 +72,9 @@ function RegisterModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Signing up..." : "Sign up"}
-      altButtonText="Sign in"
-      onAltButtonClick={handleAltClick}
-      isValid={isValid}
+      isButtonDisabled={!isValid || isLoading} // FIXED: Contract alignment to block interactions
+      redirectText="Sign in" // FIXED: Passed parameters to align with standard project modal naming patterns
+      onRedirectClick={handleAltClick} // FIXED: Passed parameters to align with standard project modal naming patterns
     >
       {/* Email input field */}
       <div className="modal__label-container">
@@ -90,6 +88,7 @@ function RegisterModal({
           required
           value={values.email || ""}
           onChange={handleChange}
+          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "register-email-error" : undefined}
         />
@@ -114,6 +113,7 @@ function RegisterModal({
           minLength="4"
           value={values.password || ""}
           onChange={handleChange}
+          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.password}
           aria-describedby={errors.password ? "register-password-error" : undefined}
         />
@@ -139,6 +139,7 @@ function RegisterModal({
           maxLength="30"
           value={values.username || ""}
           onChange={handleChange}
+          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.username}
           aria-describedby={errors.username ? "register-username-error" : undefined}
         />

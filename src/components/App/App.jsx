@@ -28,14 +28,16 @@ function App() {
 
   // --- Core Layout & Search Engine UI State ---
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Used to track API request pending states
   const [hasSearched, setHasSearched] = useState(false);
-  const [searchError, setSearchError] = "";
+  const [searchError, setSearchError] = useState("");
   const [visibleCount, setVisibleCount] = useState(3);
 
   // --- Structural Context Modals Layer ---
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false); // Added for the registration success view
+  const [serverError, setServerError] = useState(""); // Added to pass down server exception details if needed
 
   // --- Local UI Storage for Saved Cards Persistence Layer ---
   const [savedArticles, setSavedArticles] = useState([]);
@@ -43,6 +45,7 @@ function App() {
 
   // --- Modal Navigation State Controls ---
   const handleSignInClick = () => {
+    setIsRegistrationSuccess(false);
     setIsRegisterModalOpen(false);
     setIsLoginModalOpen(true);
   };
@@ -55,13 +58,14 @@ function App() {
   const closeAllModals = () => {
     setIsLoginModalOpen(false);
     setIsRegisterModalOpen(false);
+    setIsRegistrationSuccess(false);
   };
 
   // --- API Search Handling Core Logic ---
   const handleSearchSubmit = (keyword) => {
     setIsLoading(true);
     setHasSearched(true);
-    setSearchError(""); 
+    setSearchError("");
     setArticles([]);
     setVisibleCount(3);
     setCurrentKeyword(keyword);
@@ -126,11 +130,29 @@ function App() {
   };
 
   // --- Handle Context Action Mapping Pipelines ---
-  const handleLoginSubmit = (email, password) => {
-    // 💡 Added password argument here to safely pass to your auth submission layer
-    // if your original validation step complained about 'password' being unused or misaligned.
-    login({ name: "Explorer", email: email, password: password }, "simulated-session-web-token");
-    closeAllModals();
+  const handleLoginSubmit = (values) => {
+    setIsLoading(true);
+    setServerError("");
+    // Simulating an asynchronous network callback action
+    setTimeout(() => {
+      login(
+        { name: "Explorer", email: values.email, password: values.password },
+        "simulated-session-web-token",
+      );
+      setIsLoading(false);
+      closeAllModals();
+    }, 1000);
+  };
+
+  const handleRegisterSubmit = () => {
+    setIsLoading(true);
+    setServerError("");
+    // Simulating an asynchronous registration callback action
+    setTimeout(() => {
+      // Toggle successful registration state view flag
+      setIsRegistrationSuccess(true);
+      setIsLoading(false);
+    }, 1000);
   };
 
   const handleLogoutClick = () => {
@@ -195,15 +217,22 @@ function App() {
         <LoginModal
           isOpen={isLoginModalOpen}
           onClose={closeAllModals}
-          onLogin={handleLoginSubmit}
-          onRedirect={handleRegisterClick}
+          onSubmit={handleLoginSubmit}
+          onRedirectClick={handleRegisterClick}
+          isLoading={isLoading}
         />
       )}
-      {isRegisterModalOpen && (
+
+      {(isRegisterModalOpen || isRegistrationSuccess) && (
         <RegisterModal
-          isOpen={isRegisterModalOpen}
+          isOpen={isRegisterModalOpen || isRegistrationSuccess}
           onClose={closeAllModals}
-          onRedirect={handleSignInClick}
+          onRegister={handleRegisterSubmit}
+          handleAltClick={handleSignInClick}
+          onSignInLinkClick={handleSignInClick}
+          isRegistrationSuccess={isRegistrationSuccess}
+          serverError={serverError}
+          isLoading={isLoading}
         />
       )}
     </div>

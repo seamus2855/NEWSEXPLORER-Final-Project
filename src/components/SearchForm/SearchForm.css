@@ -1,6 +1,15 @@
 /* ==========================================================================
    Hero Section Layout Area Container
    ========================================================================== */
+/* NEW: This wrapper spans 100% of the screen width to host the background image */
+.hero-section {
+  background-image: url('/images/logout-white.svg');; /* Update this with your path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
 .search-form__container {
   width: 100%;
   max-width: 1440px;
@@ -11,6 +20,7 @@
   align-items: center;
   box-sizing: border-box;
 }
+
 
 .search-form__title {
   font-family: 'Roboto Slab', serif;

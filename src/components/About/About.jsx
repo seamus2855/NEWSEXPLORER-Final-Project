@@ -1,18 +1,42 @@
-import "./About.css";
+import "./AboutAuthor.css"; // Ensure you import your CSS file at the top
+import authorPhoto from "../../images/about-author.svg"; // Adjust path to your images folder
 
-function About() {
+function AboutAuthor() {
   return (
-    <section className="about">
-      {/* Fixed: Use the clean public absolute path string directly */}
-      <img src="/images/author.jpg" alt="Author" className="about__image" />
-      <div className="about__text-container">
-        <h2 className="about__title">About the author</h2>
-        <p className="about__text">
-          Write your author biography description text here...
-        </p>
+    <section id="about-author" className="about-author-section">
+      <div className="author-container">
+        <div className="author-image-wrapper">
+          <img 
+            src={authorPhoto} 
+            alt="Seamus, Full Stack Web Developer and creator of News Explorer" 
+            className="author-photo" 
+          />
+        </div>
+        <div className="author-bio-content">
+          <h2 className="author-bio-content__title">About the Author</h2>
+          <p className="author-name"><strong>Seamus</strong></p>
+          <p className="author-description">
+            Welcome to my project! I am a passionate developer and creator focused on building clean, 
+            accessible, and user-centric web experiences. With a solid foundation in software engineering, 
+            I thoroughly enjoy solving complex algorithmic or interface problems through elegant, semantic code. 
+            This project represents a culmination of my practical skills engineering front-end user 
+            interfaces in React, configuring structured client-side form validation mechanisms, and parsing 
+            asynchronous data pipelines using third-party News REST APIs.
+          </p>
+          <div className="author-links">
+            <a 
+              href="https://github.com" 
+              className="author-btn" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              View My Work
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
-export default About;
+export default AboutAuthor;

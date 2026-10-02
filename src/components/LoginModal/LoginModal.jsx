@@ -1,13 +1,11 @@
 import { useEffect } from "react";
-import { useFormAndValidation } from "../../hooks/UseFormAndValidation"; // Use a combined state hook if available, or pass values from useForm
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
 function LoginModal({ isOpen, onClose, onRedirectClick, onSubmit, isLoading }) {
-  // Recommendation: Use a form hook that outputs values, errors, and form validity
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
-  // Reset form inputs and errors every time the modal mounts or toggles open
   useEffect(() => {
     if (isOpen) {
       resetForm({ email: "", password: "" });
@@ -16,7 +14,7 @@ function LoginModal({ isOpen, onClose, onRedirectClick, onSubmit, isLoading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid) {
+    if (isValid && !isLoading) {
       onSubmit(values);
     }
   };
@@ -29,31 +27,40 @@ function LoginModal({ isOpen, onClose, onRedirectClick, onSubmit, isLoading }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Signing in..." : "Sign in"}
-      isButtonDisabled={!isValid}
+      isButtonDisabled={!isValid || isLoading}
       redirectText="Sign up"
       onRedirectClick={onRedirectClick}
     >
-      {/* Email input field */}
       <div className="modal__label-container">
-        <label className="modal__label">Email</label>
+        <label htmlFor="login-email" className="modal__label">
+          Email
+        </label>
         <input
+          id="login-email"
           type="email"
           name="email"
           className={`modal__input ${errors.email ? "modal__input_type_error" : ""}`}
           placeholder="Enter email"
           value={values.email || ""}
           onChange={handleChange}
+          disabled={isLoading}
           required
         />
-        <span className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}>
+        <span
+          className={`modal__error-message ${
+            errors.email ? "modal__error-message_visible" : ""
+          }`}
+        >
           {errors.email}
         </span>
       </div>
 
-      {/* Password input field */}
       <div className="modal__label-container">
-        <label className="modal__label">Password</label>
+        <label htmlFor="login-password" className="modal__label">
+          Password
+        </label>
         <input
+          id="login-password"
           type="password"
           name="password"
           className={`modal__input ${errors.password ? "modal__input_type_error" : ""}`}
@@ -61,9 +68,14 @@ function LoginModal({ isOpen, onClose, onRedirectClick, onSubmit, isLoading }) {
           value={values.password || ""}
           onChange={handleChange}
           minLength="4"
+          disabled={isLoading}
           required
         />
-        <span className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}>
+        <span
+          className={`modal__error-message ${
+            errors.password ? "modal__error-message_visible" : ""
+          }`}
+        >
           {errors.password}
         </span>
       </div>
