@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useFormAndValidation } from "../../hooks/useFormAndValidation"; // FIXED: Case-sensitivity
+import { useFormAndValidation } from "../../hooks/useFormAndValidation"; // FIX: Changed 'UseFormAndValidation' to lowercase 'useFormAndValidation'
 import "./RegisterModal.css";
 
 function RegisterModal({
@@ -13,8 +13,10 @@ function RegisterModal({
   onSignInLinkClick,
   isLoading,
 }) {
+  // Use structured values, errors, and validation states
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
+  // Reset inputs when modal opens or closes
   useEffect(() => {
     if (isOpen) {
       resetForm({ email: "", password: "", username: "" });
@@ -23,7 +25,7 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid && !isLoading) { // FIXED: Stop multiple duplicate submissions
+    if (isValid) {
       onRegister({
         email: values.email,
         password: values.password,
@@ -35,28 +37,13 @@ function RegisterModal({
   // High-Fidelity Success Modal View Context
   if (isRegistrationSuccess) {
     return (
-      <div 
-        className="modal modal_opened" 
-        role="dialog" 
-        aria-modal="true" 
-        aria-labelledby="success-title"
-        onClick={(e) => e.target.classList.contains("modal") && onClose()} // FIXED: Close on overlay backdrop click
-      >
+      <div className={`modal modal_opened`} role="dialog" aria-modal="true" aria-labelledby="success-title">
         <div className="modal__container register-modal__success-card">
-          <button 
-            type="button" 
-            className="modal__close-button" 
-            onClick={onClose} 
-            aria-label="Close success overlay" 
-          />
+          <button type="button" className="modal__close-button" onClick={onClose} aria-label="Close success overlay" />
           <h2 id="success-title" className="register-modal__success-title">
             Registration successfully completed!
           </h2>
-          <button 
-            type="button" 
-            className="register-modal__link" 
-            onClick={onSignInLinkClick}
-          >
+          <button type="button" className="register-modal__link" onClick={onSignInLinkClick}>
             Sign in
           </button>
         </div>
@@ -72,9 +59,9 @@ function RegisterModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Signing up..." : "Sign up"}
-      isButtonDisabled={!isValid || isLoading} // FIXED: Contract alignment to block interactions
-      redirectText="Sign in" // FIXED: Passed parameters to align with standard project modal naming patterns
-      onRedirectClick={handleAltClick} // FIXED: Passed parameters to align with standard project modal naming patterns
+      altButtonText="Sign in"
+      onAltButtonClick={handleAltClick}
+      isValid={isValid}
     >
       {/* Email input field */}
       <div className="modal__label-container">
@@ -88,12 +75,11 @@ function RegisterModal({
           required
           value={values.email || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "register-email-error" : undefined}
         />
-        <span 
-          id="register-email-error" 
+        <span
+          id="register-email-error"
           className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}
         >
           {errors.email}
@@ -113,12 +99,11 @@ function RegisterModal({
           minLength="4"
           value={values.password || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.password}
           aria-describedby={errors.password ? "register-password-error" : undefined}
         />
-        <span 
-          id="register-password-error" 
+        <span
+          id="register-password-error"
           className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}
         >
           {errors.password}
@@ -139,12 +124,11 @@ function RegisterModal({
           maxLength="30"
           value={values.username || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.username}
           aria-describedby={errors.username ? "register-username-error" : undefined}
         />
-        <span 
-          id="register-username-error" 
+        <span
+          id="register-username-error"
           className={`modal__error-message ${errors.username ? "modal__error-message_visible" : ""}`}
         >
           {errors.username}

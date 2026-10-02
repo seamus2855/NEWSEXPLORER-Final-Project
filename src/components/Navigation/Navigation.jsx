@@ -40,7 +40,12 @@ function Navigation({ isLoggedIn, userName, onSignInClick, onLogoutClick }) {
             onClick={onLogoutClick}
           >
             {userName}
-            <span className="navigation__logout-icon"></span>
+            {/* Dynamically loads black or white icon using clean public folder paths */}
+            <img 
+              src={isSavedNews ? "/images/logout-black.svg" : "/images/logout-white.svg"} 
+              alt="Logout" 
+              className="navigation__logout-icon" 
+            />
           </button>
         </>
       ) : (

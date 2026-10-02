@@ -1,7 +1,7 @@
 /* src/components/SavedNews/SavedNews.css */
 
 .saved-news { 
-  background-color: #f5f6f7; /* Fixed: Matches your main project layout background theme color */
+  background-color: #F5F6F7; /* Fixed: Matches your main project layout background theme color */
   min-height: calc(100vh - 160px); /* Ensures full page coverage minus header/footer heights */ 
   display: flex; 
   flex-direction: column; 
@@ -52,8 +52,8 @@
   padding: 60px 104px 80px 104px; 
   box-sizing: border-box; 
   flex-grow: 1; 
-  display: flex; /* Added: Ensures proper alignment flow inside the collection container */
-  flex-direction: column;
+  /* FIX: Block display format keeps sub-containers like <ul> card grid lists rendering accurately */
+  display: block; 
 } 
 
 .saved-news__empty-message { 
@@ -111,7 +111,7 @@
   
   .saved-news__title { 
     font-size: 30px; 
-    line-height: 34px; 
+    line-height: 40px; /* FIX: Added line-height safety padding for multi-line keyword lists on mobile screens */
     margin-bottom: 14px; 
   } 
   

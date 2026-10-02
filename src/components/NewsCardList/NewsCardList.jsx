@@ -1,34 +1,26 @@
-import { useLocation } from "react-router-dom";
+import NewsCard from "../NewsCard/NewsCard"; // Fixes the 'NewsCard' is not defined error
 import "./NewsCardList.css";
-import NewsCard from "../NewsCard/NewsCard";
 
 function NewsCardList({
-  cards = [], // Fallback default to prevent map crashes
+  cards,
   onCardSave,
   onCardDelete,
   isLoggedIn,
+  isSavedNewsPage = false, // Defaults to false, but allows the SavedNews page to override it
   onAuthModalOpen,
 }) {
-  const location = useLocation();
-
-  // Determine if the current view is the saved news view
-  const isSavedNewsPage = location.pathname === "/saved-news";
-
   return (
     <ul className="news-card-list">
       {cards.map((card, index) => (
         // Using url + index as key in case duplicate articles are returned by the API
-        <li
-          key={`${card.url || card.link || index}-${index}`}
-          className="news-card-list__item"
-        >
+        <li key={`${card.url || index}-${index}`}>
           <NewsCard
             card={card}
             isLoggedIn={isLoggedIn}
-            isSavedNewsPage={isSavedNewsPage} // Fixed: Passes route indicator flag directly down
-            onBookmarkClick={onCardSave} // Fixed: Mapped properly to match NewsCard callbacks
-            onDeleteClick={onCardDelete} // Fixed: Mapped properly to match NewsCard callbacks
-            onAuthModalOpen={onAuthModalOpen} // Fixed: Connects authorization modal trigger
+            isSavedNewsPage={isSavedNewsPage}
+            onBookmarkClick={onCardSave}
+            onDeleteClick={onCardDelete}
+            onAuthModalOpen={onAuthModalOpen} // Passed down to open login modal for unauthorized users
           />
         </li>
       ))}

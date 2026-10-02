@@ -21,8 +21,8 @@
   top: auto;
   left: auto;
   transform: none;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e6e8eb;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E6E8EB;
 }
 
 .header__logo {
@@ -30,37 +30,49 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #ffffff;
+  color: #FFFFFF;
   text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.header__logo:hover {
+  opacity: 0.8;
 }
 
 .header_theme_light .header__logo {
-  color: #1a1b22;
+  color: #1A1B22;
 }
 
+/* ==========================================================================
+   Responsive Adaptations (Tablet & Mobile Breakpoints)
+   ========================================================================== */
+
 /* Tablet Layout Constraints */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) { /* FIX: Synced from 1024px to match project layout */
   .header {
     padding: 11px 40px;
   }
 }
 
 /* Mobile Screen Layout Transition */
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 767px) { /* FIX: Synced from 640px to prevent card stretching */
   .header {
     padding: 16px;
-    position: relative;
+    position: absolute; /* FIX: Restored absolute positioning so it continues to overlay the hero image background */
+    top: 0;
+    left: 0;
+    transform: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+  }
+
+  /* FIX: Kept simple class selector sequence to prevent specificity overrides */
+  .header_theme_light {
+    position: relative; 
     top: auto;
     left: auto;
     transform: none;
-    background-color: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  /* Fixed: Explicitly handles the light theme behavior on mobile layout */
-  .header.header_theme_light {
-    position: relative; 
-    background-color: #ffffff;
-    border-bottom: 1px solid #e6e8eb;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E6E8EB;
   }
 }

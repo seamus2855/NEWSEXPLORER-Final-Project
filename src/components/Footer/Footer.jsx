@@ -39,9 +39,9 @@ function Footer() {
               target="_blank" 
               rel="noreferrer"
             >
-              {/* Fixed: Replaced undefined variable reference with static public asset paths */}
+              {/* Fixed: Prepend import.meta.env.BASE_URL to prevent 404 pathing errors on GitHub Pages */}
               <img 
-                src="/images/github.svg" 
+                src={`${import.meta.env.BASE_URL}images/github.svg`} 
                 alt="GitHub icon profile" 
                 className="footer__social-icon" 
               />
@@ -54,9 +54,9 @@ function Footer() {
               target="_blank" 
               rel="noreferrer"
             >
-              {/* Fixed: Replaced undefined variable reference with static public asset paths */}
+              {/* Fixed: Prepend import.meta.env.BASE_URL to prevent 404 pathing errors on GitHub Pages */}
               <img 
-                src="/images/facebook.svg" 
+                src={`${import.meta.env.BASE_URL}images/facebook.svg`} 
                 alt="Facebook icon page" 
                 className="footer__social-icon" 
               />
