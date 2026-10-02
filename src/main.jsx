@@ -5,20 +5,15 @@ import App from "./components/App/App.jsx";
 import { AuthProvider } from "./contexts/AuthProvider.jsx";
 import "./index.css";
 
-// Check if Vite is running in production mode
-const isProduction = import.meta.env.MODE === "production";
-
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <StrictMode>
-    {/* Dynamically sets basename based on your environment */}
-    <BrowserRouter
-      basename={isProduction ? "/NEWSEXPLORER-Final-Project" : "/"}
-    >
+    {/* FIX: Handed environment string management off to Vite's native BASE_URL tracking variable */}
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AuthProvider>
         <App />
       </AuthProvider>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 );
