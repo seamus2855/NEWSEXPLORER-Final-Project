@@ -4,7 +4,8 @@ An interactive, responsive single-page news aggregation search engine applicatio
 
 ## 🔗 Project Links
 
-*   **Live Deployment (GitHub Pages):** [https://seamus2855.github.io/NEWSEXPLORER-Final-Project](https://YOUR_GITHUB_USERNAME.github.io/NEWSEXPLORER-Final-Project)
+*   **Live Deployment (GitHub Pages):** * **Live Deployment (GitHub Pages):** [https://seamus2855.github.io/NEWSEXPLORER-Final-Project](https://seamus2855.github.io/NEWSEXPLORER-Final-Project)
+
 *   **Project Repository:** [https://github.com/seamus2855/NEWSEXPLORER-Final-Project](https://github.com/seamus2855/NEWSEXPLORER-Final-Project)
 *   **Project Video Demonstration (Loom):** [https://www.loom.com/share/1b23e2911c21477c829fc65326e934c4](https://www.loom.com/share/1b23e2911c21477c829fc65326e934c4)
 
