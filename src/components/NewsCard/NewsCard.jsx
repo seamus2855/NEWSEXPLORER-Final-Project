@@ -10,7 +10,9 @@ function NewsCard({
   const text = card.description || "No preview description available.";
   const date = card.publishedAt;
   const source = card.source?.name || "Unknown Source";
-  const image = card.urlToImage || card.image || "https://unsplash.com"; // Added a functional generic news image fallback
+  
+  // FIXED: Points cleanly to your local public folder image placeholder asset
+  const image = card.urlToImage || card.image || "/images/not-found.svg"; 
   const link = card.url || card.link;
   const isSaved = card.isSaved || false;
   const keyword = card.keyword || "";
@@ -47,7 +49,8 @@ function NewsCard({
           className="news-card__image"
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = "https://unsplash.com";
+            // FIXED: Fallback backup handles broken external API links cleanly
+            e.target.src = "/images/not-found.svg";
           }}
         />
       </a>

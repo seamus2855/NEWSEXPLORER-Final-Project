@@ -59,7 +59,7 @@
   align-items: center; 
   justify-content: center;
   gap: 8px; 
-  box-sizing: border-box; /* Added to normalize padding button models */
+  box-sizing: border-box; 
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; 
 } 
 
@@ -79,13 +79,16 @@
   background-color: rgba(0, 0, 0, 0.05); 
 } 
 
-/* Logout Icon styling - FIX: Updated paths to absolute paths to resolve Vite bundle build time errors */ 
+/* Logout Icon styling - FIXED display blocks to allow empty spans to render */ 
 .navigation__logout-icon { 
+  display: inline-block; /* CRITICAL FIX: Forces inline spans to obey size parameters */
   width: 18px; 
   height: 18px; 
   background-image: url('/images/logout-white.svg'); 
   background-repeat: no-repeat; 
   background-position: center; 
+  background-size: contain; /* FIX: Prevents vector paths from shearing out of viewport scales */
+  vertical-align: middle; /* Aligns smoothly alongside text models */
 } 
 
 .navigation_theme_light .navigation__logout-icon { 
@@ -95,7 +98,7 @@
 /* ==========================================================================
    Responsive Tablet & Mobile Media Queries
    ========================================================================== */
-@media screen and (max-width: 1023px) { /* FIX: Synced from 1024px to match your standard project grids */
+@media screen and (max-width: 1023px) { 
   .navigation { 
     gap: 20px; 
   } 
@@ -111,9 +114,9 @@
   } 
 } 
 
-@media screen and (max-width: 767px) { /* FIX: Synced from 640px to line up with Header.css mobile breakpoints */
+@media screen and (max-width: 767px) { 
   /* Overlay/Dropdown state when mobile menu is opened */ 
-  .navigation.navigation_mobile_opened { /* Fixed: Chained selectors seamlessly together (no spaces) */
+  .navigation.navigation_mobile_opened { 
     display: flex; 
     flex-direction: column; 
     position: absolute; 
@@ -143,7 +146,7 @@
     width: 100%; 
     padding: 0; 
     border-bottom: none; 
-    color: #FFFFFF; /* FIX: Guarantees links are readable inside default dark menu */
+    color: #FFFFFF; 
   } 
   
   .navigation__link_active { 
@@ -163,25 +166,21 @@
     color: #FFFFFF; 
   } 
 
-  /* Fixed: Correctly chain light theme configuration for full-panel mobile overrides */
   .navigation_theme_light.navigation_mobile_opened { 
     background-color: #FFFFFF; 
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05); /* Added slight shadow separating white list from white page backdrop */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05); 
   } 
 
-  /* FIX: Forces link color typography changes inside open white panels */
   .navigation_theme_light.navigation_mobile_opened .navigation__link {
     color: #1A1B22;
   }
 
-  /* Fixed: Enforces appropriate dark typography contrast inside light mobile drawers */
   .navigation_theme_light.navigation_mobile_opened .navigation__logout-btn,
   .navigation_theme_light.navigation_mobile_opened .navigation__signin-btn {
     color: #1A1B22;
     border-color: #1A1B22;
   }
 
-  /* FIX: Swap to dark logout asset when light theme menu drawer is expanded */
   .navigation_theme_light.navigation_mobile_opened .navigation__logout-icon {
     background-image: url('/images/logout-black.svg');
   }
