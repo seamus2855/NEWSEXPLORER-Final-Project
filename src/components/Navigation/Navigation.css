@@ -17,6 +17,7 @@
   height: 100%;
 } 
 
+/* Links */
 .navigation__link { 
   display: flex;
   align-items: center;
@@ -26,7 +27,7 @@
   font-weight: 500; 
   line-height: 24px; 
   text-decoration: none; 
-  color: #FFFFFF; 
+  color: #ffffff; 
   padding: 0 10px; 
   border-bottom: 3px solid transparent; 
   box-sizing: border-box;
@@ -37,32 +38,30 @@
   opacity: 0.8; 
 } 
 
-/* Modifiers for active states (Home / Dark theme) */ 
+/* Link Modifiers */ 
 .navigation__link_active { 
-  border-bottom-color: #FFFFFF; 
+  border-bottom-color: #ffffff; 
 } 
 
-/* Alternate light theme for Saved News page */ 
-.navigation_theme_light .navigation__link { 
-  color: #1A1B22; 
+.navigation__link_theme_light { 
+  color: #1a1b22; 
 } 
 
-.navigation_theme_light .navigation__link_active { 
-  border-bottom-color: #1A1B22; 
+.navigation__link_theme_light-active { 
+  border-bottom-color: #1a1b22; 
 } 
 
 /* ==========================================================================
    Header Action Buttons (Sign In / Logout)
    ========================================================================== */
-.navigation__logout-btn,
-.navigation__signin-btn { 
+.navigation__btn { 
   font-family: 'Roboto', Arial, sans-serif; 
   font-size: 18px; 
   font-weight: 500; 
   line-height: 24px; 
   background-color: transparent; 
-  color: #FFFFFF; 
-  border: 1px solid #FFFFFF; 
+  color: #ffffff; 
+  border: 1px solid #ffffff; 
   border-radius: 100px; 
   padding: 0 18px; 
   height: 48px;
@@ -76,18 +75,24 @@
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease; 
 } 
 
-.navigation__logout-btn:hover,
-.navigation__signin-btn:hover { 
-  opacity: 0.8;
+.navigation__btn:hover { 
+  opacity: 0.8; 
 } 
 
-.navigation_theme_light .navigation__logout-btn,
-.navigation_theme_light .navigation__signin-btn { 
-  color: #1A1B22; 
-  border-color: #1A1B22; 
+.navigation__btn_type_signin {
+  min-width: 152px;
+  padding: 0 20px;
+}
+
+.navigation__btn_type_logout {
+  min-width: 112px;
+}
+
+.navigation__btn_theme_light { 
+  color: #1a1b22; 
+  border-color: #1a1b22; 
 } 
 
-/* Logout Icon styling (works directly on <img> tags) */ 
 .navigation__logout-icon { 
   width: 24px; 
   height: 24px; 
@@ -95,7 +100,7 @@
   vertical-align: middle; 
 } 
 
-/* Hamburger menu button hidden on desktop */
+/* Hamburger menu button hidden by default */
 .navigation__menu-btn {
   display: none;
 }
@@ -113,64 +118,62 @@
     padding: 0 6px;
   } 
   
-  .navigation__logout-btn,
-  .navigation__signin-btn { 
+  .navigation__btn { 
     font-size: 16px; 
     height: 40px;
     padding: 0 14px; 
   } 
 
-  .navigation__logout-icon {
-    width: 20px;
-    height: 20px;
-  }
+  .navigation__logout-icon { 
+    width: 20px; 
+    height: 20px; 
+  } 
 } 
 
 /* ==========================================================================
    Responsive Adaptations (Mobile <= 767px)
    ========================================================================== */
 @media screen and (max-width: 767px) { 
-  /* Mobile Hamburger / Close toggle */
-  .navigation__menu-btn {
-    display: block;
-    width: 24px;
-    height: 24px;
-    border: none;
-    background: transparent url('/images/menu-white.svg') center / contain no-repeat;
-    cursor: pointer;
-    z-index: 30;
-  }
+  .navigation__menu-btn { 
+    display: block; 
+    width: 24px; 
+    height: 24px; 
+    border: none; 
+    background: transparent url('/images/menu-white.svg') center / contain no-repeat; 
+    cursor: pointer; 
+    z-index: 30; 
+  } 
 
-  .navigation__menu-btn.navigation_theme_light {
-    background-image: url('/images/menu-black.svg');
-  }
+  .navigation__menu-btn_theme_light { 
+    background-image: url('/images/menu-black.svg'); 
+  } 
 
-  .navigation__menu-btn_close,
-  .navigation__menu-btn_close.navigation_theme_light {
-    background-image: url('/images/close-white.svg');
-  }
+  .navigation__menu-btn_type_close { 
+    background-image: url('/images/close-white.svg'); 
+  } 
 
-  /* Full screen dark backdrop behind drawer */
-  .navigation__overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 15;
-  }
+  .navigation__overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 15; 
+  } 
 
-  /* Dropdown drawer state when mobile menu is opened */ 
-  .navigation.navigation_mobile_opened,
-  .navigation.navigation_mobile-open { 
+  .navigation { 
+    display: none; 
+  } 
+  
+  .navigation_opened { 
     display: flex; 
     flex-direction: column; 
     position: fixed; 
     top: 0; 
     left: 0; 
     width: 100%; 
-    height: auto;
+    height: auto; 
     background-color: #202222; 
     padding: 72px 16px 24px; 
     box-sizing: border-box; 
@@ -179,41 +182,35 @@
     z-index: 20; 
   } 
   
-  /* Hide default nav elements on mobile unless drawer is open */ 
-  .navigation:not(.navigation_mobile_opened):not(.navigation_mobile-open) { 
-    display: none; 
-  } 
-  
   .navigation__item { 
     width: 100%; 
-    height: auto;
+    height: auto; 
   } 
   
   .navigation__link { 
     font-size: 18px; 
     line-height: 24px; 
     width: 100%; 
-    height: auto;
+    height: auto; 
     padding: 8px 0; 
-    border-bottom: none !important; 
-    color: #FFFFFF !important; 
+    border-bottom: none; 
+    color: #ffffff; 
   } 
   
-  .navigation__logout-btn,
-  .navigation__signin-btn { 
+  .navigation__btn { 
     font-size: 18px; 
     line-height: 24px; 
     width: 100%; 
-    height: 56px;
+    height: 56px; 
     justify-content: center; 
     padding: 0; 
     margin-top: 10px; 
-    border-color: #FFFFFF !important; 
-    color: #FFFFFF !important; 
+    border-color: #ffffff; 
+    color: #ffffff; 
   } 
 
-  .navigation__logout-icon {
-    width: 24px;
-    height: 24px;
-  }
+  .navigation__logout-icon { 
+    width: 24px; 
+    height: 24px; 
+  } 
 }

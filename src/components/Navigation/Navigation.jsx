@@ -12,9 +12,15 @@ function Navigation({
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Fallback to route inspection if theme prop is not explicitly passed
   const isSavedNews = theme ? theme === "light" : location.pathname === "/saved-news";
-  const themeClass = isSavedNews ? "navigation_theme_light" : "";
+
+  // BEM Modifier strings
+  const navThemeMod = isSavedNews ? " navigation_theme_light" : "";
+  const navMobileMod = isMobileMenuOpen ? " navigation_opened" : "";
+  const menuBtnThemeMod = isSavedNews ? " navigation__menu-btn_theme_light" : "";
+  const menuBtnCloseMod = isMobileMenuOpen ? " navigation__menu-btn_close" : "";
+  const linkThemeMod = isSavedNews ? " navigation__link_theme_light" : "";
+  const btnThemeMod = isSavedNews ? " navigation__btn_theme_light" : "";
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -39,9 +45,7 @@ function Navigation({
       {/* Mobile Hamburger / Close Button */}
       <button
         type="button"
-        className={`navigation__menu-btn ${themeClass} ${
-          isMobileMenuOpen ? "navigation__menu-btn_close" : ""
-        }`}
+        className={`navigation__menu-btn${menuBtnThemeMod}${menuBtnCloseMod}`}
         onClick={toggleMobileMenu}
         aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
       />
@@ -56,16 +60,14 @@ function Navigation({
       )}
 
       {/* Main Navigation Container */}
-      <nav
-        className={`navigation ${themeClass} ${
-          isMobileMenuOpen ? "navigation_mobile-open" : ""
-        }`}
-      >
+      <nav className={`navigation${navThemeMod}${navMobileMod}`}>
         <NavLink
           to="/"
           onClick={closeMobileMenu}
           className={({ isActive }) =>
-            `navigation__link ${isActive ? "navigation__link_active" : ""}`
+            `navigation__link${linkThemeMod}${isActive ? " navigation__link_active" : ""}${
+              isActive && isSavedNews ? " navigation__link_active-light" : ""
+            }`
           }
         >
           Home
@@ -77,7 +79,9 @@ function Navigation({
               to="/saved-news"
               onClick={closeMobileMenu}
               className={({ isActive }) =>
-                `navigation__link ${isActive ? "navigation__link_active" : ""}`
+                `navigation__link${linkThemeMod}${isActive ? " navigation__link_active" : ""}${
+                  isActive && isSavedNews ? " navigation__link_active-light" : ""
+                }`
               }
             >
               Saved articles
@@ -85,7 +89,7 @@ function Navigation({
 
             <button
               type="button"
-              className="navigation__logout-btn"
+              className={`navigation__btn navigation__logout-btn${btnThemeMod}`}
               onClick={handleLogout}
             >
               <span className="navigation__user-name">{userName}</span>
@@ -103,7 +107,7 @@ function Navigation({
         ) : (
           <button
             type="button"
-            className="navigation__signin-btn"
+            className={`navigation__btn navigation__signin-btn${btnThemeMod}`}
             onClick={handleSignIn}
           >
             Sign in

@@ -15,14 +15,14 @@
   background-color: transparent;
 }
 
-/* Light Theme Modifier (Active on /saved-news) */
+/* Block modifier */
 .header_theme_light {
   position: relative;
   background-color: #ffffff;
   border-bottom: 1px solid #e6e8eb;
 }
 
-/* Logo Typography & Theme Colors */
+/* Base element */
 .header__logo {
   font-family: "Roboto Slab", serif;
   font-size: 20px;
@@ -37,15 +37,15 @@
   opacity: 0.8;
 }
 
-.header_theme_light .header__logo {
+/* Element modifier (replaces the nested selector) */
+.header__logo_theme_light {
   color: #1a1b22;
 }
 
 /* ==========================================================================
-   Responsive Adaptations (Tablet & Mobile Breakpoints)
+   Responsive Adaptations
    ========================================================================== */
 
-/* Tablet Layout Constraints */
 @media screen and (max-width: 1023px) {
   .header {
     height: 66px;
@@ -53,7 +53,6 @@
   }
 }
 
-/* Mobile Screen Layout Transition */
 @media screen and (max-width: 767px) {
   .header {
     height: 56px;
@@ -63,9 +62,5 @@
   .header__logo {
     font-size: 16px;
     line-height: 24px;
-  }
-
-  .header_theme_light {
-    position: relative;
   }
 }
