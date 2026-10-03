@@ -111,15 +111,20 @@
   cursor: not-allowed;
 }
 
+/* 🌟 REFINED: Cleaned up margin rules to match Figma specification alignments */
 .modal__alt-text {
   font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: #000000;
-  margin: 16px 0 0;
+  margin: 16px auto 0 auto;
   text-align: center;
+  display: block;
 }
 
+/* 🌟 REFINED: Removed underlines to align cleanly with your specific UI screenshot requirements */
 .modal__alt-button {
   padding: 0;
   border: 0;
@@ -128,12 +133,15 @@
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
+  line-height: 17px;
   cursor: pointer;
   margin-left: 4px;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .modal__alt-button:hover {
-  text-decoration: underline;
+  opacity: 0.7;
+  text-decoration: none; /* Removed underline decoration to cleanly match the Figma screen asset design */
 }
 
 /* ==========================================================================

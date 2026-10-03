@@ -6,10 +6,10 @@ import "./LoginModal.css";
 function LoginModal({
   isOpen,
   onClose,
-  handleAltClick, // Renamed to match alternative link actions across modals
-  onLogin,        // Explicit form submission handler
+  handleAltClick, // Switches to the register modal layout view
+  onLogin,        // Form submission action handler
   isLoading,
-  serverError,    // Included server fallback messaging
+  serverError,    
 }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
@@ -22,7 +22,7 @@ function LoginModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid) {
+    if (isValid && typeof onLogin === "function") {
       onLogin({
         email: values.email,
         password: values.password,
@@ -32,15 +32,16 @@ function LoginModal({
 
   return (
     <ModalWithForm
-      title="Log in"
+      title="Sign in" 
       name="login"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText={isLoading ? "Logging in..." : "Log in"}
-      altButtonText="Sign up"
-      onAltButtonClick={handleAltClick}
-      isValid={isValid}
+      buttonText={isLoading ? "Signing in..." : "Sign in"}
+      /* 🌟 FIXED: Mapped props to align perfectly with ModalWithForm configuration keys */
+      isButtonDisabled={!isValid} 
+      redirectText="Sign up"
+      onRedirectClick={handleAltClick}
     >
       {/* Email input field */}
       <div className="modal__label-container">

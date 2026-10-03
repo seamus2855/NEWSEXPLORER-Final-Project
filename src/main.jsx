@@ -9,8 +9,8 @@ const root = createRoot(document.getElementById("root"));
 
 root.render(
   <StrictMode>
-    {/* FIX: Handed environment string management off to Vite's native BASE_URL tracking variable */}
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    {/* FIXED: Uses Vite's native string variable, falling back gracefully to your main directory root if undefined */}
+    <BrowserRouter basename={import.meta.env.BASE_URL || "/"}>
       <AuthProvider>
         <App />
       </AuthProvider>

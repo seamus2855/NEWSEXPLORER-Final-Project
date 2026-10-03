@@ -1,63 +1,116 @@
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ isLoggedIn, userName, onSignInClick, onLogoutClick }) {
+function Navigation({
+  isLoggedIn,
+  userName,
+  onSignInClick,
+  onLogoutClick,
+  theme,
+}) {
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Determine if the current page is the saved articles route
-  const isSavedNews = location.pathname === "/saved-news";
-
-  // Set theme modifier suffixes cleanly
+  // Fallback to route inspection if theme prop is not explicitly passed
+  const isSavedNews = theme ? theme === "light" : location.pathname === "/saved-news";
   const themeClass = isSavedNews ? "navigation_theme_light" : "";
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleSignIn = () => {
+    closeMobileMenu();
+    if (onSignInClick) onSignInClick();
+  };
+
+  const handleLogout = () => {
+    closeMobileMenu();
+    if (onLogoutClick) onLogoutClick();
+  };
+
   return (
-    <nav className={`navigation ${themeClass}`}>
-      {/* Home link always visible */}
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          `navigation__link ${isActive ? "navigation__link_active" : ""}`
-        }
+    <>
+      {/* Mobile Hamburger / Close Button */}
+      <button
+        type="button"
+        className={`navigation__menu-btn ${themeClass} ${
+          isMobileMenuOpen ? "navigation__menu-btn_close" : ""
+        }`}
+        onClick={toggleMobileMenu}
+        aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+      />
+
+      {/* Backdrop overlay for mobile menu */}
+      {isMobileMenuOpen && (
+        <div
+          className="navigation__overlay"
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Main Navigation Container */}
+      <nav
+        className={`navigation ${themeClass} ${
+          isMobileMenuOpen ? "navigation_mobile-open" : ""
+        }`}
       >
-        Home
-      </NavLink>
+        <NavLink
+          to="/"
+          onClick={closeMobileMenu}
+          className={({ isActive }) =>
+            `navigation__link ${isActive ? "navigation__link_active" : ""}`
+          }
+        >
+          Home
+        </NavLink>
 
-      {isLoggedIn ? (
-        <>
-          {/* Saved articles link only shows if logged in */}
-          <NavLink
-            to="/saved-news"
-            className={({ isActive }) =>
-              `navigation__link ${isActive ? "navigation__link_active" : ""}`
-            }
-          >
-            Saved articles
-          </NavLink>
+        {isLoggedIn ? (
+          <>
+            <NavLink
+              to="/saved-news"
+              onClick={closeMobileMenu}
+              className={({ isActive }) =>
+                `navigation__link ${isActive ? "navigation__link_active" : ""}`
+              }
+            >
+              Saved articles
+            </NavLink>
 
+            <button
+              type="button"
+              className="navigation__logout-btn"
+              onClick={handleLogout}
+            >
+              <span className="navigation__user-name">{userName}</span>
+              <img
+                src={
+                  isSavedNews && !isMobileMenuOpen
+                    ? "/images/logout-black.svg"
+                    : "/images/logout-white.svg"
+                }
+                alt="Logout"
+                className="navigation__logout-icon"
+              />
+            </button>
+          </>
+        ) : (
           <button
             type="button"
-            className="navigation__logout-btn"
-            onClick={onLogoutClick}
+            className="navigation__signin-btn"
+            onClick={handleSignIn}
           >
-            {userName}
-            {/* Dynamically loads black or white icon using clean public folder paths */}
-            <img 
-              src={isSavedNews ? "/images/logout-black.svg" : "/images/logout-white.svg"} 
-              alt="Logout" 
-              className="navigation__logout-icon" 
-            />
+            Sign in
           </button>
-        </>
-      ) : (
-        <button
-          type="button"
-          className="navigation__signin-btn"
-          onClick={onSignInClick}
-        >
-          Sign in
-        </button>
-      )}
-    </nav>
+        )}
+      </nav>
+    </>
   );
 }
 

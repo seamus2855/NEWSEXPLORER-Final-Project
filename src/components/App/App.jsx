@@ -217,9 +217,10 @@ function App() {
         <LoginModal
           isOpen={isLoginModalOpen}
           onClose={closeAllModals}
-          onSubmit={handleLoginSubmit}
-          onRedirectClick={handleRegisterClick}
+          onLogin={handleLoginSubmit}
+          handleAltClick={handleRegisterClick}
           isLoading={isLoading}
+          serverError={serverError}
         />
       )}
 

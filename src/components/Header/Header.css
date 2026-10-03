@@ -2,35 +2,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1440px;
   width: 100%;
-  margin: 0 auto;
-  padding: 24px 104px;
+  height: 80px;
+  padding: 0 104px;
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   z-index: 10;
+  box-sizing: border-box;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-sizing: border-box; /* Ensures padding doesn't cause overflow errors */
+  background-color: transparent;
 }
 
-/* Modifier class applied when viewing /saved-news route */
+/* Light Theme Modifier (Active on /saved-news) */
 .header_theme_light {
   position: relative;
-  top: auto;
-  left: auto;
-  transform: none;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #E6E8EB;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e6e8eb;
 }
 
+/* Logo Typography & Theme Colors */
 .header__logo {
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
@@ -40,7 +38,7 @@
 }
 
 .header_theme_light .header__logo {
-  color: #1A1B22;
+  color: #1a1b22;
 }
 
 /* ==========================================================================
@@ -48,31 +46,26 @@
    ========================================================================== */
 
 /* Tablet Layout Constraints */
-@media screen and (max-width: 1023px) { /* FIX: Synced from 1024px to match project layout */
+@media screen and (max-width: 1023px) {
   .header {
-    padding: 11px 40px;
+    height: 66px;
+    padding: 0 40px;
   }
 }
 
 /* Mobile Screen Layout Transition */
-@media screen and (max-width: 767px) { /* FIX: Synced from 640px to prevent card stretching */
+@media screen and (max-width: 767px) {
   .header {
-    padding: 16px;
-    position: absolute; /* FIX: Restored absolute positioning so it continues to overlay the hero image background */
-    top: 0;
-    left: 0;
-    transform: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: transparent;
+    height: 56px;
+    padding: 0 16px;
   }
 
-  /* FIX: Kept simple class selector sequence to prevent specificity overrides */
+  .header__logo {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
   .header_theme_light {
-    position: relative; 
-    top: auto;
-    left: auto;
-    transform: none;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #E6E8EB;
+    position: relative;
   }
 }
