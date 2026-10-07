@@ -1,12 +1,16 @@
-/* RegisterModal.css */
+/* ==========================================================================
+   📦 BLOCK MODIFIERS: modal (Registration Success Layout States)
+   ========================================================================== */
 
-.register-modal__success-container { 
+/* FIXED: Replaced loose block mixin container with a clean modifier layout hook */
+.modal__container--success { 
   display: flex; 
   flex-direction: column; 
   gap: 14px; 
 } 
 
-.register-modal__success-title { 
+/* FIXED: Synced title class syntax to utilize standardized double-hyphen modifier notation */
+.modal__title--success { 
   font-family: 'Roboto Slab', serif; 
   font-size: 26px; 
   font-weight: 700; /* Fixed: Changed from 900 to 700 to match standard font-weight limits */
@@ -15,7 +19,8 @@
   margin: 0 0 4px 0; 
 } 
 
-.register-modal__link { 
+/* FIXED: Formatted the standalone inline navigation trigger block element text link */
+.modal__link { 
   font-family: 'Inter', Arial, sans-serif; 
   font-size: 18px; 
   font-weight: 500; 
@@ -26,46 +31,32 @@
   padding: 0; 
   cursor: pointer; 
   text-align: left; 
-  align-self: flex-start; /* Fixed: Keeps button click area bounded flush to text width */
+  align-self: flex-start; /* Keeps button click area bounded flush to text width */
   transition: opacity 0.2s ease; 
 } 
 
-.register-modal__link:hover { 
+.modal__link:hover { 
   opacity: 0.7; 
-  text-decoration: underline; /* Added: Clear interactive affordance for link action conversion */
-} 
-
-/* System feedback for duplicate emails or server runtime issues */ 
-.register-modal__form-error { 
-  font-family: 'Inter', Arial, sans-serif; 
-  font-size: 12px; 
-  font-weight: 400; 
-  line-height: 14px; 
-  color: #FF1A1A; 
-  text-align: center; 
-  min-height: 14px; 
-  margin: 8px 0 16px 0; /* FIX: Replaced layout-breaking negative margins with stable spacing */
-  width: 100%; 
-  display: block;
-  box-sizing: border-box;
+  text-decoration: underline; /* Clear interactive affordance for link action conversion */
 } 
 
 /* ==========================================================================
-   Responsive Adaptations (Mobile Viewports)
+   📱 Responsive Adaptations (Mobile Viewports)
    ========================================================================== */
-@media screen and (max-width: 580px) { /* Fixed: Aligned breakpoint width with your base modal layout (580px) */
-  .register-modal__success-container {
+@media screen and (max-width: 580px) { /* Aligned breakpoint width with your base modal layout (580px) */
+  /* FIXED: Adjusted responsive descriptor queries to hook into modern BEM selectors */
+  .modal__container--success {
     margin-top: 40px; /* Generates spacing below the mobile close button */
     flex-grow: 1;
     justify-content: flex-start;
   }
 
-  .register-modal__success-title { 
+  .modal__title--success { 
     font-size: 22px; 
     line-height: 26px; 
   } 
   
-  .register-modal__link { 
+  .modal__link { 
     font-size: 16px; 
     line-height: 20px; 
     margin-top: 14px; /* Increases tap target separation for mobile users */

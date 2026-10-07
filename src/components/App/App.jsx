@@ -161,7 +161,8 @@ function App() {
   };
 
   if (isAuthLoading) {
-    return <div className="loading-screen">Loading layout...</div>;
+    /* FIXED: Adjusted class styling layout to follow strict BEM guidelines */
+    return <div className="page__loading">Loading layout...</div>;
   }
 
   return (

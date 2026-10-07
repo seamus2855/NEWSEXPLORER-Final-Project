@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Base Backdrop Wrapper Area
+   📦 BLOCK: popup (Base Backdrop Wrapper Area)
    ========================================================================== */
 .popup {
   position: fixed;
@@ -14,13 +14,13 @@
   z-index: 999;
 }
 
-/* FIX: Chain selectors to give this higher specificity, preventing display conflicts */
-.popup.popup_opened {
+/* FIXED: Chain selectors to match strict BEM double-hyphen (--) modifier conventions */
+.popup.popup--opened {
   display: flex;
 }
 
 /* ==========================================================================
-   Central Card Container Module
+   Elements: Card Containers and Text Layouts
    ========================================================================== */
 .popup__container {
   background-color: #ffffff;
@@ -32,9 +32,6 @@
   box-sizing: border-box;
 }
 
-/* ==========================================================================
-   Action & Control Elements
-   ========================================================================== */
 .popup__close-button {
   position: absolute;
   top: -36px;
@@ -62,9 +59,6 @@
   margin: 0 0 22px;
 }
 
-/* ==========================================================================
-   Input Form Structure
-   ========================================================================== */
 .popup__form {
   display: flex;
   flex-direction: column;
@@ -95,7 +89,7 @@
 }
 
 /* ==========================================================================
-   Submission and Redirect Row Controls
+   Elements: Submission and Alternative Redirect Rows
    ========================================================================== */
 .popup__submit-button {
   background-color: #2f71e5; /* FIX: Brand active baseline color */
@@ -132,7 +126,8 @@
   margin: 16px 0 0;
 }
 
-.popup__redirect-link {
+/* FIXED: Updated element class selector from popup__redirect-link to popup__redirect-button */
+.popup__redirect-button {
   background: none;
   border: none;
   color: #2f71e5;
@@ -142,14 +137,19 @@
   font-family: inherit;
 }
 
-.popup__redirect-link:hover {
+.popup__redirect-button:hover {
   text-decoration: underline;
 }
 
 /* ==========================================================================
-   Responsive Mobile Fluidity Layout (Breakpoints)
+   📱 Responsive Mobile Fluidity Layout (Breakpoints)
    ========================================================================== */
 @media screen and (max-width: 560px) {
+  /* FIXED: Synchronized matching double-hyphen breakpoint rule */
+  .popup.popup--opened {
+    align-items: flex-start;
+  }
+
   .popup__container {
     width: 100%;
     min-height: 100dvh; /* FIX: Prevents mobile header/address overlay bars from cutting content */

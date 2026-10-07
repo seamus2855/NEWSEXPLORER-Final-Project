@@ -15,8 +15,8 @@
   background-color: transparent;
 }
 
-/* Block modifier */
-.header_theme_light {
+/* FIXED: Block modifier using standard double-hyphen (--) notation */
+.header--theme-light {
   position: relative;
   background-color: #ffffff;
   border-bottom: 1px solid #e6e8eb;
@@ -37,8 +37,8 @@
   opacity: 0.8;
 }
 
-/* Element modifier (replaces the nested selector) */
-.header__logo_theme_light {
+/* FIXED: Element modifier using standard double-hyphen (--) notation */
+.header__logo--theme-light {
   color: #1a1b22;
 }
 

@@ -1,7 +1,10 @@
-/* ========================================================================== Hero Section Layout Area Container ========================================================================== */ 
-/* NEW: This wrapper spans 100% of the screen width to host the background image */ 
-.hero-section { 
-  background-image: url('/images/header.svg'); /* FIX: Linked the correct header canvas background graphic */
+/* ==========================================================================
+   📦 BLOCK: search-form (Hero Section Layout Area Container)
+   ========================================================================== */
+
+/* FIXED: Changed from loose .hero-section to match your explicit .search-form__hero-wrapper block container class */ 
+.search-form__hero-wrapper { 
+  background-image: url('/images/header.svg'); /* Linked the correct header canvas background graphic */
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
@@ -41,7 +44,9 @@
   max-width: 566px; 
 } 
 
-/* ========================================================================== Search Row Enclosure Setup ========================================================================== */ 
+/* ==========================================================================
+   Elements: Search Row Enclosure Setup
+   ========================================================================== */ 
 .search-form { 
   width: 100%; 
   max-width: 608px; 
@@ -76,6 +81,11 @@
 .search-form__input::placeholder { 
   color: #B6BCBF; 
 } 
+
+/* FIXED: Added clean double-hyphen modifier layout rules for error context indicators */
+.search-form__input--type-error {
+  border-bottom-color: #FF1A1A;
+}
 
 .search-form__button { 
   position: absolute; 
@@ -117,7 +127,10 @@
   font-weight: 500; 
 } 
 
-/* ========================================================================== Responsive Adaptation Breakpoints (Tablet & Mobile) ========================================================================== */ 
+/* ==========================================================================
+   📱 Responsive Adaptation Breakpoints (Tablet & Mobile)
+   ========================================================================== */ 
+
 /* Tablet Media Queries (Viewports under 1024px) */ 
 @media screen and (max-width: 1023px) { 
   .search-form__container { 
@@ -157,7 +170,7 @@
 @media screen and (max-width: 767px) { 
   .search-form__container { 
     padding: 86px 16px 32px; 
-    align-items: flex-start; /* FIX: Shifts layout cards leftward to match text-align: left */
+    align-items: flex-start; /* Shifts layout cards leftward to match text-align: left */
   } 
   
   .search-form__title { 
@@ -178,8 +191,8 @@
   
   .search-form { 
     max-width: 100%; 
-    display: flex;          /* FIX: Enabled flexbox so order property functions on the error element */
-    flex-direction: column; /* FIX: Stacks form components sequentially downwards */
+    display: flex;          /* Enabled flexbox so order property functions on the error element */
+    flex-direction: column; /* Stacks form components sequentially downwards */
     gap: 8px; 
   } 
   
@@ -190,7 +203,7 @@
     border: none; 
     border-radius: 0; 
     gap: 8px; /* Restructured stacking separation space */ 
-    order: 0; /* FIX: Forces input container layout above the error element */
+    order: 0; /* Forces input container layout above the error element */
   } 
   
   .search-form__input { 
@@ -210,7 +223,7 @@
     font-size: 18px; 
     line-height: 24px; 
     box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2); 
-    order: 2; /* FIX: Explicitly forces button underneath the validation error message */
+    order: 2; /* Explicitly forces button underneath the validation error message */
   } 
   
   /* Safely outputs error into normal block document flow to prevent layout overlapping on text objects */ 

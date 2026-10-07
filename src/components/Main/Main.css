@@ -16,8 +16,8 @@
   box-sizing: border-box;
 }
 
-/* State modifier to align Preloader, Errors, and Nothing Found items perfectly center */
-.main__results-container_status {
+/* FIXED: State modifier using standard BEM double-hyphen (--) notation */
+.main__results-container--status {
   align-items: center;
   justify-content: center;
   padding: 86px 104px;
@@ -117,7 +117,8 @@
     padding: 40px 40px 48px;
   }
 
-  .main__results-container_status {
+  /* FIXED: Synchronized matching double-hyphen breakpoint rule */
+  .main__results-container--status {
     padding: 48px 40px;
   }
 
@@ -145,7 +146,8 @@
     padding: 32px 16px 40px;
   }
 
-  .main__results-container_status {
+  /* FIXED: Synchronized matching double-hyphen breakpoint rule */
+  .main__results-container--status {
     padding: 50px 16px;
   }
 

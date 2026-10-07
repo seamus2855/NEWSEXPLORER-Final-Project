@@ -11,7 +11,7 @@ function NewsCard({
   const date = card.publishedAt;
   const source = card.source?.name || "Unknown Source";
   
-  // FIXED: Points cleanly to your local public folder image placeholder asset
+  // Points cleanly to your local public folder image placeholder asset
   const image = card.urlToImage || card.image || "/images/not-found.svg"; 
   const link = card.url || card.link;
   const isSaved = card.isSaved || false;
@@ -49,7 +49,7 @@ function NewsCard({
           className="news-card__image"
           onError={(e) => {
             e.target.onerror = null;
-            // FIXED: Fallback backup handles broken external API links cleanly
+            // Fallback backup handles broken external API links cleanly
             e.target.src = "/images/not-found.svg";
           }}
         />
@@ -63,12 +63,13 @@ function NewsCard({
         <div className="news-card__action-container">
           <button
             type="button"
+            /* FIXED: Replaced legacy single underscores with standard BEM double hyphens (--) for style modifiers */
             className={`news-card__button ${
               isSavedNewsPage
-                ? "news-card__button_type_trash"
+                ? "news-card__button--type-trash"
                 : isSaved
-                ? "news-card__button_type_bookmark-marked"
-                : "news-card__button_type_bookmark"
+                ? "news-card__button--type-bookmark-marked"
+                : "news-card__button--type-bookmark"
             }`}
             onClick={handleActionButtonClick}
             aria-label={isSavedNewsPage ? "Delete article" : "Save article"}

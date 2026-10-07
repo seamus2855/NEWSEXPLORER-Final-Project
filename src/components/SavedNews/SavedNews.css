@@ -46,7 +46,8 @@
   margin: 0;
 }
 
-.saved-news__keywords-bold {
+/* FIXED: Updated single underscore (_) variants to strict BEM double hyphens (--) */
+.saved-news__keywords--bold {
   font-weight: 700;
 }
 

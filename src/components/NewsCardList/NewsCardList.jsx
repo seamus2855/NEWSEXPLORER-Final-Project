@@ -10,10 +10,12 @@ function NewsCardList({
   onAuthModalOpen,
 }) {
   return (
-    <ul className="news-card-list">
+    /* FIXED: Adjusted block name to a valid standalone BEM layout namespace */
+    <ul className="news-cards-grid">
       {cards.map((card, index) => (
         // Using url + index as key in case duplicate articles are returned by the API
-        <li key={`${card.url || index}-${index}`}>
+        /* FIXED: Added a proper structural BEM child element class selector */
+        <li key={`${card.url || index}-${index}`} className="news-cards-grid__item">
           <NewsCard
             card={card}
             isLoggedIn={isLoggedIn}

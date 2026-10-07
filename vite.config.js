@@ -14,14 +14,18 @@ logger.warn = (msg, options) => {
 };
 
 // https://vite.dev
-export default defineConfig(({ command, isPreview }) => {
+export default defineConfig(() => {
   return {
     plugins: [react()],
-    
+
     // FIX: Hand over the configured interception logger engine to the bundler
     customLogger: logger,
 
-    // Handles pathing seamlessly for dev servers, production previews, and GitHub Pages
-    base: (command === "serve" || isPreview) ? "/" : "/NEWSEXPLORER-Final-Project/",
+    /* 
+       FIXED: Standardized the base path across all environments. 
+       This ensures that your local preview and your GitHub Pages deployment 
+       look for files in the exact same directory mapping.
+    */
+    base: "/NEWSEXPLORER-Final-Project/",
   };
 });

@@ -1,9 +1,9 @@
 /* NewsCardList.css */
 
-/* Clean layout grid specifically targeting the <ul> container */
-.news-card-list {
+/* FIXED: Clean layout grid specifically targeting the BEM <ul> container */
+.news-cards-grid {
   display: grid;
-  /* 🌟 FIXED: Changed from auto-fill to exactly 3 columns to match the Figma design spec */
+  /* Changed from auto-fill to exactly 3 columns to match the Figma design spec */
   grid-template-columns: repeat(3, minmax(0, 1fr));
   
   column-gap: 16px;    /* Sets the precise spacing width between cards */
@@ -12,12 +12,12 @@
   list-style: none;    /* Removes bullet points from standard <ul> elements */
   padding: 0;          /* Clears default browser indentations */
   margin: 0 auto 64px; /* Centers the list block smoothly */
-  max-width: 1232px;   /* 🌟 FIXED: Reduced from 1440px to standard design system card container width */
+  max-width: 1232px;   /* Reduced from 1440px to standard design system card container width */
   box-sizing: border-box;
 }
 
-/* Individual list item wrapper settings */
-.news-card-list__item {
+/* FIXED: Individual list item wrapper settings matching BEM standards */
+.news-cards-grid__item {
   display: flex;
   width: 100%;
 }
@@ -28,8 +28,9 @@
 
 /* Tablet Viewports - Synchronized with card component breakpoints */
 @media screen and (max-width: 1023px) {
-  .news-card-list {
-    /* 🌟 FIXED: Switches to a balanced 2-column layout structure for midsize screens */
+  /* FIXED: Updated block namespace inside layout breakpoint */
+  .news-cards-grid {
+    /* Switches to a balanced 2-column layout structure for midsize screens */
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px; /* Maintained 16px to prevent cluttered visual spacing */
     margin-bottom: 32px;
@@ -38,7 +39,8 @@
 
 /* Mobile Viewports - Updated to standard 767px to prevent ultra-stretched cards */
 @media screen and (max-width: 767px) {
-  .news-card-list {
+  /* FIXED: Updated block namespace inside layout breakpoint */
+  .news-cards-grid {
     grid-template-columns: 1fr; /* Stacks the cards vertically into a single column layout */
     gap: 16px;
     margin-bottom: 24px;

@@ -14,13 +14,13 @@ function Navigation({
 
   const isSavedNews = theme ? theme === "light" : location.pathname === "/saved-news";
 
-  // BEM Modifier strings
-  const navThemeMod = isSavedNews ? " navigation_theme_light" : "";
-  const navMobileMod = isMobileMenuOpen ? " navigation_opened" : "";
-  const menuBtnThemeMod = isSavedNews ? " navigation__menu-btn_theme_light" : "";
-  const menuBtnCloseMod = isMobileMenuOpen ? " navigation__menu-btn_close" : "";
-  const linkThemeMod = isSavedNews ? " navigation__link_theme_light" : "";
-  const btnThemeMod = isSavedNews ? " navigation__btn_theme_light" : "";
+  // FIXED: Converted single underscore modifiers to strict BEM double hyphens (--)
+  const navThemeMod = isSavedNews ? " navigation--theme-light" : "";
+  const navMobileMod = isMobileMenuOpen ? " navigation--opened" : "";
+  const menuBtnThemeMod = isSavedNews ? " navigation__menu-btn--theme-light" : "";
+  const menuBtnCloseMod = isMobileMenuOpen ? " navigation__menu-btn--close" : "";
+  const linkThemeMod = isSavedNews ? " navigation__link--theme-light" : "";
+  const btnThemeMod = isSavedNews ? " navigation__btn--theme-light" : "";
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -65,8 +65,8 @@ function Navigation({
           to="/"
           onClick={closeMobileMenu}
           className={({ isActive }) =>
-            `navigation__link${linkThemeMod}${isActive ? " navigation__link_active" : ""}${
-              isActive && isSavedNews ? " navigation__link_active-light" : ""
+            `navigation__link${linkThemeMod}${isActive ? " navigation__link--active" : ""}${
+              isActive && isSavedNews ? " navigation__link--active-light" : ""
             }`
           }
         >
@@ -79,8 +79,8 @@ function Navigation({
               to="/saved-news"
               onClick={closeMobileMenu}
               className={({ isActive }) =>
-                `navigation__link${linkThemeMod}${isActive ? " navigation__link_active" : ""}${
-                  isActive && isSavedNews ? " navigation__link_active-light" : ""
+                `navigation__link${linkThemeMod}${isActive ? " navigation__link--active" : ""}${
+                  isActive && isSavedNews ? " navigation__link--active-light" : ""
                 }`
               }
             >

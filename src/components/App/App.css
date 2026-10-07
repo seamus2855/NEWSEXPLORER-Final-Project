@@ -18,7 +18,9 @@ body {
   color: #1A1B22;
 }
 
-/* Master Layout Wrapper */
+/* ==========================================================================
+   📦 BLOCK: page (Master Layout Wrapper)
+   ========================================================================== */
 .page {
   display: flex;
   flex-direction: column;
@@ -35,12 +37,10 @@ body {
   flex: 1 0 auto; /* Keeps the middle content growing dynamically */
 }
 
-/* ==========================================================================
-   Hero / Search Section Background Implementation
-   ========================================================================== */
-.hero-search-section {
-  /* Replace with your exact image filename/path from your project directory */
-  background-image: url('../images/Overlay.svg');
+/* Hero / Search Section Background Implementation */
+.page__hero-search {
+  /* Points to the working asset directory folder layout */
+  background-image: url('/images/Overlay.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -63,18 +63,35 @@ body {
   color: #FFFFFF;
 }
 
-/* Optional State Modifiers for Dark/Light Theme Switching */
-.page_theme_dark {
+/* App loading splash screen state alignment */
+.page__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 18px;
+  color: #1A1B22;
+  background-color: #F5F6F7;
+}
+
+/* ==========================================================================
+   ⚡ MODIFIERS: Strict BEM uses double hyphens (--) for states/themes
+   ========================================================================== */
+.page--theme-dark {
   background-color: #1A1B22;
   color: #FFFFFF;
 }
 
-.page_theme_light {
+.page--theme-light {
   background-color: #FFFFFF;
   color: #1A1B22;
 }
 
-/* Global Interactive Resets */
+/* ==========================================================================
+   Global Interactive Resets
+   ========================================================================== */
 button {
   cursor: pointer;
   border: none;

@@ -10,8 +10,10 @@ function Header({
   theme = "dark",
 }) {
   const isLight = theme === "light";
-  const headerModifier = isLight ? " header_theme_light" : "";
-  const logoModifier = isLight ? " header__logo_theme_light" : "";
+  
+  /* FIXED: Rewritten to follow strict BEM double-hyphen (--) modifier conventions */
+  const headerModifier = isLight ? " header--theme-light" : "";
+  const logoModifier = isLight ? " header__logo--theme-light" : "";
 
   return (
     <header className={`header${headerModifier}`}>

@@ -97,22 +97,25 @@
 }
 
 /* ==========================================================================
-   Bookmark & Trash Button Icon States - Synced to verified public assets
+   ⚡ MODIFIERS: Strict BEM uses double hyphens (--) for states/variants
    ========================================================================== */
-.news-card__button_type_bookmark {
-  background-image: url('/images/card.svg'); /* FIXED: Mapped back to your existing public graphic template */
+
+/* FIXED: Replaced single underscores with standard BEM double hyphens (--) */
+.news-card__button--type-bookmark {
+  background-image: url('/images/card.svg'); /* Mapped back to your existing public graphic template */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 14px 18px;
 }
 
-.news-card__button_type_bookmark:hover {
+.news-card__button--type-bookmark:hover {
   background-image: url('/images/card.svg');
   background-color: #F5F6F7;
   opacity: 0.8;
 }
 
-.news-card__button_type_bookmark-marked {
+/* FIXED: Replaced single underscores with standard BEM double hyphens (--) */
+.news-card__button--type-bookmark-marked {
   background-image: url('/images/card.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -120,20 +123,23 @@
   filter: invert(25%) sepia(95%) saturate(1900%) hue-rotate(195deg) brightness(90%) contrast(100%); /* Adds a fallback visual marker effect */
 }
 
-.news-card__button_type_trash {
-  background-image: url('/images/logout-black.svg'); /* FIXED: Swapped placeholder map asset to available icon layout */
+/* FIXED: Replaced single underscores with standard BEM double hyphens (--) */
+.news-card__button--type-trash {
+  background-image: url('/images/logout-black.svg'); /* Swapped placeholder map asset to available icon layout */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px 16px;
 }
 
-.news-card__button_type_trash:hover {
+.news-card__button--type-trash:hover {
   background-image: url('/images/logout-black.svg');
   background-color: #F5F6F7;
   opacity: 0.7;
 }
 
-/* Card Content Description Area */
+/* ==========================================================================
+   Card Content Description Area
+   ========================================================================== */
 .news-card__text-container {
   padding: 24px;
   display: flex;

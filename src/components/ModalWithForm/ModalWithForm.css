@@ -6,8 +6,8 @@
   z-index: 1000; /* Ensures the modal sits on top of all page layers */
 }
 
-/* FIX: Chain selectors to give this higher specificity than .modal, preventing display: none from winning */
-.modal.modal_opened {
+/* FIXED: Chain selectors to match strict BEM double-hyphen (--) modifier conventions */
+.modal.modal--opened {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +111,7 @@
   cursor: not-allowed;
 }
 
-/* 🌟 REFINED: Cleaned up margin rules to match Figma specification alignments */
+/* REFINED: Cleaned up margin rules to match Figma specification alignments */
 .modal__alt-text {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -124,7 +124,7 @@
   display: block;
 }
 
-/* 🌟 REFINED: Removed underlines to align cleanly with your specific UI screenshot requirements */
+/* REFINED: Removed underlines to align cleanly with your specific UI screenshot requirements */
 .modal__alt-button {
   padding: 0;
   border: 0;
@@ -145,10 +145,11 @@
 }
 
 /* ==========================================================================
-   Responsive Mobile Fluidity Layout (Breakpoints)
+   📱 Responsive Mobile Fluidity Layout (Breakpoints)
    ========================================================================== */
 @media screen and (max-width: 640px) { /* Fixed: Unified to match your project's 640px grid standard */
-  .modal.modal_opened {
+  /* FIXED: Synchronized matching double-hyphen breakpoint rule */
+  .modal.modal--opened {
     align-items: flex-start; 
   }
 

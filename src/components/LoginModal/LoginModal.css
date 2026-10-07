@@ -43,11 +43,6 @@
   border-bottom-color: #1a1b22; /* High contrast active focus state */
 }
 
-/* Enhanced error state color toggles */
-.modal__input_type_error {
-  border-bottom-color: #ff0000;
-}
-
 /* Validation error text positioned perfectly without shifting surrounding layout cards */
 .modal__error-message {
   font-family: 'Inter', Arial, sans-serif;
@@ -63,18 +58,11 @@
   transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.modal__error-message_visible {
-  opacity: 1;
-  visibility: visible;
-}
-
 /* ==========================================================================
-   🌟 ADDED: Alternative Redirect Link Rules to match Figma exactly
+   🌟 Alternative Redirect Link Rules to match Figma exactly
    ========================================================================== */
 
-/* Main wrapping layout container for the "or Sign up" block */
-.modal__alternative-text,
-.modal__alt-text,
+/* Main wrapping layout container for the navigation block */
 .modal__form-nav {
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -89,8 +77,6 @@
 }
 
 /* Interactive blue clickable link layout matching the screenshot */
-.modal__alternative-link,
-.modal__alt-link,
 .modal__form-nav-link {
   color: #2f71e5; /* Signature brand blue used on action buttons */
   font-weight: 500;
@@ -104,8 +90,32 @@
 }
 
 /* Elegant visual indicator transition behavior when hovering */
-.modal__alternative-link:hover,
-.modal__alt-link:hover,
 .modal__form-nav-link:hover {
   opacity: 0.7;
+}
+
+/* ==========================================================================
+   ⚡ BEM MODIFIERS (Using strict -- notation)
+   ========================================================================== */
+
+/* Enhanced error state color toggles */
+.modal__input--type-error {
+  border-bottom-color: #ff0000;
+}
+
+/* Visible modifier state for your validation messages */
+.modal__error-message--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* FIXED: Added clean localized modifier rule to handle global backend server exception drops */
+.modal__error-message--server {
+  position: static; /* Let it flow naturally beneath form buttons or elements without absolute shifting */
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 14px;
+  opacity: 1;
+  visibility: visible;
 }

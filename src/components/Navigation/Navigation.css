@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Base Navigation Container (Desktop)
+   📦 BLOCK: navigation (Desktop Grid)
    ========================================================================== */
 .navigation { 
   display: flex; 
@@ -17,7 +17,7 @@
   height: 100%;
 } 
 
-/* Links */
+/* Elements: Interactive Anchors */
 .navigation__link { 
   display: flex;
   align-items: center;
@@ -38,21 +38,21 @@
   opacity: 0.8; 
 } 
 
-/* Link Modifiers */ 
-.navigation__link_active { 
+/* ⚡ LINK MODIFIERS (Double-hyphen notation) */ 
+.navigation__link--active { 
   border-bottom-color: #ffffff; 
 } 
 
-.navigation__link_theme_light { 
+.navigation__link--theme-light { 
   color: #1a1b22; 
 } 
 
-.navigation__link_theme_light-active { 
+.navigation__link--active-light { 
   border-bottom-color: #1a1b22; 
 } 
 
 /* ==========================================================================
-   Header Action Buttons (Sign In / Logout)
+   Elements: Header Action Controls (Sign In / Logout)
    ========================================================================== */
 .navigation__btn { 
   font-family: 'Roboto', Arial, sans-serif; 
@@ -79,19 +79,28 @@
   opacity: 0.8; 
 } 
 
-.navigation__btn_type_signin {
+/* Structural Element Class Identifiers */
+.navigation__signin-btn {
   min-width: 152px;
   padding: 0 20px;
 }
 
-.navigation__btn_type_logout {
+.navigation__logout-btn {
   min-width: 112px;
 }
 
-.navigation__btn_theme_light { 
+/* ⚡ BUTTON MODIFIERS */
+.navigation__btn--theme-light { 
   color: #1a1b22; 
   border-color: #1a1b22; 
 } 
+
+.navigation__user-name {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
 
 .navigation__logout-icon { 
   width: 24px; 
@@ -100,13 +109,13 @@
   vertical-align: middle; 
 } 
 
-/* Hamburger menu button hidden by default */
+/* Hamburger menu activation toggle hidden by default on desktop viewports */
 .navigation__menu-btn {
   display: none;
 }
 
 /* ==========================================================================
-   Responsive Adaptations (Tablet)
+   📱 Responsive Framework (Tablet Landscape Layout)
    ========================================================================== */
 @media screen and (max-width: 1023px) { 
   .navigation { 
@@ -131,7 +140,7 @@
 } 
 
 /* ==========================================================================
-   Responsive Adaptations (Mobile <= 767px)
+   📱 Responsive Framework (Mobile Drawer <= 767px)
    ========================================================================== */
 @media screen and (max-width: 767px) { 
   .navigation__menu-btn { 
@@ -144,11 +153,12 @@
     z-index: 30; 
   } 
 
-  .navigation__menu-btn_theme_light { 
+  /* ⚡ HAMBURGER MENU STATE MODIFIERS */
+  .navigation__menu-btn--theme-light { 
     background-image: url('/images/menu-black.svg'); 
   } 
 
-  .navigation__menu-btn_type_close { 
+  .navigation__menu-btn--close { 
     background-image: url('/images/close-white.svg'); 
   } 
 
@@ -166,7 +176,8 @@
     display: none; 
   } 
   
-  .navigation_opened { 
+  /* ⚡ DRAWER CONTAINER OPEN MODIFIER */
+  .navigation--opened { 
     display: flex; 
     flex-direction: column; 
     position: fixed; 

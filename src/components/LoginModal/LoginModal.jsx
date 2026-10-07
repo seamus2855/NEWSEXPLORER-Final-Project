@@ -38,7 +38,7 @@ function LoginModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Signing in..." : "Sign in"}
-      /* 🌟 FIXED: Mapped props to align perfectly with ModalWithForm configuration keys */
+      /* Mapped props to align perfectly with ModalWithForm configuration keys */
       isButtonDisabled={!isValid} 
       redirectText="Sign up"
       onRedirectClick={handleAltClick}
@@ -50,7 +50,8 @@ function LoginModal({
           id="login-email"
           type="email"
           name="email"
-          className={`modal__input ${errors.email ? "modal__input_type_error" : ""}`}
+          /* FIXED: Updated single underscores to BEM double hyphens (--) for the input error modifier */
+          className={`modal__input ${errors.email ? "modal__input--type-error" : ""}`}
           placeholder="Enter email"
           required
           value={values.email || ""}
@@ -60,7 +61,8 @@ function LoginModal({
         />
         <span 
           id="login-email-error" 
-          className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}
+          /* FIXED: Updated single underscores to BEM double hyphens (--) for the visible message modifier */
+          className={`modal__error-message ${errors.email ? "modal__error-message--visible" : ""}`}
         >
           {errors.email}
         </span>
@@ -73,7 +75,8 @@ function LoginModal({
           id="login-password"
           type="password"
           name="password"
-          className={`modal__input ${errors.password ? "modal__input_type_error" : ""}`}
+          /* FIXED: Updated single underscores to BEM double hyphens (--) for the input error modifier */
+          className={`modal__input ${errors.password ? "modal__input--type-error" : ""}`}
           placeholder="Enter password"
           required
           minLength="4"
@@ -84,7 +87,8 @@ function LoginModal({
         />
         <span 
           id="login-password-error" 
-          className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}
+          /* FIXED: Updated single underscores to BEM double hyphens (--) for the visible message modifier */
+          className={`modal__error-message ${errors.password ? "modal__error-message--visible" : ""}`}
         >
           {errors.password}
         </span>
@@ -92,7 +96,8 @@ function LoginModal({
 
       {/* Shared Server Fallback Exception Messaging */}
       {serverError && (
-        <span className="register-modal__form-error" role="alert">
+        /* FIXED: Changed cross-component block namespace to a clean contextual modifier class */
+        <span className="modal__error-message modal__error-message--server" role="alert">
           {serverError}
         </span>
       )}

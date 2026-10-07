@@ -31,7 +31,8 @@ function SavedNews({ savedCards = [], onCardDelete, isLoggedIn, currentUser }) {
 
     if (totalKeywords === 1) {
       return (
-        <span className="saved-news__keywords-bold">
+        /* FIXED: Updated single underscore (_) variants to strict BEM double hyphens (--) */
+        <span className="saved-news__keywords--bold">
           {displayMap[sortedUniqueKeys[0]]}
         </span>
       );
@@ -40,11 +41,11 @@ function SavedNews({ savedCards = [], onCardDelete, isLoggedIn, currentUser }) {
     if (totalKeywords === 2) {
       return (
         <>
-          <span className="saved-news__keywords-bold">
+          <span className="saved-news__keywords--bold">
             {displayMap[sortedUniqueKeys[0]]}
           </span>{" "}
           and{" "}
-          <span className="saved-news__keywords-bold">
+          <span className="saved-news__keywords--bold">
             {displayMap[sortedUniqueKeys[1]]}
           </span>
         </>
@@ -54,15 +55,15 @@ function SavedNews({ savedCards = [], onCardDelete, isLoggedIn, currentUser }) {
     if (totalKeywords === 3) {
       return (
         <>
-          <span className="saved-news__keywords-bold">
+          <span className="saved-news__keywords--bold">
             {displayMap[sortedUniqueKeys[0]]}
           </span>
           ,{" "}
-          <span className="saved-news__keywords-bold">
+          <span className="saved-news__keywords--bold">
             {displayMap[sortedUniqueKeys[1]]}
           </span>
           , and{" "}
-          <span className="saved-news__keywords-bold">
+          <span className="saved-news__keywords--bold">
             {displayMap[sortedUniqueKeys[2]]}
           </span>
         </>
@@ -73,15 +74,15 @@ function SavedNews({ savedCards = [], onCardDelete, isLoggedIn, currentUser }) {
     const remainingCount = totalKeywords - 2;
     return (
       <>
-        <span className="saved-news__keywords-bold">
+        <span className="saved-news__keywords--bold">
           {displayMap[sortedUniqueKeys[0]]}
         </span>
         ,{" "}
-        <span className="saved-news__keywords-bold">
+        <span className="saved-news__keywords--bold">
           {displayMap[sortedUniqueKeys[1]]}
         </span>
         , and{" "}
-        <span className="saved-news__keywords-bold">
+        <span className="saved-news__keywords--bold">
           {remainingCount} other
         </span>
       </>
@@ -111,7 +112,8 @@ function SavedNews({ savedCards = [], onCardDelete, isLoggedIn, currentUser }) {
             cards={savedCards}
             onCardDelete={onCardDelete}
             isLoggedIn={isLoggedIn}
-            isSavedNews={true}
+            /* FIXED: Changed from isSavedNews={true} to align perfectly with NewsCardList keys */
+            isSavedNewsPage={true}
           />
         ) : (
           <p className="saved-news__empty-message">No articles saved yet.</p>

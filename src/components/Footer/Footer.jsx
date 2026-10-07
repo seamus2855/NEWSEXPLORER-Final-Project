@@ -13,12 +13,12 @@ function Footer() {
       <div className="footer__navigation">
         {/* Text links list */}
         <ul className="footer__links">
-          <li className="footer__list-item">
+          <li className="footer__item">
             <Link to="/" className="footer__link">
               Home
             </Link>
           </li>
-          <li className="footer__list-item">
+          <li className="footer__item">
             <a 
               href="https://tripleten.com" 
               className="footer__link" 
@@ -31,11 +31,11 @@ function Footer() {
         </ul>
 
         {/* Social icon links list */}
-        <ul className="footer__social-icons">
-          <li className="footer__list-item">
+        <ul className="footer__social">
+          <li className="footer__item">
             <a 
               href="https://github.com" 
-              className="footer__icon-link" 
+              className="footer__link" 
               target="_blank" 
               rel="noreferrer"
             >
@@ -43,14 +43,14 @@ function Footer() {
               <img 
                 src={`${import.meta.env.BASE_URL}images/github.svg`} 
                 alt="GitHub icon profile" 
-                className="footer__social-icon" 
+                className="footer__icon" 
               />
             </a>
           </li>
-          <li className="footer__list-item">
+          <li className="footer__item">
             <a 
               href="https://facebook.com" 
-              className="footer__icon-link" 
+              className="footer__link" 
               target="_blank" 
               rel="noreferrer"
             >
@@ -58,7 +58,7 @@ function Footer() {
               <img 
                 src={`${import.meta.env.BASE_URL}images/facebook.svg`} 
                 alt="Facebook icon page" 
-                className="footer__social-icon" 
+                className="footer__icon" 
               />
             </a>
           </li>
