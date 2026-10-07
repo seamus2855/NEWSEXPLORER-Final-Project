@@ -8,8 +8,10 @@
 .modal__label-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 34px; /* Expanded slightly to account for the absolute error below */
   position: relative;
+  /* Replaced margin-bottom with bottom padding to safely contain the error text inside its own bounding box */
+  padding-bottom: 22px; 
+  margin-bottom: 12px; 
 }
 
 .modal__label {
@@ -17,7 +19,7 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
-  color: #b6bcbf; /* Adjusted from blue to match neutral gray unfocused layout states */
+  color: #b6bcbf; /* Neutral gray unfocused layout state */
   margin-bottom: 8px;
 }
 
@@ -38,12 +40,7 @@
 }
 
 .modal__input:focus {
-  border-bottom-color: #1a1b22; /* High contrast active focus state matching standard layouts */
-}
-
-/* Enhanced error state color toggles */
-.modal__input_type_error {
-  border-bottom-color: #ff0000;
+  border-bottom-color: #1a1b22; /* High contrast active focus state */
 }
 
 /* Validation error text positioned perfectly without shifting surrounding layout cards */
@@ -54,14 +51,71 @@
   line-height: 14px;
   color: #ff0000;
   position: absolute;
-  bottom: -20px;
+  bottom: 4px; /* Placed exactly within the container's safe padding zone */
   left: 0;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  visibility: hidden; /* Fixed: Prevents screen readers or invisible mouse-clicks from interacting with hidden text */
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.modal__error-message_visible {
+/* ==========================================================================
+   🌟 Alternative Redirect Link Rules to match Figma exactly
+   ========================================================================== */
+
+/* Main wrapping layout container for the navigation block */
+.modal__form-nav {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000000;
+  margin: 16px auto 0 auto;
+  display: block;
+  width: max-content;
+}
+
+/* Interactive blue clickable link layout matching the screenshot */
+.modal__form-nav-link {
+  color: #2f71e5; /* Signature brand blue used on action buttons */
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 4px;
+  font-size: 14px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Elegant visual indicator transition behavior when hovering */
+.modal__form-nav-link:hover {
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   ⚡ BEM MODIFIERS (Using strict -- notation)
+   ========================================================================== */
+
+/* Enhanced error state color toggles */
+.modal__input--type-error {
+  border-bottom-color: #ff0000;
+}
+
+/* Visible modifier state for your validation messages */
+.modal__error-message--visible {
   opacity: 1;
+  visibility: visible;
 }
 
-/* Move global structures (.modal__form, .modal__submit-btn, etc.) out to ModalWithForm.css */
+/* FIXED: Added clean localized modifier rule to handle global backend server exception drops */
+.modal__error-message--server {
+  position: static; /* Let it flow naturally beneath form buttons or elements without absolute shifting */
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 14px;
+  opacity: 1;
+  visibility: visible;
+}

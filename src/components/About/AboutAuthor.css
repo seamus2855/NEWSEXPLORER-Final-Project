@@ -1,10 +1,12 @@
-/* AboutAuthor.css */
-.about-author-section {
+/* ==========================================================================
+   📦 BLOCK: about-author
+   ========================================================================== */
+.about-author {
   background-color: #ffffff;
   width: 100%;
 }
 
-.author-container {
+.about-author__container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -15,24 +17,24 @@
   box-sizing: border-box;
 }
 
-.author-image-wrapper {
+.about-author__image-wrapper {
   flex-shrink: 0;
 }
 
-.author-photo {
+.about-author__photo {
   width: 464px;
   height: 464px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.author-bio-content {
+.about-author__bio-content {
   display: flex;
   flex-direction: column;
   color: #1a1b22;
 }
 
-.author-bio-content__title {
+.about-author__title {
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 40px;
   font-weight: 400;
@@ -40,14 +42,14 @@
   margin: 0 0 24px;
 }
 
-.author-name {
+.about-author__name {
   font-family: 'Inter', Arial, sans-serif;
   font-size: 18px;
   line-height: 24px;
   margin: 0 0 16px;
 }
 
-.author-description {
+.about-author__description {
   font-family: 'Inter', Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -56,11 +58,11 @@
   margin: 0 0 24px;
 }
 
-.author-links {
+.about-author__links {
   display: flex;
 }
 
-.author-btn {
+.about-author__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -78,28 +80,28 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.author-btn:hover {
+.about-author__btn:hover {
   background-color: #1a1b22;
   color: #ffffff;
 }
 
 /* ==========================================================================
-   Tablet & Mobile Responsive Framework (Breakpoints)
+   📱 Tablet & Mobile Responsive Framework (Breakpoints)
    ========================================================================== */
 @media screen and (max-width: 900px) {
-  .author-container {
+  .about-author__container {
     flex-direction: column;
     padding: 40px 16px;
     gap: 24px;
     text-align: left; /* Aligns smoothly with professional left-aligned body text requirements */
   }
 
-  .author-photo {
+  .about-author__photo {
     width: 272px;
     height: 272px;
   }
 
-  .author-bio-content__title {
+  .about-author__title {
     font-size: 30px;
     line-height: 40px;
     margin-bottom: 16px;

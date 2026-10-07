@@ -1,3 +1,6 @@
+/* ==========================================================================
+   📦 BLOCK: popup (Base Backdrop Wrapper Area)
+   ========================================================================== */
 .popup {
   position: fixed;
   top: 0;
@@ -5,28 +8,37 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
+  display: none; /* Controlled programmatically via JavaScript active class states */
   justify-content: center;
   align-items: center;
   z-index: 999;
 }
 
+/* FIXED: Chain selectors to match strict BEM double-hyphen (--) modifier conventions */
+.popup.popup--opened {
+  display: flex;
+}
+
+/* ==========================================================================
+   Elements: Card Containers and Text Layouts
+   ========================================================================== */
 .popup__container {
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   padding: 34px 36px 28px;
   position: relative;
-  width: 100%;
-  max-width: 430px;
+  width: min(430px, calc(100% - 32px)); /* FIX: Keeps container layout from clipping screen borders on small viewports */
   box-sizing: border-box;
 }
 
 .popup__close-button {
   position: absolute;
   top: -36px;
-  right: -36px;
-  background: transparent url("../../images/close-icon.svg") no-repeat center; /* Adjust close graphic asset path */
+  right: -36px; 
+  /* FIX: Merged your custom asset pathway rule securely into the template */
+  background: transparent url('/images/logout-black.svg') no-repeat center; 
+  background-size: contain;
   border: none;
   width: 24px;
   height: 24px;
@@ -52,7 +64,6 @@
   flex-direction: column;
 }
 
-/* Custom styling matching the input style row line from mockup */
 .popup__input-label {
   font-family: "Inter", Arial, sans-serif;
   font-size: 12px;
@@ -77,11 +88,14 @@
   border-bottom-color: rgba(0, 0, 0, 0.4);
 }
 
+/* ==========================================================================
+   Elements: Submission and Alternative Redirect Rows
+   ========================================================================== */
 .popup__submit-button {
-  background-color: #e6e6e6; /* Light gray active/inactive matching mockup */
+  background-color: #2f71e5; /* FIX: Brand active baseline color */
   border-radius: 100px;
   border: none;
-  color: #a0a0a0;
+  color: #ffffff; 
   font-family: "Roboto", Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -89,6 +103,18 @@
   padding: 16px 0;
   margin-top: 16px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.popup__submit-button:hover:not(:disabled) {
+  background-color: #2a65cc; 
+}
+
+/* FIX: Mutes components smoothly only when inputs are invalid */
+.popup__submit-button:disabled {
+  background-color: #e6e6e6; 
+  color: #a0a0a0;
+  cursor: not-allowed;
 }
 
 .popup__redirect {
@@ -100,7 +126,8 @@
   margin: 16px 0 0;
 }
 
-.popup__redirect-link {
+/* FIXED: Updated element class selector from popup__redirect-link to popup__redirect-button */
+.popup__redirect-button {
   background: none;
   border: none;
   color: #2f71e5;
@@ -110,15 +137,39 @@
   font-family: inherit;
 }
 
-/* Responsive adjustment for small phone viewports */
+.popup__redirect-button:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   📱 Responsive Mobile Fluidity Layout (Breakpoints)
+   ========================================================================== */
 @media screen and (max-width: 560px) {
+  /* FIXED: Synchronized matching double-hyphen breakpoint rule */
+  .popup.popup--opened {
+    align-items: flex-start;
+  }
+
   .popup__container {
     width: 100%;
-    height: 100%;
+    min-height: 100dvh; /* FIX: Prevents mobile header/address overlay bars from cutting content */
     max-width: 100%;
     border-radius: 0;
     padding: 56px 16px 24px;
+    display: flex;          
+    flex-direction: column;
+    box-sizing: border-box;
   }
+  
+  .popup__form {
+    flex-grow: 1; 
+  }
+  
+  .popup__redirect {
+    margin-top: auto; /* FIX: Neatly pins dynamic navigation alternative choices to the screen base */
+    padding-top: 16px;
+  }
+
   .popup__close-button {
     top: 16px;
     right: 16px;

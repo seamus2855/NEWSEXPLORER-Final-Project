@@ -33,7 +33,8 @@ function SearchForm({ onSearchSubmit }) {
           <div className="search-form__field-wrapper">
             <input
               type="text"
-              className={`search-form__input ${error ? "search-form__input_type_error" : ""}`}
+              /* FIXED: Converted single underscore to standard BEM double hyphens (--) for the error modifier */
+              className={`search-form__input ${error ? "search-form__input--type-error" : ""}`}
               placeholder="Enter topic"
               value={keyword}
               onChange={handleChange}

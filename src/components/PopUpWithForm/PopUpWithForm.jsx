@@ -48,7 +48,8 @@ function PopupWithForm({
           or{" "}
           <button
             type="button"
-            className="popup__redirect-link"
+            /* FIXED: Changed element name to a clean, valid semantic BEM child class selector */
+            className="popup__redirect-button"
             onClick={onRedirectClick}
           >
             {redirectText}

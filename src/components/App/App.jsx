@@ -14,7 +14,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 
 // Correct path and case-sensitivity for your News API utility
-import { searchNews } from "../../utils/newsApi.js";
+import { searchNews } from "../../utils/NewsApi.js";
 
 function App() {
   // --- Destructure Globally Managed Global Auth Context States ---
@@ -161,7 +161,8 @@ function App() {
   };
 
   if (isAuthLoading) {
-    return <div className="loading-screen">Loading layout...</div>;
+    /* FIXED: Adjusted class styling layout to follow strict BEM guidelines */
+    return <div className="page__loading">Loading layout...</div>;
   }
 
   return (
@@ -217,9 +218,10 @@ function App() {
         <LoginModal
           isOpen={isLoginModalOpen}
           onClose={closeAllModals}
-          onSubmit={handleLoginSubmit}
-          onRedirectClick={handleRegisterClick}
+          onLogin={handleLoginSubmit}
+          handleAltClick={handleRegisterClick}
           isLoading={isLoading}
+          serverError={serverError}
         />
       )}
 

@@ -1,23 +1,31 @@
-import { defineConfig } from "vite";
+import { defineConfig, createLogger } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
-export default defineConfig(({ command, isPreview }) => {
+// FIX: Initialize the native Vite logger instance to intercept terminal warning logs cleanly
+const logger = createLogger();
+const originalWarn = logger.warn;
+
+// FIX: Overwrite the standard logger warning emitter with your custom filter logic
+logger.warn = (msg, options) => {
+  if (msg.includes("PLUGIN_TIMINGS") || msg.includes("vite:prepare-out-dir")) {
+    return; // Suppresses this specific log message safely
+  }
+  originalWarn(msg, options); // Permits all other system messages to print normally
+};
+
+// https://vite.dev
+export default defineConfig(() => {
   return {
     plugins: [react()],
 
-    build: {
-      // Passes configuration settings down to the underlying Rolldown engine
-      rolldownOptions: {
-        checks: {
-          bundlerTimings: false, // 👈 Disables the terminal [PLUGIN_TIMINGS] output report
-        },
-      },
-    },
+    // FIX: Hand over the configured interception logger engine to the bundler
+    customLogger: logger,
 
-    // Uses absolute root paths '/' for local dev 'serve' AND local production 'preview'
-    // Uses the custom subfolder route string exclusively for the final production build
-    base:
-      command === "serve" || isPreview ? "/" : "/NEWSEXPLORER-Final-Project/",
+    /* 
+       FIXED: Standardized the base path across all environments. 
+       This ensures that your local preview and your GitHub Pages deployment 
+       look for files in the exact same directory mapping.
+    */
+    base: "/NEWSEXPLORER-Final-Project/",
   };
 });

@@ -1,58 +1,120 @@
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ isLoggedIn, userName, onSignInClick, onLogoutClick }) {
+function Navigation({
+  isLoggedIn,
+  userName,
+  onSignInClick,
+  onLogoutClick,
+  theme,
+}) {
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Determine if the current page is the saved articles route
-  const isSavedNews = location.pathname === "/saved-news";
+  const isSavedNews = theme ? theme === "light" : location.pathname === "/saved-news";
 
-  // Set theme modifier suffixes cleanly
-  const themeClass = isSavedNews ? "navigation_theme_light" : "";
+  // FIXED: Converted single underscore modifiers to strict BEM double hyphens (--)
+  const navThemeMod = isSavedNews ? " navigation--theme-light" : "";
+  const navMobileMod = isMobileMenuOpen ? " navigation--opened" : "";
+  const menuBtnThemeMod = isSavedNews ? " navigation__menu-btn--theme-light" : "";
+  const menuBtnCloseMod = isMobileMenuOpen ? " navigation__menu-btn--close" : "";
+  const linkThemeMod = isSavedNews ? " navigation__link--theme-light" : "";
+  const btnThemeMod = isSavedNews ? " navigation__btn--theme-light" : "";
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleSignIn = () => {
+    closeMobileMenu();
+    if (onSignInClick) onSignInClick();
+  };
+
+  const handleLogout = () => {
+    closeMobileMenu();
+    if (onLogoutClick) onLogoutClick();
+  };
 
   return (
-    <nav className={`navigation ${themeClass}`}>
-      {/* Home link always visible */}
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          `navigation__link ${isActive ? "navigation__link_active" : ""}`
-        }
-      >
-        Home
-      </NavLink>
+    <>
+      {/* Mobile Hamburger / Close Button */}
+      <button
+        type="button"
+        className={`navigation__menu-btn${menuBtnThemeMod}${menuBtnCloseMod}`}
+        onClick={toggleMobileMenu}
+        aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+      />
 
-      {isLoggedIn ? (
-        <>
-          {/* Saved articles link only shows if logged in */}
-          <NavLink
-            to="/saved-news"
-            className={({ isActive }) =>
-              `navigation__link ${isActive ? "navigation__link_active" : ""}`
-            }
-          >
-            Saved articles
-          </NavLink>
+      {/* Backdrop overlay for mobile menu */}
+      {isMobileMenuOpen && (
+        <div
+          className="navigation__overlay"
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
+      )}
 
+      {/* Main Navigation Container */}
+      <nav className={`navigation${navThemeMod}${navMobileMod}`}>
+        <NavLink
+          to="/"
+          onClick={closeMobileMenu}
+          className={({ isActive }) =>
+            `navigation__link${linkThemeMod}${isActive ? " navigation__link--active" : ""}${
+              isActive && isSavedNews ? " navigation__link--active-light" : ""
+            }`
+          }
+        >
+          Home
+        </NavLink>
+
+        {isLoggedIn ? (
+          <>
+            <NavLink
+              to="/saved-news"
+              onClick={closeMobileMenu}
+              className={({ isActive }) =>
+                `navigation__link${linkThemeMod}${isActive ? " navigation__link--active" : ""}${
+                  isActive && isSavedNews ? " navigation__link--active-light" : ""
+                }`
+              }
+            >
+              Saved articles
+            </NavLink>
+
+            <button
+              type="button"
+              className={`navigation__btn navigation__logout-btn${btnThemeMod}`}
+              onClick={handleLogout}
+            >
+              <span className="navigation__user-name">{userName}</span>
+              <img
+                src={
+                  isSavedNews && !isMobileMenuOpen
+                    ? "/images/logout-black.svg"
+                    : "/images/logout-white.svg"
+                }
+                alt="Logout"
+                className="navigation__logout-icon"
+              />
+            </button>
+          </>
+        ) : (
           <button
             type="button"
-            className="navigation__logout-btn"
-            onClick={onLogoutClick}
+            className={`navigation__btn navigation__signin-btn${btnThemeMod}`}
+            onClick={handleSignIn}
           >
-            {userName}
-            <span className="navigation__logout-icon"></span>
+            Sign in
           </button>
-        </>
-      ) : (
-        <button
-          type="button"
-          className="navigation__signin-btn"
-          onClick={onSignInClick}
-        >
-          Sign in
-        </button>
-      )}
-    </nav>
+        )}
+      </nav>
+    </>
   );
 }
 

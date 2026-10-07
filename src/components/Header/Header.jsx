@@ -1,21 +1,32 @@
 import { Link } from "react-router-dom";
-import Navigation from "../Navigation/Navigation"; // Verify this path matches your folder tree
+import Navigation from "../Navigation/Navigation";
 import "./Header.css";
 
-function Header({ isLoggedIn, userName, onSignInClick, onLogoutClick }) {
+function Header({
+  isLoggedIn,
+  userName,
+  onSignInClick,
+  onLogoutClick,
+  theme = "dark",
+}) {
+  const isLight = theme === "light";
+  
+  /* FIXED: Rewritten to follow strict BEM double-hyphen (--) modifier conventions */
+  const headerModifier = isLight ? " header--theme-light" : "";
+  const logoModifier = isLight ? " header__logo--theme-light" : "";
+
   return (
-    <header className="header">
-      {/* Logo points back to the homepage */}
-      <Link to="/" className="header__logo">
+    <header className={`header${headerModifier}`}>
+      <Link to="/" className={`header__logo${logoModifier}`}>
         NewsExplorer
       </Link>
 
-      {/* Extracted navigation options */}
       <Navigation
         isLoggedIn={isLoggedIn}
         userName={userName}
         onSignInClick={onSignInClick}
         onLogoutClick={onLogoutClick}
+        theme={theme}
       />
     </header>
   );

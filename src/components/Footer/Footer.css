@@ -1,4 +1,4 @@
-/* Footer.css */
+/* Footer.css */ 
 
 .footer {
   display: flex;
@@ -9,6 +9,7 @@
   margin: 0 auto;
   padding: 32px 104px;
   background-color: #FFFFFF;
+  box-sizing: border-box; /* Ensures padding does not break width calculations */
 }
 
 .footer__copyright {
@@ -26,8 +27,8 @@
   gap: 42px;
 }
 
-.footer__links,
-.footer__social-icons {
+.footer__links, 
+.footer__social {
   display: flex;
   align-items: center;
   list-style: none;
@@ -39,8 +40,13 @@
   gap: 40px;
 }
 
-.footer__social-icons {
+.footer__social {
   gap: 27px;
+}
+
+.footer__item {
+  display: flex;
+  align-items: center;
 }
 
 .footer__link {
@@ -49,25 +55,26 @@
   font-weight: 400;
   line-height: 22px;
   color: #1A1B22;
-}
-
-.footer__icon-link {
+  text-decoration: none; /* Prevents default browser link underlines */
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.2s ease-in-out;
 }
 
-.footer__social-icon {
+.footer__link:hover {
+  opacity: 0.6;
+}
+
+.footer__icon {
   width: 24px;
   height: 24px;
   object-fit: contain;
 }
 
-/* Base interactive transitions */
-.footer__link:hover, 
-.footer__icon-link:hover {
-  opacity: 0.6;
-}
+/* ==========================================================================
+   Responsive Adaptations (Breakpoints)
+   ========================================================================== */
 
 /* Tablet Layout Breakpoint */
 @media screen and (max-width: 1024px) {
@@ -85,7 +92,7 @@
 }
 
 /* Mobile Component Responsive Flow */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 640px) { /* Updated from 600px to match standard 640px grid breakpoints */
   .footer {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -106,12 +113,8 @@
     gap: 32px;
   }
 
-  .footer__social-icons {
-    gap: 42px;
-  }
-
-  .footer__copyright {
-    font-size: 16px;
-    line-height: 22px;
+  /* Reset social icons display layout for tight mobile rows */
+  .footer__social {
+    gap: 27px; /* Matches desktop gap so icons remain tight instead of spreading wildly */
   }
 }

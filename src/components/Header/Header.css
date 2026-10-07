@@ -2,65 +2,65 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1440px;
   width: 100%;
-  margin: 0 auto;
-  padding: 24px 104px;
+  height: 80px;
+  padding: 0 104px;
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   z-index: 10;
+  box-sizing: border-box;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-sizing: border-box; /* Ensures padding doesn't cause overflow errors */
+  background-color: transparent;
 }
 
-/* Modifier class applied when viewing /saved-news route */
-.header_theme_light {
+/* FIXED: Block modifier using standard double-hyphen (--) notation */
+.header--theme-light {
   position: relative;
-  top: auto;
-  left: auto;
-  transform: none;
   background-color: #ffffff;
   border-bottom: 1px solid #e6e8eb;
 }
 
+/* Base element */
 .header__logo {
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
   color: #ffffff;
   text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
-.header_theme_light .header__logo {
+.header__logo:hover {
+  opacity: 0.8;
+}
+
+/* FIXED: Element modifier using standard double-hyphen (--) notation */
+.header__logo--theme-light {
   color: #1a1b22;
 }
 
-/* Tablet Layout Constraints */
-@media screen and (max-width: 1024px) {
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media screen and (max-width: 1023px) {
   .header {
-    padding: 11px 40px;
+    height: 66px;
+    padding: 0 40px;
   }
 }
 
-/* Mobile Screen Layout Transition */
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 767px) {
   .header {
-    padding: 16px;
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    background-color: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    height: 56px;
+    padding: 0 16px;
   }
 
-  /* Fixed: Explicitly handles the light theme behavior on mobile layout */
-  .header.header_theme_light {
-    position: relative; 
-    background-color: #ffffff;
-    border-bottom: 1px solid #e6e8eb;
+  .header__logo {
+    font-size: 16px;
+    line-height: 24px;
   }
 }

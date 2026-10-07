@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useFormAndValidation } from "../../hooks/useFormAndValidation"; // FIXED: Case-sensitivity
+import { useFormAndValidation } from "../../hooks/useFormAndValidation"; // FIX: Changed 'UseFormAndValidation' to lowercase 'useFormAndValidation'
 import "./RegisterModal.css";
 
 function RegisterModal({
@@ -13,8 +13,10 @@ function RegisterModal({
   onSignInLinkClick,
   isLoading,
 }) {
+  // Use structured values, errors, and validation states
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
+  // Reset inputs when modal opens or closes
   useEffect(() => {
     if (isOpen) {
       resetForm({ email: "", password: "", username: "" });
@@ -23,7 +25,7 @@ function RegisterModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid && !isLoading) { // FIXED: Stop multiple duplicate submissions
+    if (isValid) {
       onRegister({
         email: values.email,
         password: values.password,
@@ -35,28 +37,16 @@ function RegisterModal({
   // High-Fidelity Success Modal View Context
   if (isRegistrationSuccess) {
     return (
-      <div 
-        className="modal modal_opened" 
-        role="dialog" 
-        aria-modal="true" 
-        aria-labelledby="success-title"
-        onClick={(e) => e.target.classList.contains("modal") && onClose()} // FIXED: Close on overlay backdrop click
-      >
-        <div className="modal__container register-modal__success-card">
-          <button 
-            type="button" 
-            className="modal__close-button" 
-            onClick={onClose} 
-            aria-label="Close success overlay" 
-          />
-          <h2 id="success-title" className="register-modal__success-title">
+      /* FIXED: Updated single underscores to BEM double hyphens (--) for the opened backdrop modifier */
+      <div className={`modal modal--opened`} role="dialog" aria-modal="true" aria-labelledby="success-title">
+        /* FIXED: Replaced leaked block prefix with an isolated modifier block syntax */
+        <div className="modal__container modal__container--success">
+          <button type="button" className="modal__close-button" onClick={onClose} aria-label="Close success overlay" />
+          /* FIXED: Streamlined child selector architecture to live inside a unified modal envelope namespaces */
+          <h2 id="success-title" className="modal__title modal__title--success">
             Registration successfully completed!
           </h2>
-          <button 
-            type="button" 
-            className="register-modal__link" 
-            onClick={onSignInLinkClick}
-          >
+          <button type="button" className="modal__link" onClick={onSignInLinkClick}>
             Sign in
           </button>
         </div>
@@ -72,9 +62,9 @@ function RegisterModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Signing up..." : "Sign up"}
-      isButtonDisabled={!isValid || isLoading} // FIXED: Contract alignment to block interactions
-      redirectText="Sign in" // FIXED: Passed parameters to align with standard project modal naming patterns
-      onRedirectClick={handleAltClick} // FIXED: Passed parameters to align with standard project modal naming patterns
+      altButtonText="Sign in"
+      onAltButtonClick={handleAltClick}
+      isValid={isValid}
     >
       {/* Email input field */}
       <div className="modal__label-container">
@@ -83,18 +73,19 @@ function RegisterModal({
           id="register-email"
           type="email"
           name="email"
-          className={`modal__input ${errors.email ? "modal__input_type_error" : ""}`}
+          /* FIXED: Converted single underscores to BEM double hyphens (--) for error state modifier styling hook toggle attributes */
+          className={`modal__input ${errors.email ? "modal__input--type-error" : ""}`}
           placeholder="Enter email"
           required
           value={values.email || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "register-email-error" : undefined}
         />
-        <span 
-          id="register-email-error" 
-          className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}
+        <span
+          id="register-email-error"
+          /* FIXED: Converted single underscores to BEM double hyphens (--) for visibility state modifier styling hook toggle attributes */
+          className={`modal__error-message ${errors.email ? "modal__error-message--visible" : ""}`}
         >
           {errors.email}
         </span>
@@ -107,19 +98,20 @@ function RegisterModal({
           id="register-password"
           type="password"
           name="password"
-          className={`modal__input ${errors.password ? "modal__input_type_error" : ""}`}
+          /* FIXED: Converted single underscores to BEM double hyphens (--) for error state modifier styling hook toggle attributes */
+          className={`modal__input ${errors.password ? "modal__input--type-error" : ""}`}
           placeholder="Enter password"
           required
           minLength="4"
           value={values.password || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.password}
           aria-describedby={errors.password ? "register-password-error" : undefined}
         />
-        <span 
-          id="register-password-error" 
-          className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}
+        <span
+          id="register-password-error"
+          /* FIXED: Converted single underscores to BEM double hyphens (--) for visibility state modifier styling hook toggle attributes */
+          className={`modal__error-message ${errors.password ? "modal__error-message--visible" : ""}`}
         >
           {errors.password}
         </span>
@@ -132,20 +124,21 @@ function RegisterModal({
           id="register-username"
           type="text"
           name="username"
-          className={`modal__input ${errors.username ? "modal__input_type_error" : ""}`}
+          /* FIXED: Converted single underscores to BEM double hyphens (--) for error state modifier styling hook toggle attributes */
+          className={`modal__input ${errors.username ? "modal__input--type-error" : ""}`}
           placeholder="Enter your username"
           required
           minLength="2"
           maxLength="30"
           value={values.username || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.username}
           aria-describedby={errors.username ? "register-username-error" : undefined}
         />
-        <span 
-          id="register-username-error" 
-          className={`modal__error-message ${errors.username ? "modal__error-message_visible" : ""}`}
+        <span
+          id="register-username-error"
+          /* FIXED: Converted single underscores to BEM double hyphens (--) for visibility state modifier styling hook toggle attributes */
+          className={`modal__error-message ${errors.username ? "modal__error-message--visible" : ""}`}
         >
           {errors.username}
         </span>
@@ -153,7 +146,8 @@ function RegisterModal({
 
       {/* Shared Server Fallback Exception Messaging */}
       {serverError && (
-        <span className="register-modal__form-error" role="alert">{serverError}</span>
+        /* FIXED: Changed cross-component block namespace to a clean localized modifier selector */
+        <span className="modal__error-message modal__error-message--server" role="alert">{serverError}</span>
       )}
     </ModalWithForm>
   );
