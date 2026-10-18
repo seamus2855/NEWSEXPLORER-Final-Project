@@ -41,7 +41,8 @@ function ModalWithForm({
 
   return (
     <div 
-      className={`modal ${isOpen ? "modal_opened" : ""}`} 
+      /* FIXED: Updated single underscore (_) to standard BEM double hyphens (--) for the opened modifier */
+      className={`modal ${isOpen ? "modal--opened" : ""}`} 
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -62,8 +63,9 @@ function ModalWithForm({
           <div className="modal__submit-container">
             <button
               type="submit"
+              /* FIXED: Updated single underscore (_) to standard BEM double hyphens (--) for the disabled button modifier */
               className={`modal__submit-button ${
-                isButtonDisabled ? "modal__submit-button_disabled" : ""
+                isButtonDisabled ? "modal__submit-button--disabled" : ""
               }`}
               disabled={isButtonDisabled}
             >
