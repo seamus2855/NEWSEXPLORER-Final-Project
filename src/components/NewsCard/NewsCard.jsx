@@ -10,9 +10,9 @@ function NewsCard({
   const text = card.description || "No preview description available.";
   const date = card.publishedAt;
   const source = card.source?.name || "Unknown Source";
-  
+
   // Points cleanly to your local public folder image placeholder asset
-  const image = card.urlToImage || card.image || "/images/not-found.svg"; 
+  const image = card.urlToImage || card.image || "/images/not-found.svg";
   const link = card.url || card.link;
   const isSaved = card.isSaved || false;
   const keyword = card.keyword || "";
@@ -42,7 +42,16 @@ function NewsCard({
 
   return (
     <article className="news-card">
-      <a href={link} target="_blank" rel="noreferrer" className="news-card__link">
+      {/* 
+        FIXED: Wrapped the entire card content inside a single block-level anchor tag.
+        This forces the inner elements to obey your flex-direction column styling flawlessly.
+      */}
+      <a
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+        className="news-card__main-link"
+      >
         <img
           src={image}
           alt={title}
@@ -53,8 +62,19 @@ function NewsCard({
             e.target.src = "/images/not-found.svg";
           }}
         />
+
+        <div className="news-card__text-container">
+          <p className="news-card__date">{formatDate(date)}</p>
+          <h3 className="news-card__title">{title}</h3>
+          <p className="news-card__text">{text}</p>
+          <p className="news-card__source">{source}</p>
+        </div>
       </a>
 
+      {/* 
+        Absolute Floating Layer container stands completely clear of the layout stream. 
+        It sits safely outside the main block links so clicking buttons does not trigger redirects.
+      */}
       <div className="news-card__top-container">
         {isSavedNewsPage && keyword && (
           <div className="news-card__keyword">{keyword}</div>
@@ -63,13 +83,12 @@ function NewsCard({
         <div className="news-card__action-container">
           <button
             type="button"
-            /* FIXED: Replaced legacy single underscores with standard BEM double hyphens (--) for style modifiers */
             className={`news-card__button ${
               isSavedNewsPage
                 ? "news-card__button--type-trash"
                 : isSaved
-                ? "news-card__button--type-bookmark-marked"
-                : "news-card__button--type-bookmark"
+                  ? "news-card__button--type-bookmark-marked"
+                  : "news-card__button--type-bookmark"
             }`}
             onClick={handleActionButtonClick}
             aria-label={isSavedNewsPage ? "Delete article" : "Save article"}
@@ -82,13 +101,6 @@ function NewsCard({
           )}
         </div>
       </div>
-
-      <a href={link} target="_blank" rel="noreferrer" className="news-card__text-container">
-        <p className="news-card__date">{formatDate(date)}</p>
-        <h3 className="news-card__title">{title}</h3>
-        <p className="news-card__text">{text}</p>
-        <p className="news-card__source">{source}</p>
-      </a>
     </article>
   );
 }

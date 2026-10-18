@@ -2,11 +2,38 @@
    📦 BLOCK MODIFIERS: modal (Registration Success Layout States)
    ========================================================================== */
 
+/* Base container for the modal overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.2s, opacity 0.2s linear;
+  z-index: 999;
+}
+
+/* Modifier to trigger the visible layout state */
+.modal--opened {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.2s linear;
+}
+
 /* FIXED: Replaced loose block mixin container with a clean modifier layout hook */
 .modal__container--success { 
   display: flex; 
   flex-direction: column; 
   gap: 14px; 
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  position: relative;
 } 
 
 /* FIXED: Synced title class syntax to utilize standardized double-hyphen modifier notation */
@@ -39,6 +66,36 @@
   opacity: 0.7; 
   text-decoration: underline; /* Clear interactive affordance for link action conversion */
 } 
+
+/* ==========================================================================
+   ⚠️ EXCEPTION STATES: Dynamic Validation Hooks
+   ========================================================================== */
+
+.modal__input--type-error {
+  border-bottom: 1px solid #FF0000; /* Highlight invalid fields red */
+}
+
+.modal__error-message {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+
+.modal__error-message--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Shared Server Fallback Exception Messaging modifier */
+.modal__error-message--server {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+}
 
 /* ==========================================================================
    📱 Responsive Adaptations (Mobile Viewports)

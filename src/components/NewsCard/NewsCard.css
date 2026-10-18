@@ -1,3 +1,20 @@
+/* ==========================================================================
+   📦 PARENT GRID CONTAINER (Add this to your parent HTML/JSX wrapper element)
+   ========================================================================== */
+.news-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1232px; /* Standard structural layout width constraint */
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+/* ==========================================================================
+   🃏 CARD MAIN CONTAINER
+   ========================================================================== */
 .news-card {
   background-color: #FFFFFF;
   border-radius: 16px;
@@ -7,6 +24,7 @@
   position: relative;
   width: 100%;
   min-height: 440px;
+  box-sizing: border-box;
   transition: box-shadow 0.2s ease;
 }
 
@@ -14,14 +32,34 @@
   box-shadow: 0px 8px 24px rgba(26, 27, 34, 0.1);
 }
 
+/* ==========================================================================
+   🔗 INTEGRATED CONTENT LINK WRAPPER (Fixed Flex Alignment)
+   ========================================================================== */
+.news-card__main-link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   🖼️ CARD IMAGE COMPONENT (Fixed Overflow)
+   ========================================================================== */
 .news-card__image {
   width: 100%;
   height: 272px;
   object-fit: cover;
   display: block; 
+  flex-shrink: 0; /* Forces the image block layout to obey strict height boundaries */
 }
 
-/* Badges and Top Actions Layout */
+/* ==========================================================================
+   🏷️ BADGES AND TOP ACTIONS LAYOUT (Absolute Floating Layer)
+   ========================================================================== */
 .news-card__top-container {
   position: absolute;
   top: 16px;
@@ -55,7 +93,9 @@
   margin-left: auto;
 }
 
-/* Tooltip message adjustments */
+/* ==========================================================================
+   💬 TOOLTIP MESSAGE ADJUSTMENTS
+   ========================================================================== */
 .news-card__tooltip {
   background-color: #FFFFFF;
   color: #1A1B22;
@@ -73,7 +113,15 @@
   margin-right: 4px; 
 }
 
-/* Round Action Buttons (Bookmark & Trash) */
+/* Show tooltip when parent contains a hovered action button */
+.news-card__action-container:has(.news-card__button:hover) .news-card__tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   🔘 ROUND ACTION BUTTONS (Bookmark & Trash)
+   ========================================================================== */
 .news-card__button {
   width: 40px;
   height: 40px;
@@ -90,19 +138,9 @@
   transition: opacity 0.2s ease, background-color 0.2s ease;
 }
 
-/* Show tooltip when parent contains a hovered action button */
-.news-card__action-container:has(.news-card__button:hover) .news-card__tooltip {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* ==========================================================================
-   ⚡ MODIFIERS: Strict BEM uses double hyphens (--) for states/variants
-   ========================================================================== */
-
-/* FIXED: Replaced single underscores with standard BEM double hyphens (--) */
+/* Bookmark Action States */
 .news-card__button--type-bookmark {
-  background-image: url('/images/card.svg'); /* Mapped back to your existing public graphic template */
+  background-image: url('/images/card.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 14px 18px;
@@ -114,18 +152,17 @@
   opacity: 0.8;
 }
 
-/* FIXED: Replaced single underscores with standard BEM double hyphens (--) */
 .news-card__button--type-bookmark-marked {
   background-image: url('/images/card.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 14px 18px;
-  filter: invert(25%) sepia(95%) saturate(1900%) hue-rotate(195deg) brightness(90%) contrast(100%); /* Adds a fallback visual marker effect */
+  filter: invert(25%) sepia(95%) saturate(1900%) hue-rotate(195deg) brightness(90%) contrast(100%);
 }
 
-/* FIXED: Replaced single underscores with standard BEM double hyphens (--) */
+/* Trash Action States */
 .news-card__button--type-trash {
-  background-image: url('/images/logout-black.svg'); /* Swapped placeholder map asset to available icon layout */
+  background-image: url('/images/logout-black.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px 16px;
@@ -138,7 +175,7 @@
 }
 
 /* ==========================================================================
-   Card Content Description Area
+   📝 CARD CONTENT DESCRIPTION AREA
    ========================================================================== */
 .news-card__text-container {
   padding: 24px;
@@ -146,7 +183,7 @@
   flex-direction: column;
   flex-grow: 1;
   z-index: 1;
-  text-decoration: none;
+  box-sizing: border-box;
 }
 
 .news-card__date {
@@ -196,9 +233,14 @@
 }
 
 /* ==========================================================================
-   Responsive Grid Adapters (Breakpoints)
+   📱 RESPONSIVE MEDIA QUERIES (Breakpoints)
    ========================================================================== */
 @media screen and (max-width: 1023px) {
+  .news-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Drops down to a clean 2-column view */
+    gap: 12px;
+  }
+
   .news-card__image {
     height: 150px;
   }
@@ -228,6 +270,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  .news-cards-grid {
+    grid-template-columns: 1fr; /* Stack layout seamlessly into single columns for mobile browsers */
+    gap: 16px;
+  }
+
   .news-card__image {
     height: 196px;
   }

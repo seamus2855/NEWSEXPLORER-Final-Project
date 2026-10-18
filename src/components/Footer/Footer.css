@@ -92,7 +92,7 @@
 }
 
 /* Mobile Component Responsive Flow */
-@media screen and (max-width: 640px) { /* Updated from 600px to match standard 640px grid breakpoints */
+@media screen and (max-width: 640px) {
   .footer {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -100,6 +100,8 @@
     gap: 40px;
   }
 
+  /* Optimization: Added a separate row wrap configuration if your design 
+     requires links and icons to layout side-by-side or stack cleanly */
   .footer__navigation {
     flex-direction: column;
     align-items: flex-start;
@@ -113,8 +115,7 @@
     gap: 32px;
   }
 
-  /* Reset social icons display layout for tight mobile rows */
   .footer__social {
-    gap: 27px; /* Matches desktop gap so icons remain tight instead of spreading wildly */
+    gap: 27px; /* Kept tight row format for touch targets */
   }
 }

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useFormAndValidation } from "../../hooks/useFormAndValidation"; // FIX: Changed 'UseFormAndValidation' to lowercase 'useFormAndValidation'
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import "./RegisterModal.css";
 
 function RegisterModal({
@@ -37,12 +37,14 @@ function RegisterModal({
   // High-Fidelity Success Modal View Context
   if (isRegistrationSuccess) {
     return (
-      /* FIXED: Updated single underscores to BEM double hyphens (--) for the opened backdrop modifier */
-      <div className={`modal modal--opened`} role="dialog" aria-modal="true" aria-labelledby="success-title">
-        /* FIXED: Replaced leaked block prefix with an isolated modifier block syntax */
+      <div className="modal modal--opened" role="dialog" aria-modal="true" aria-labelledby="success-title">
         <div className="modal__container modal__container--success">
-          <button type="button" className="modal__close-button" onClick={onClose} aria-label="Close success overlay" />
-          /* FIXED: Streamlined child selector architecture to live inside a unified modal envelope namespaces */
+          <button 
+            type="button" 
+            className="modal__close-button" 
+            onClick={onClose} 
+            aria-label="Close success overlay" 
+          />
           <h2 id="success-title" className="modal__title modal__title--success">
             Registration successfully completed!
           </h2>
@@ -73,7 +75,6 @@ function RegisterModal({
           id="register-email"
           type="email"
           name="email"
-          /* FIXED: Converted single underscores to BEM double hyphens (--) for error state modifier styling hook toggle attributes */
           className={`modal__input ${errors.email ? "modal__input--type-error" : ""}`}
           placeholder="Enter email"
           required
@@ -84,7 +85,6 @@ function RegisterModal({
         />
         <span
           id="register-email-error"
-          /* FIXED: Converted single underscores to BEM double hyphens (--) for visibility state modifier styling hook toggle attributes */
           className={`modal__error-message ${errors.email ? "modal__error-message--visible" : ""}`}
         >
           {errors.email}
@@ -98,7 +98,6 @@ function RegisterModal({
           id="register-password"
           type="password"
           name="password"
-          /* FIXED: Converted single underscores to BEM double hyphens (--) for error state modifier styling hook toggle attributes */
           className={`modal__input ${errors.password ? "modal__input--type-error" : ""}`}
           placeholder="Enter password"
           required
@@ -110,7 +109,6 @@ function RegisterModal({
         />
         <span
           id="register-password-error"
-          /* FIXED: Converted single underscores to BEM double hyphens (--) for visibility state modifier styling hook toggle attributes */
           className={`modal__error-message ${errors.password ? "modal__error-message--visible" : ""}`}
         >
           {errors.password}
@@ -124,7 +122,6 @@ function RegisterModal({
           id="register-username"
           type="text"
           name="username"
-          /* FIXED: Converted single underscores to BEM double hyphens (--) for error state modifier styling hook toggle attributes */
           className={`modal__input ${errors.username ? "modal__input--type-error" : ""}`}
           placeholder="Enter your username"
           required
@@ -137,7 +134,6 @@ function RegisterModal({
         />
         <span
           id="register-username-error"
-          /* FIXED: Converted single underscores to BEM double hyphens (--) for visibility state modifier styling hook toggle attributes */
           className={`modal__error-message ${errors.username ? "modal__error-message--visible" : ""}`}
         >
           {errors.username}
@@ -146,8 +142,9 @@ function RegisterModal({
 
       {/* Shared Server Fallback Exception Messaging */}
       {serverError && (
-        /* FIXED: Changed cross-component block namespace to a clean localized modifier selector */
-        <span className="modal__error-message modal__error-message--server" role="alert">{serverError}</span>
+        <span className="modal__error-message modal__error-message--server" role="alert">
+          {serverError}
+        </span>
       )}
     </ModalWithForm>
   );

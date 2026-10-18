@@ -1,20 +1,16 @@
-import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-
+import { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 // Point to the hook file inside your contexts folder
-import { useAuth } from "../../hooks/useAuth.js";
-
-import Main from "../Main/Main";
-import SavedNews from "../SavedNews/SavedNews";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-
+import { useAuth } from '../../hooks/useAuth.js';
+import Main from '../Main/Main';
+import SavedNews from '../SavedNews/SavedNews';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 // Modals layer
-import LoginModal from "../LoginModal/LoginModal";
-import RegisterModal from "../RegisterModal/RegisterModal";
-
+import LoginModal from '../LoginModal/LoginModal';
+import RegisterModal from '../RegisterModal/RegisterModal';
 // Correct path and case-sensitivity for your News API utility
-import { searchNews } from "../../utils/NewsApi.js";
+import { searchNews } from '../../utils/NewsApi.js';
 
 function App() {
   // --- Destructure Globally Managed Global Auth Context States ---
@@ -28,20 +24,21 @@ function App() {
 
   // --- Core Layout & Search Engine UI State ---
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // Used to track API request pending states
+  const [isNewsLoading, setIsNewsLoading] = useState(false); // FIXED: Renamed to explicitly track News API requests only
+  const [isFormLoading, setIsFormLoading] = useState(false); // FIXED: Added to handle Form overlay loading states independently
   const [hasSearched, setHasSearched] = useState(false);
-  const [searchError, setSearchError] = useState("");
+  const [searchError, setSearchError] = useState('');
   const [visibleCount, setVisibleCount] = useState(3);
 
   // --- Structural Context Modals Layer ---
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false); // Added for the registration success view
-  const [serverError, setServerError] = useState(""); // Added to pass down server exception details if needed
+  const [serverError, setServerError] = useState(''); // Added to pass down server exception details if needed
 
   // --- Local UI Storage for Saved Cards Persistence Layer ---
   const [savedArticles, setSavedArticles] = useState([]);
-  const [currentKeyword, setCurrentKeyword] = useState("");
+  const [currentKeyword, setCurrentKeyword] = useState('');
 
   // --- Modal Navigation State Controls ---
   const handleSignInClick = () => {
@@ -63,13 +60,13 @@ function App() {
 
   // --- API Search Handling Core Logic ---
   const handleSearchSubmit = (keyword) => {
-    setIsLoading(true);
+    setIsNewsLoading(true); // FIXED: Targets news loader state exclusively
     setHasSearched(true);
-    setSearchError("");
+    setSearchError('');
     setArticles([]);
     setVisibleCount(3);
     setCurrentKeyword(keyword);
-
+    
     searchNews(keyword)
       .then((data) => {
         if (data.articles) {
@@ -85,11 +82,11 @@ function App() {
       .catch((err) => {
         console.error(err);
         setSearchError(
-          "Sorry, something went wrong during the request. Please try again later.",
+          'Sorry, something went wrong during the request. Please try again later.'
         );
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsNewsLoading(false); // FIXED: Clears news loader state exclusively
       });
   };
 
@@ -119,7 +116,7 @@ function App() {
     const cardWithMeta = {
       ...card,
       isSaved: true,
-      keyword: currentKeyword || "General",
+      keyword: currentKeyword || 'General',
     };
     setSavedArticles((prev) => [cardWithMeta, ...prev]);
     setArticles((prev) =>
@@ -131,27 +128,27 @@ function App() {
 
   // --- Handle Context Action Mapping Pipelines ---
   const handleLoginSubmit = (values) => {
-    setIsLoading(true);
-    setServerError("");
+    setIsFormLoading(true); // FIXED: Targets independent form validation loader
+    setServerError('');
     // Simulating an asynchronous network callback action
     setTimeout(() => {
       login(
-        { name: "Explorer", email: values.email, password: values.password },
-        "simulated-session-web-token",
+        { name: 'Explorer', email: values.email, password: values.password },
+        'simulated-session-web-token',
       );
-      setIsLoading(false);
+      setIsFormLoading(false); // FIXED: Clears form submission loading state
       closeAllModals();
     }, 1000);
   };
 
   const handleRegisterSubmit = () => {
-    setIsLoading(true);
-    setServerError("");
+    setIsFormLoading(true); // FIXED: Targets independent form validation loader
+    setServerError('');
     // Simulating an asynchronous registration callback action
     setTimeout(() => {
       // Toggle successful registration state view flag
       setIsRegistrationSuccess(true);
-      setIsLoading(false);
+      setIsFormLoading(false); // FIXED: Clears form submission loading state
     }, 1000);
   };
 
@@ -173,7 +170,6 @@ function App() {
         onLogoutClick={handleLogoutClick}
         onSignInClick={handleSignInClick}
       />
-
       <Routes>
         <Route
           path="/"
@@ -182,7 +178,7 @@ function App() {
               onSearchSubmit={handleSearchSubmit}
               onShowMore={handleShowMore}
               cards={articles}
-              isLoading={isLoading}
+              isLoading={isNewsLoading} // FIXED: Receives only the news query pending loader state
               hasSearched={hasSearched}
               searchError={searchError}
               visibleCount={visibleCount}
@@ -193,7 +189,6 @@ function App() {
             />
           }
         />
-
         <Route
           path="/saved-news"
           element={
@@ -210,7 +205,7 @@ function App() {
           }
         />
       </Routes>
-
+      <Routes /> {/* Empty element alignment balance protection removal */}
       <Footer />
 
       {/* --- Overlay Modals Injection Layer --- */}
@@ -220,11 +215,10 @@ function App() {
           onClose={closeAllModals}
           onLogin={handleLoginSubmit}
           handleAltClick={handleRegisterClick}
-          isLoading={isLoading}
+          isLoading={isFormLoading} // FIXED: Passed the separate form submit loading tracker variable
           serverError={serverError}
         />
       )}
-
       {(isRegisterModalOpen || isRegistrationSuccess) && (
         <RegisterModal
           isOpen={isRegisterModalOpen || isRegistrationSuccess}
@@ -234,7 +228,7 @@ function App() {
           onSignInLinkClick={handleSignInClick}
           isRegistrationSuccess={isRegistrationSuccess}
           serverError={serverError}
-          isLoading={isLoading}
+          isLoading={isFormLoading} // FIXED: Passed the separate form submit loading tracker variable
         />
       )}
     </div>

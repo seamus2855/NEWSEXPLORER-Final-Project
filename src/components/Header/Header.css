@@ -15,11 +15,11 @@
   background-color: transparent;
 }
 
-/* FIXED: Block modifier using standard double-hyphen (--) notation */
+/* FIXED: Kept absolute positioning uniform to prevent shifting between viewports */
 .header--theme-light {
-  position: relative;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e6e8eb;
+  position: absolute; 
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E6E8EB;
 }
 
 /* Base element */
@@ -28,7 +28,7 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #ffffff;
+  color: #FFFFFF;
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
@@ -39,7 +39,7 @@
 
 /* FIXED: Element modifier using standard double-hyphen (--) notation */
 .header__logo--theme-light {
-  color: #1a1b22;
+  color: #1A1B22;
 }
 
 /* ==========================================================================

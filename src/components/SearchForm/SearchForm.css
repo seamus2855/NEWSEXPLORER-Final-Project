@@ -3,8 +3,10 @@
    ========================================================================== */
 
 /* FIXED: Changed from loose .hero-section to match your explicit .search-form__hero-wrapper block container class */ 
+/* FIXED: Added a blended dark overlay scrim and background color fallback to ensure text contrast */ 
 .search-form__hero-wrapper { 
-  background-image: url('/images/header.svg'); /* Linked the correct header canvas background graphic */
+  background-color: #1A1B22; /* High-contrast fallback color matching the dark image canvas */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('/images/header.svg'); 
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 

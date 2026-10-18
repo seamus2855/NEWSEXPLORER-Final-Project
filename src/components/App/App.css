@@ -39,15 +39,15 @@ body {
 
 /* Hero / Search Section Background Implementation */
 .page__hero-search {
-  /* Points to the working asset directory folder layout */
-  background-image: url('/images/Overlay.svg');
+  background-image: url('../images/Overlay.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-  /* Added missing constraints to ensure the background wrapper expands */
   width: 100%;
-  min-height: 100vh; /* Guarantees the canvas layout spans full viewport height */
+  
+  /* OPTIMIZED: Changed from 100vh to a responsive min-height so content cards 
+     are clearly visible beneath the search wrapper without scrolling a full screen */
+  min-height: 536px; 
 
   /* Layout padding to give the title and search form breathing room */
   padding: 80px 24px;
