@@ -1,3 +1,6 @@
+/* ==========================================================================
+   📦 BLOCK: navigation (Desktop Grid)
+   ========================================================================== */
 .navigation { 
   display: flex; 
   align-items: center; 
@@ -5,22 +8,29 @@
   padding: 0; 
   margin: 0; 
   gap: 32px; 
+  height: 100%;
 } 
 
 .navigation__item { 
   display: flex; 
   align-items: center; 
+  height: 100%;
 } 
 
+/* Elements: Interactive Anchors */
 .navigation__link { 
+  display: flex;
+  align-items: center;
+  height: 100%;
   font-family: 'Roboto', Arial, sans-serif; 
   font-size: 18px; 
   font-weight: 500; 
   line-height: 24px; 
   text-decoration: none; 
-  color: #FFFFFF; 
-  padding: 8px 0; 
+  color: #ffffff; 
+  padding: 0 10px; 
   border-bottom: 3px solid transparent; 
+  box-sizing: border-box;
   transition: border-bottom-color 0.2s ease, opacity 0.2s ease; 
 } 
 
@@ -28,141 +38,190 @@
   opacity: 0.8; 
 } 
 
-/* Modifiers for active states */ 
-.navigation__link_active { 
-  border-bottom-color: #FFFFFF; 
+/* ⚡ LINK MODIFIERS (Double-hyphen notation) */ 
+.navigation__link--active { 
+  border-bottom-color: #ffffff; 
 } 
 
-/* Alternate light theme for Saved News page */ 
-.navigation_theme_light .navigation__link { 
-  color: #1A1B22; 
+.navigation__link--theme-light { 
+  color: #1a1b22; 
 } 
 
-.navigation_theme_light .navigation__link_active { 
-  border-bottom-color: #1A1B22; 
+.navigation__link--active-light { 
+  border-bottom-color: #1a1b22; 
 } 
 
-/* Fixed: Grouped both specific React buttons to replace missing .navigation__button layout */ 
-.navigation__logout-btn,
-.navigation__signin-btn { 
+/* ==========================================================================
+   Elements: Header Action Controls (Sign In / Logout)
+   ========================================================================== */
+.navigation__btn { 
   font-family: 'Roboto', Arial, sans-serif; 
   font-size: 18px; 
   font-weight: 500; 
   line-height: 24px; 
-  background: transparent; 
-  color: #FFFFFF; 
-  border: 1px solid #FFFFFF; 
+  background-color: transparent; 
+  color: #ffffff; 
+  border: 1px solid #ffffff; 
   border-radius: 100px; 
-  padding: 12px 24px; 
+  padding: 0 18px; 
+  height: 48px;
   cursor: pointer; 
   display: flex; 
   align-items: center; 
   justify-content: center;
-  gap: 8px; 
-  transition: background-color 0.2s ease, color 0.2s ease; 
+  gap: 12px; 
+  box-sizing: border-box; 
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease; 
 } 
 
-.navigation__logout-btn:hover,
-.navigation__signin-btn:hover { 
-  background-color: rgba(255, 255, 255, 0.1); 
+.navigation__btn:hover { 
+  opacity: 0.8; 
 } 
 
-.navigation_theme_light .navigation__logout-btn,
-.navigation_theme_light .navigation__signin-btn { 
-  color: #1A1B22; 
-  border-color: #1A1B22; 
+/* Structural Element Class Identifiers */
+.navigation__signin-btn {
+  min-width: 152px;
+  padding: 0 20px;
+}
+
+.navigation__logout-btn {
+  min-width: 112px;
+}
+
+/* ⚡ BUTTON MODIFIERS */
+.navigation__btn--theme-light { 
+  color: #1a1b22; 
+  border-color: #1a1b22; 
 } 
 
-.navigation_theme_light .navigation__logout-btn:hover,
-.navigation_theme_light .navigation__signin-btn:hover { 
-  background-color: rgba(0, 0, 0, 0.05); 
-} 
+.navigation__user-name {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
 
-/* Logout Icon — FIXED PATHING */ 
 .navigation__logout-icon { 
-  width: 18px; 
-  height: 18px; 
-  background-image: url('/images/logout-white.svg'); /* 👈 Changed path to public root folder */ 
-  background-repeat: no-repeat; 
-  background-position: center; 
+  width: 24px; 
+  height: 24px; 
+  object-fit: contain;
+  vertical-align: middle; 
 } 
 
-.navigation_theme_light .navigation__logout-icon { 
-  background-image: url('/images/logout-black.svg'); /* 👈 Changed path to public root folder */ 
-} 
+/* Hamburger menu activation toggle hidden by default on desktop viewports */
+.navigation__menu-btn {
+  display: none;
+}
 
 /* ==========================================================================
-   Responsive Tablet & Mobile Media Queries
+   📱 Responsive Framework (Tablet Landscape Layout)
    ========================================================================== */
 @media screen and (max-width: 1023px) { 
   .navigation { 
-    gap: 20px; 
+    gap: 16px; 
   } 
   
   .navigation__link { 
     font-size: 16px; 
+    padding: 0 6px;
   } 
   
-  /* Fixed: Synchronized tablet buttons */
-  .navigation__logout-btn,
-  .navigation__signin-btn { 
+  .navigation__btn { 
     font-size: 16px; 
-    padding: 8px 16px; 
+    height: 40px;
+    padding: 0 14px; 
+  } 
+
+  .navigation__logout-icon { 
+    width: 20px; 
+    height: 20px; 
   } 
 } 
 
+/* ==========================================================================
+   📱 Responsive Framework (Mobile Drawer <= 767px)
+   ========================================================================== */
 @media screen and (max-width: 767px) { 
-  /* Overlay/Dropdown state when mobile menu is opened */ 
-  .navigation_mobile_opened { 
-    display: flex; 
-    flex-direction: column; 
-    position: absolute; 
-    top: 56px; /* Height of mobile Header */ 
+  .navigation__menu-btn { 
+    display: block; 
+    width: 24px; 
+    height: 24px; 
+    border: none; 
+    background: transparent url('/images/menu-white.svg') center / contain no-repeat; 
+    cursor: pointer; 
+    z-index: 30; 
+  } 
+
+  /* ⚡ HAMBURGER MENU STATE MODIFIERS */
+  .navigation__menu-btn--theme-light { 
+    background-image: url('/images/menu-black.svg'); 
+  } 
+
+  .navigation__menu-btn--close { 
+    background-image: url('/images/close-white.svg'); 
+  } 
+
+  .navigation__overlay { 
+    position: fixed; 
+    top: 0; 
     left: 0; 
-    width: 100%; 
-    background-color: #1A1B22; 
-    padding: 24px 16px 48px; 
-    box-sizing: border-box; 
-    gap: 28px; 
-    align-items: flex-start; 
-    z-index: 10; 
+    right: 0; 
+    bottom: 0; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 15; 
+  } 
+
+  .navigation { 
+    display: none; 
   } 
   
-  /* Hide default nav elements on mobile unless explicitly opened */ 
-  .navigation:not(.navigation_mobile_opened) { 
-    display: none; 
+  /* ⚡ DRAWER CONTAINER OPEN MODIFIER */
+  .navigation--opened { 
+    display: flex; 
+    flex-direction: column; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: auto; 
+    background-color: #202222; 
+    padding: 72px 16px 24px; 
+    box-sizing: border-box; 
+    gap: 22px; 
+    align-items: flex-start; 
+    z-index: 20; 
   } 
   
   .navigation__item { 
     width: 100%; 
+    height: auto; 
   } 
   
   .navigation__link { 
-    font-size: 22px; 
-    line-height: 56px; 
-    width: 100%; 
-    padding: 0; 
-    border-bottom: none; 
-  } 
-  
-  .navigation__link_active { 
-    border-bottom: none; 
-  } 
-  
-  /* Fixed: Synchronized mobile drawer action spacing buttons */
-  .navigation__logout-btn,
-  .navigation__signin-btn { 
     font-size: 18px; 
     line-height: 24px; 
     width: 100%; 
-    justify-content: center; 
-    padding: 16px 0; 
-    margin-top: 12px; 
-    border-color: #FFFFFF; 
-    color: #FFFFFF; 
+    height: auto; 
+    padding: 8px 0; 
+    border-bottom: none; 
+    color: #ffffff; 
   } 
   
-  .navigation_theme_light .navigation_mobile_opened { 
-    background-color: #FFFFFF; /* Matches light header when dropdown opens */ 
+  .navigation__btn { 
+    font-size: 18px; 
+    line-height: 24px; 
+    width: 100%; 
+    height: 56px; 
+    justify-content: center; 
+    padding: 0; 
+    margin-top: 10px; 
+    border-color: #ffffff; 
+    color: #ffffff; 
+  } 
+
+  .navigation__logout-icon { 
+    width: 24px; 
+    height: 24px; 
   } 
 }

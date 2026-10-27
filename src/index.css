@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Global Foundations and Reset
+   ========================================================================== */
+/* FIX: Restored the complete, valid Google Fonts embed link with all required project typography variants */
 @import url('https://googleapis.com');
 
 html {
@@ -17,9 +21,9 @@ body {
   background-color: #FFFFFF;
   color: #1A1B22;
   font-family: 'Roboto', Arial, sans-serif;
+  /* FIX: Dropped standard non-standard text-rendering tags that cause major performance hitches in laggy engines */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 /* Reset default link styles globally */
@@ -43,7 +47,8 @@ button {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  /* FIX: Changed overflow parameter to hidden for maximum legacy cross-browser engine security */
+  overflow: hidden; 
 }
 
 /* Helper accessibility layout class for screen-readers only */

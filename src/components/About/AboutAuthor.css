@@ -1,0 +1,138 @@
+/* ==========================================================================
+   📦 BLOCK: about-author
+   ========================================================================== */
+.about-author {
+  background-color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-author__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 56px;
+  max-width: 1232px; /* Standard structural layout width constraint matching grid profiles */
+  margin: 0 auto;
+  padding: 80px 40px; /* Reduced side padding to prevent column crushing on smaller monitors */
+  box-sizing: border-box;
+}
+
+/* FIXED: Strict size boundaries to prevent flexible container shrinkage */
+.about-author__image-wrapper {
+  width: 464px;
+  height: 464px;
+  flex-shrink: 0; /* Prevents text elements from squishing the image wrapper box into an oval */
+  border-radius: 50%;
+  overflow: hidden; /* Guarantees clean boundary mask containment */
+}
+
+.about-author__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block; /* Prevents unwanted baseline inline spacing */
+}
+
+.about-author__bio-content {
+  display: flex;
+  flex-direction: column;
+  color: #1a1b22;
+  max-width: 600px; /* Locks text layout boundaries cleanly beside the circular image */
+}
+
+.about-author__title {
+  font-family: 'Roboto Slab', serif; /* Corrected to point to your semantic design serif headings */
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+  margin: 0 0 24px;
+}
+
+.about-author__name {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0 0 16px;
+}
+
+.about-author__description {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #4d4f54; /* Slate gray styling for body copy legibility */
+  margin: 0 0 24px;
+  word-break: break-word; /* Safe text wrapping for specialized jargon/long terms */
+}
+
+.about-author__links {
+  display: flex;
+}
+
+.about-author__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 24px;
+  background-color: #ffffff;
+  border: 1px solid #1a1b22;
+  border-radius: 80px;
+  color: #1a1b22;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box; /* Ensures layout dimensions stay clean with borders */
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.about-author__btn:hover {
+  background-color: #1a1b22;
+  color: #ffffff;
+  border-color: #1a1b22;
+}
+
+/* ==========================================================================
+   📱 Tablet & Mobile Responsive Framework (Breakpoints)
+   ========================================================================== */
+@media screen and (max-width: 1023px) {
+  .about-author__container {
+    gap: 32px;
+    padding: 40px 24px;
+  }
+
+  .about-author__image-wrapper {
+    width: 272px;
+    height: 272px;
+  }
+
+  .about-author__title {
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-author__container {
+    flex-direction: column; /* Stack layout components cleanly for compact viewports */
+    gap: 24px;
+    padding: 40px 16px;
+    text-align: left; /* Aligns smoothly with professional left-aligned body text requirements */
+  }
+
+  .about-author__image-wrapper {
+    margin: 0 auto; /* Centers the profile picture on mobile cards */
+  }
+}
+
+/* Mobile Small Optimization (Under 400px viewports) */
+@media screen and (max-width: 400px) {
+  .about-author__btn {
+    width: 100%; /* Spans full horizontal container logic nicely on small devices */
+  }
+}
