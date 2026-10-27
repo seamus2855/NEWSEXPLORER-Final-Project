@@ -39,18 +39,20 @@ body {
 
 /* Hero / Search Section Background Implementation */
 .page__hero-search {
+  /* FIXED: Added a charcoal color fallback to seamlessly transition with the overlay edge colors */
+  background-color: #1A1B22;
   background-image: url('../images/Overlay.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
   
-  /* OPTIMIZED: Changed from 100vh to a responsive min-height so content cards 
-     are clearly visible beneath the search wrapper without scrolling a full screen */
+  /* OPTIMIZED: Standardized minimum viewport coverage height limits */
   min-height: 536px; 
 
-  /* Layout padding to give the title and search form breathing room */
-  padding: 80px 24px;
+  /* FIXED: Increased top padding from 80px to 160px to clear the absolute height 
+     of your header/navigation bar cleanly without forcing content card overflow shifts */
+  padding: 160px 24px 80px;
 
   /* Centers the page title and search form inside the container */
   display: flex;
@@ -61,6 +63,7 @@ body {
 
   /* Text color override so your title remains readable against the background */
   color: #FFFFFF;
+  position: relative;
 }
 
 /* App loading splash screen state alignment */
@@ -124,4 +127,21 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* ==========================================================================
+   📱 RESPONSIVE MEDIA QUERIES (Breakpoints)
+   ========================================================================== */
+@media screen and (max-width: 1023px) {
+  .page__hero-search {
+    padding: 120px 24px 48px;
+    min-height: 452px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .page__hero-search {
+    padding: 84px 16px 32px;
+    min-height: 412px;
+  }
 }

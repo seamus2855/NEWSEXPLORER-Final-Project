@@ -1,44 +1,73 @@
-import { Link } from "react-router-dom"; 
-import "./Footer.css"; 
+import { Link } from "react-router-dom";
+import "./Footer.css";
 
-function Footer() { 
-  const currentYear = new Date().getFullYear(); 
-  
-  return ( 
-    <footer className="footer"> 
-      <p className="footer__copyright"> 
-        &copy; {currentYear} Supersite, Powered by News API 
-      </p> 
-      <div className="footer__navigation"> 
-        {/* Text links list */} 
-        <ul className="footer__links"> 
-          <li className="footer__item"> 
-            <Link to="/" className="footer__link"> Home </Link> 
-          </li> 
-          <li className="footer__item"> 
-            <a href="https://tripleten.com" className="footer__link" target="_blank" rel="noreferrer"> 
-              TripleTen 
-            </a> 
-          </li> 
-        </ul> 
-        {/* Social icon links list */} 
-        <ul className="footer__social"> 
-          <li className="footer__item"> 
-            <a href="https://github.com" className="footer__link" target="_blank" rel="noreferrer"> 
-              {/* Fixed: Wrapped the template literal inside backticks and curly braces */} 
-              <img src={`${import.meta.env.BASE_URL}images/github.svg`} alt="GitHub icon profile" className="footer__icon" /> 
-            </a> 
-          </li> 
-          <li className="footer__item"> 
-            <a href="https://facebook.com" className="footer__link" target="_blank" rel="noreferrer"> 
-              {/* Fixed: Wrapped the template literal inside backticks and curly braces */} 
-              <img src={`${import.meta.env.BASE_URL}images/facebook.svg`} alt="Facebook icon page" className="footer__icon" /> 
-            </a> 
-          </li> 
-        </ul> 
-      </div> 
-    </footer> 
-  ); 
-} 
+// FIXED: Reference images directly from the public/images directory via root-relative strings
+// Since they reside in the public folder, Vite serves them from the root directly.
+const githubIcon = "images/github.svg";
+const facebookIcon = "images/facebook.svg";
+
+function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="footer">
+      <p className="footer__copyright">
+        &copy; {currentYear} Supersite, Powered by News API
+      </p>
+      <div className="footer__navigation">
+        {/* Text links list */}
+        <ul className="footer__links">
+          <li className="footer__item">
+            <Link to="/" className="footer__link">
+              {" "}
+              Home{" "}
+            </Link>
+          </li>
+          <li className="footer__item">
+            <a
+              href="https://tripleten.com"
+              className="footer__link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              TripleTen
+            </a>
+          </li>
+        </ul>
+        {/* Social icon links list */}
+        <ul className="footer__social">
+          <li className="footer__item">
+            <a
+              href="https://github.com"
+              className="footer__link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                src={githubIcon}
+                alt="GitHub icon profile"
+                className="footer__icon"
+              />
+            </a>
+          </li>
+          <li className="footer__item">
+            <a
+              href="https://facebook.com"
+              className="footer__link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                src={facebookIcon}
+                alt="Facebook icon page"
+                className="footer__icon"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  );
+}
 
 export default Footer;

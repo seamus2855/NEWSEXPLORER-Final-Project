@@ -7,10 +7,12 @@ import "./index.css";
 
 const root = createRoot(document.getElementById("root"));
 
+// Safely access the base URL with an optional chaining fallback to prevent runtime crashes
+const baseName = import.meta.env?.BASE_URL || "/";
+
 root.render(
   <StrictMode>
-    {/* FIXED: Uses Vite's native string variable, falling back gracefully to your main directory root if undefined */}
-    <BrowserRouter basename={import.meta.env.BASE_URL || "/"}>
+    <BrowserRouter basename={baseName}>
       <AuthProvider>
         <App />
       </AuthProvider>

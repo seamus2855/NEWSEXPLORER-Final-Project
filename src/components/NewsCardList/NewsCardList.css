@@ -1,45 +1,46 @@
 /* NewsCardList.css */
 
-/* FIXED: Clean layout grid specifically targeting the BEM <ul> container */
+/* ==========================================================================
+   📦 PARENT GRID CONTAINER (UL List Element)
+   ========================================================================== */
 .news-cards-grid {
   display: grid;
-  /* Changed from auto-fill to exactly 3 columns to match the Figma design spec */
+  /* Exactly 3 columns to match the Figma design spec */
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  
-  column-gap: 16px;    /* Sets the precise spacing width between cards */
-  row-gap: 16px;       /* Adds fallback spacing if row components wrap */
+  gap: 16px;           /* Unifies row-gap and column-gap explicitly */
   width: 100%;
   list-style: none;    /* Removes bullet points from standard <ul> elements */
-  padding: 0;          /* Clears default browser indentations */
+  padding: 0 16px;     /* Added horizontal padding to prevent cards from touching screen edges */
   margin: 0 auto 64px; /* Centers the list block smoothly */
-  max-width: 1232px;   /* Reduced from 1440px to standard design system card container width */
+  max-width: 1232px;   /* Matches design system card container width */
   box-sizing: border-box;
 }
 
-/* FIXED: Individual list item wrapper settings matching BEM standards */
+/* ==========================================================================
+   🃏 INDIVIDUAL LIST ITEM CARD WRAPPER (LI Elements)
+   ========================================================================== */
 .news-cards-grid__item {
   display: flex;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* ==========================================================================
-   Responsive Adaptation Guidelines (Breakpoints)
+   📱 RESPONSIVE MEDIA QUERIES (Breakpoints)
    ========================================================================== */
 
 /* Tablet Viewports - Synchronized with card component breakpoints */
 @media screen and (max-width: 1023px) {
-  /* FIXED: Updated block namespace inside layout breakpoint */
   .news-cards-grid {
     /* Switches to a balanced 2-column layout structure for midsize screens */
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px; /* Maintained 16px to prevent cluttered visual spacing */
+    gap: 12px; /* Drops gap down slightly to mirror the main component spacing */
     margin-bottom: 32px;
   }
 }
 
 /* Mobile Viewports - Updated to standard 767px to prevent ultra-stretched cards */
 @media screen and (max-width: 767px) {
-  /* FIXED: Updated block namespace inside layout breakpoint */
   .news-cards-grid {
     grid-template-columns: 1fr; /* Stacks the cards vertically into a single column layout */
     gap: 16px;

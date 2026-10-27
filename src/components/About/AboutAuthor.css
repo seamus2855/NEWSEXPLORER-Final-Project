@@ -4,6 +4,7 @@
 .about-author {
   background-color: #ffffff;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .about-author__container {
@@ -11,20 +12,24 @@
   flex-direction: row;
   align-items: center;
   gap: 56px;
-  max-width: 1440px;
+  max-width: 1232px; /* Standard structural layout width constraint matching grid profiles */
   margin: 0 auto;
-  padding: 80px 104px;
+  padding: 80px 40px; /* Reduced side padding to prevent column crushing on smaller monitors */
   box-sizing: border-box;
 }
 
+/* FIXED: Strict size boundaries to prevent flexible container shrinkage */
 .about-author__image-wrapper {
-  flex-shrink: 0;
+  width: 464px;
+  height: 464px;
+  flex-shrink: 0; /* Prevents text elements from squishing the image wrapper box into an oval */
+  border-radius: 50%;
+  overflow: hidden; /* Guarantees clean boundary mask containment */
 }
 
 .about-author__photo {
-  width: 464px;
-  height: 464px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block; /* Prevents unwanted baseline inline spacing */
 }
@@ -33,10 +38,11 @@
   display: flex;
   flex-direction: column;
   color: #1a1b22;
+  max-width: 600px; /* Locks text layout boundaries cleanly beside the circular image */
 }
 
 .about-author__title {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-family: 'Roboto Slab', serif; /* Corrected to point to your semantic design serif headings */
   font-size: 40px;
   font-weight: 400;
   line-height: 46px;
@@ -44,14 +50,15 @@
 }
 
 .about-author__name {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
+  font-weight: 500;
   line-height: 24px;
   margin: 0 0 16px;
 }
 
 .about-author__description {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
@@ -74,7 +81,7 @@
   border: 1px solid #1a1b22;
   border-radius: 80px;
   color: #1a1b22;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
@@ -92,15 +99,13 @@
 /* ==========================================================================
    📱 Tablet & Mobile Responsive Framework (Breakpoints)
    ========================================================================== */
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1023px) {
   .about-author__container {
-    flex-direction: column;
-    padding: 40px 16px;
-    gap: 24px;
-    text-align: left; /* Aligns smoothly with professional left-aligned body text requirements */
+    gap: 32px;
+    padding: 40px 24px;
   }
 
-  .about-author__photo {
+  .about-author__image-wrapper {
     width: 272px;
     height: 272px;
   }
@@ -109,6 +114,19 @@
     font-size: 30px;
     line-height: 40px;
     margin-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-author__container {
+    flex-direction: column; /* Stack layout components cleanly for compact viewports */
+    gap: 24px;
+    padding: 40px 16px;
+    text-align: left; /* Aligns smoothly with professional left-aligned body text requirements */
+  }
+
+  .about-author__image-wrapper {
+    margin: 0 auto; /* Centers the profile picture on mobile cards */
   }
 }
 

@@ -13,7 +13,6 @@ function RegisterModal({
   onSignInLinkClick,
   isLoading,
 }) {
-  // Use structured values, errors, and validation states
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
   // Reset inputs when modal opens or closes
@@ -38,6 +37,7 @@ function RegisterModal({
   if (isRegistrationSuccess) {
     return (
       <div className="modal modal--opened" role="dialog" aria-modal="true" aria-labelledby="success-title">
+        <div className="modal__overlay" onClick={onClose} />
         <div className="modal__container modal__container--success">
           <button 
             type="button" 
@@ -65,7 +65,7 @@ function RegisterModal({
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Signing up..." : "Sign up"}
       altButtonText="Sign in"
-      onAltButtonClick={handleAltClick}
+      onAltButtonClick={handleAltClick} // Triggers modal cross-switch flow actions seamlessly
       isValid={isValid}
     >
       {/* Email input field */}

@@ -6,6 +6,7 @@ import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx"; 
 // Modals layer
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
@@ -24,8 +25,8 @@ function App() {
 
   // --- Core Layout & Search Engine UI State ---
   const [articles, setArticles] = useState([]);
-  const [isNewsLoading, setIsNewsLoading] = useState(false); // FIXED: Renamed to explicitly track News API requests only
-  const [isFormLoading, setIsFormLoading] = useState(false); // FIXED: Added to handle Form overlay loading states independently
+  const [isNewsLoading, setIsNewsLoading] = useState(false); 
+  const [isFormLoading, setIsFormLoading] = useState(false); 
   const [hasSearched, setHasSearched] = useState(false);
   const [searchError, setSearchError] = useState('');
   const [visibleCount, setVisibleCount] = useState(3);
@@ -33,8 +34,8 @@ function App() {
   // --- Structural Context Modals Layer ---
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false); // Added for the registration success view
-  const [serverError, setServerError] = useState(''); // Added to pass down server exception details if needed
+  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false); 
+  const [serverError, setServerError] = useState(''); 
 
   // --- Local UI Storage for Saved Cards Persistence Layer ---
   const [savedArticles, setSavedArticles] = useState([]);
@@ -60,7 +61,7 @@ function App() {
 
   // --- API Search Handling Core Logic ---
   const handleSearchSubmit = (keyword) => {
-    setIsNewsLoading(true); // FIXED: Targets news loader state exclusively
+    setIsNewsLoading(true); 
     setHasSearched(true);
     setSearchError('');
     setArticles([]);
@@ -86,7 +87,7 @@ function App() {
         );
       })
       .finally(() => {
-        setIsNewsLoading(false); // FIXED: Clears news loader state exclusively
+        setIsNewsLoading(false); 
       });
   };
 
@@ -128,27 +129,24 @@ function App() {
 
   // --- Handle Context Action Mapping Pipelines ---
   const handleLoginSubmit = (values) => {
-    setIsFormLoading(true); // FIXED: Targets independent form validation loader
+    setIsFormLoading(true); 
     setServerError('');
-    // Simulating an asynchronous network callback action
     setTimeout(() => {
       login(
         { name: 'Explorer', email: values.email, password: values.password },
         'simulated-session-web-token',
       );
-      setIsFormLoading(false); // FIXED: Clears form submission loading state
+      setIsFormLoading(false); 
       closeAllModals();
     }, 1000);
   };
 
   const handleRegisterSubmit = () => {
-    setIsFormLoading(true); // FIXED: Targets independent form validation loader
+    setIsFormLoading(true); 
     setServerError('');
-    // Simulating an asynchronous registration callback action
     setTimeout(() => {
-      // Toggle successful registration state view flag
       setIsRegistrationSuccess(true);
-      setIsFormLoading(false); // FIXED: Clears form submission loading state
+      setIsFormLoading(false); 
     }, 1000);
   };
 
@@ -158,7 +156,6 @@ function App() {
   };
 
   if (isAuthLoading) {
-    /* FIXED: Adjusted class styling layout to follow strict BEM guidelines */
     return <div className="page__loading">Loading layout...</div>;
   }
 
@@ -178,7 +175,7 @@ function App() {
               onSearchSubmit={handleSearchSubmit}
               onShowMore={handleShowMore}
               cards={articles}
-              isLoading={isNewsLoading} // FIXED: Receives only the news query pending loader state
+              isLoading={isNewsLoading} 
               hasSearched={hasSearched}
               searchError={searchError}
               visibleCount={visibleCount}
@@ -189,23 +186,23 @@ function App() {
             />
           }
         />
+        {/* FIXED: Replaced loose inline conditional rendering statements with the ProtectedRoute container */}
         <Route
           path="/saved-news"
           element={
-            isLoggedIn ? (
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
               <SavedNews
                 savedCards={savedArticles}
                 onCardDelete={handleCardDelete}
                 isLoggedIn={isLoggedIn}
                 currentUser={currentUser}
               />
-            ) : (
-              <Navigate to="/" replace />
-            )
+            </ProtectedRoute>
           }
         />
+        {/* Wildcard Fallback redirection catch-all link */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <Routes /> {/* Empty element alignment balance protection removal */}
       <Footer />
 
       {/* --- Overlay Modals Injection Layer --- */}
@@ -215,7 +212,7 @@ function App() {
           onClose={closeAllModals}
           onLogin={handleLoginSubmit}
           handleAltClick={handleRegisterClick}
-          isLoading={isFormLoading} // FIXED: Passed the separate form submit loading tracker variable
+          isLoading={isFormLoading} 
           serverError={serverError}
         />
       )}
@@ -228,7 +225,7 @@ function App() {
           onSignInLinkClick={handleSignInClick}
           isRegistrationSuccess={isRegistrationSuccess}
           serverError={serverError}
-          isLoading={isFormLoading} // FIXED: Passed the separate form submit loading tracker variable
+          isLoading={isFormLoading} 
         />
       )}
     </div>

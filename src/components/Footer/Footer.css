@@ -4,10 +4,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1440px;
+  max-width: 1232px; /* Harmonized structural layout boundary constraint to match your site grid standard */
   width: 100%;
   margin: 0 auto;
-  padding: 32px 104px;
+  padding: 32px 16px; /* Reduced horizontal baseline padding to safeguard responsive fluid scaling on smaller laptop viewports */
   background-color: #FFFFFF;
   box-sizing: border-box; /* Ensures padding does not break width calculations */
 }
@@ -73,13 +73,13 @@
 }
 
 /* ==========================================================================
-   Responsive Adaptations (Breakpoints)
+   📱 Tablet & Mobile Responsive Framework (Breakpoints)
    ========================================================================== */
 
-/* Tablet Layout Breakpoint */
-@media screen and (max-width: 1024px) {
+/* Tablet Layout Breakpoint - Synchronized with core application components */
+@media screen and (max-width: 1023px) {
   .footer {
-    padding: 32px 40px;
+    padding: 32px 24px;
   }
 
   .footer__navigation {
@@ -92,7 +92,7 @@
 }
 
 /* Mobile Component Responsive Flow */
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 767px) {
   .footer {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -100,8 +100,6 @@
     gap: 40px;
   }
 
-  /* Optimization: Added a separate row wrap configuration if your design 
-     requires links and icons to layout side-by-side or stack cleanly */
   .footer__navigation {
     flex-direction: column;
     align-items: flex-start;

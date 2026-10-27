@@ -9,7 +9,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,15 +25,52 @@
   transition: visibility 0s, opacity 0.2s linear;
 }
 
-/* FIXED: Replaced loose block mixin container with a clean modifier layout hook */
+/* Background overlay mask layer */
+.modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* FIXED: Unified structural dimensions to keep the card stable across all forms */
 .modal__container--success { 
   display: flex; 
   flex-direction: column; 
   gap: 14px; 
   background-color: #FFFFFF;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 430px;
+  padding: 43px 36px 51px;
   box-sizing: border-box;
   position: relative;
+  z-index: 2;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
 } 
+
+/* FIXED: Replaced broken truncated code with a clean, fully formatted inline SVG string */
+.modal__close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='24' height='24' fill='none' xmlns='http://w3.org d='M18.364 5.636L5.636 18.364M18.364 18.364L5.636 5.636' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.modal__close-button:hover {
+  opacity: 0.6;
+}
 
 /* FIXED: Synced title class syntax to utilize standardized double-hyphen modifier notation */
 .modal__title--success { 
@@ -43,7 +79,7 @@
   font-weight: 700; /* Fixed: Changed from 900 to 700 to match standard font-weight limits */
   line-height: 30px; 
   color: #000000; 
-  margin: 0 0 4px 0; 
+  margin: 0; 
 } 
 
 /* FIXED: Formatted the standalone inline navigation trigger block element text link */
@@ -59,11 +95,11 @@
   cursor: pointer; 
   text-align: left; 
   align-self: flex-start; /* Keeps button click area bounded flush to text width */
-  transition: opacity 0.2s ease; 
+  transition: color 0.2s ease, opacity 0.2s ease; 
 } 
 
 .modal__link:hover { 
-  opacity: 0.7; 
+  color: #2A64CC;
   text-decoration: underline; /* Clear interactive affordance for link action conversion */
 } 
 
@@ -101,11 +137,19 @@
    📱 Responsive Adaptations (Mobile Viewports)
    ========================================================================== */
 @media screen and (max-width: 580px) { /* Aligned breakpoint width with your base modal layout (580px) */
-  /* FIXED: Adjusted responsive descriptor queries to hook into modern BEM selectors */
+  
+  /* FIXED: Adjusted properties to overlay cleanly full-screen on mobile browsers */
   .modal__container--success {
-    margin-top: 40px; /* Generates spacing below the mobile close button */
-    flex-grow: 1;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 0;
+    padding: 124px 16px 32px; /* Generates spacing below the top close button area */
     justify-content: flex-start;
+  }
+
+  .modal__close-button {
+    top: 24px;
+    right: 16px;
   }
 
   .modal__title--success { 
