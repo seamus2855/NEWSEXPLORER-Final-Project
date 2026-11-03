@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
-// FIXED: Reference images directly from the public/images directory via root-relative strings
-// Since they reside in the public folder, Vite serves them from the root directly.
-const githubIcon = "images/github.svg";
-const facebookIcon = "images/facebook.svg";
+// IMPORT ICONS DIRECTLY FROM THE SRC/IMAGES DIRECTORY
+import githubIcon from "../images/github.svg";
+import facebookIcon from "../images/facebook.svg";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,8 +18,7 @@ function Footer() {
         <ul className="footer__links">
           <li className="footer__item">
             <Link to="/" className="footer__link">
-              {" "}
-              Home{" "}
+              Home
             </Link>
           </li>
           <li className="footer__item">

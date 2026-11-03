@@ -64,9 +64,9 @@ function RegisterModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Signing up..." : "Sign up"}
-      altButtonText="Sign in"
-      onAltButtonClick={handleAltClick} // Triggers modal cross-switch flow actions seamlessly
-      isValid={isValid}
+      redirectText="Sign in"
+      onRedirectClick={handleAltClick}
+      isButtonDisabled={!isValid}
     >
       {/* Email input field */}
       <div className="modal__label-container">

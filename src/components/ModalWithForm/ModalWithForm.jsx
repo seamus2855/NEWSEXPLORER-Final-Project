@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import "./ModalWithForm.css"; // Ensure standard wrapper styling is pulled in
+import "./ModalWithForm.css";
 
 function ModalWithForm({
   title,
-  name, // Added for semantic naming if needed for CSS or forms
+  name,
   isOpen,
   onClose,
   onSubmit,
   buttonText,
-  isButtonDisabled = false, // Sync with your modal implementations
-  redirectText,             // Sync with your modal implementations
-  onRedirectClick,         // Sync with your modal implementations
+  isButtonDisabled = false,
+  redirectText,
+  onRedirectClick,
   children,
 }) {
   // Close modal on Escape key press
@@ -36,12 +36,10 @@ function ModalWithForm({
     }
   };
 
-  // Generate a clean ID for the screen-reader heading link
   const titleId = `modal-title-${name || "form"}`;
 
   return (
     <div 
-      /* FIXED: Updated single underscore (_) to standard BEM double hyphens (--) for the opened modifier */
       className={`modal ${isOpen ? "modal--opened" : ""}`} 
       onClick={handleOverlayClick}
       role="dialog"
@@ -63,7 +61,6 @@ function ModalWithForm({
           <div className="modal__submit-container">
             <button
               type="submit"
-              /* FIXED: Updated single underscore (_) to standard BEM double hyphens (--) for the disabled button modifier */
               className={`modal__submit-button ${
                 isButtonDisabled ? "modal__submit-button--disabled" : ""
               }`}

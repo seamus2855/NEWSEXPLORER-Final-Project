@@ -2,11 +2,10 @@
    📦 BLOCK: search-form (Hero Section Layout Area Container)
    ========================================================================== */
 
-/* FIXED: Changed from loose .hero-section to match your explicit .search-form__hero-wrapper block container class */ 
-/* FIXED: Added a blended dark overlay scrim and background color fallback to ensure text contrast */ 
+/* FIXED: Corrected path from absolute root (/images/) to relative (../images/) to support src assets */ 
 .search-form__hero-wrapper { 
   background-color: #1A1B22; /* High-contrast fallback color matching the dark image canvas */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('/images/header.svg'); 
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('../images/header.svg'); 
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
