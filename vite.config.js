@@ -1,32 +1,22 @@
 import { defineConfig, createLogger } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Initialize the native Vite logger instance to intercept terminal warning logs cleanly
 const logger = createLogger();
-// FIXED: Explicitly bind the logger context to avoid execution scope breakdown during compilation
 const originalWarn = logger.warn.bind(logger);
 
-// Overwrite the standard logger warning emitter with your custom filter logic
+// Safely suppress specific build and environment warning logs
 logger.warn = (msg, options) => {
   if (msg.includes("PLUGIN_TIMINGS") || msg.includes("vite:prepare-out-dir")) {
-    return; // Suppresses this specific log message safely
+    return;
   }
-  originalWarn(msg, options); // Permits all other system messages to print normally
+  originalWarn(msg, options);
 };
 
 // https://vite.dev
-export default defineConfig(({ mode }) => {
+export default defineConfig(() => {
   return {
     plugins: [react()],
-
-    // Hand over the configured interception logger engine to the bundler
     customLogger: logger,
-
-    /* 
-       Standardized the base path across all environments. 
-       This ensures that your local preview and your GitHub Pages deployment 
-       look for files in the exact same directory mapping.
-    */
     base: "/NEWSEXPLORER-Final-Project/",
   };
 });

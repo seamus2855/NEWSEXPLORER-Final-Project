@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./SearchForm.css";
 
-// Added a headerChildren prop to cleanly render your navigation header inside the hero section
 function SearchForm({ onSearchSubmit, headerChildren }) {
   const [keyword, setKeyword] = useState("");
   const [error, setError] = useState("");
@@ -23,7 +22,6 @@ function SearchForm({ onSearchSubmit, headerChildren }) {
 
   return (
     <div className="search-form__hero-wrapper">
-      {/* 1. Render the Header/Navigation here so it layers over the background graphic */}
       {headerChildren}
 
       <div className="search-form__container">
@@ -33,11 +31,10 @@ function SearchForm({ onSearchSubmit, headerChildren }) {
         </p>
 
         <form className="search-form" onSubmit={handleSubmit} noValidate>
-          {/* Main search text entry area */}
           <div className="search-form__field-wrapper">
             <input
               type="text"
-              className={`search-form__input ${error ? "search-form__input--type-error" : ""}`}
+              className={`search-form__input${error ? " search-form__input--type-error" : ""}`}
               placeholder="Enter topic"
               value={keyword}
               onChange={handleChange}
@@ -49,7 +46,6 @@ function SearchForm({ onSearchSubmit, headerChildren }) {
             </button>
           </div>
 
-          {/* Render error directly underneath the search bar to protect structural alignment */}
           {error && (
             <span className="search-form__error" id="search-input-error" aria-live="polite">
               {error}

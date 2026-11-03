@@ -1,15 +1,13 @@
-/* Footer.css */ 
-
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1232px; /* Harmonized structural layout boundary constraint to match your site grid standard */
+  max-width: 1232px;
   width: 100%;
   margin: 0 auto;
-  padding: 32px 16px; /* Reduced horizontal baseline padding to safeguard responsive fluid scaling on smaller laptop viewports */
-  background-color: #FFFFFF;
-  box-sizing: border-box; /* Ensures padding does not break width calculations */
+  padding: 32px 16px;
+  background-color: #ffffff;
+  box-sizing: border-box;
 }
 
 .footer__copyright {
@@ -17,7 +15,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: #B6BCBF;
+  color: #b6bcbf;
   margin: 0;
 }
 
@@ -54,8 +52,8 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: #1A1B22;
-  text-decoration: none; /* Prevents default browser link underlines */
+  color: #1a1b22;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,11 +70,7 @@
   object-fit: contain;
 }
 
-/* ==========================================================================
-   📱 Tablet & Mobile Responsive Framework (Breakpoints)
-   ========================================================================== */
-
-/* Tablet Layout Breakpoint - Synchronized with core application components */
+/* Tablet Layout Breakpoint */
 @media screen and (max-width: 1023px) {
   .footer {
     padding: 32px 24px;
@@ -91,13 +85,19 @@
   }
 }
 
-/* Mobile Component Responsive Flow */
+/* Mobile Layout Breakpoint */
 @media screen and (max-width: 767px) {
   .footer {
     flex-direction: column-reverse;
     align-items: flex-start;
     padding: 20px 16px 38px;
     gap: 40px;
+  }
+
+  .footer__copyright {
+    text-align: left;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   .footer__navigation {
@@ -113,7 +113,12 @@
     gap: 32px;
   }
 
+  .footer__link {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
   .footer__social {
-    gap: 27px; /* Kept tight row format for touch targets */
+    gap: 27px;
   }
 }

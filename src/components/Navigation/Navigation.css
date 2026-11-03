@@ -17,7 +17,6 @@
   height: 100%;
 } 
 
-/* Elements: Interactive Anchors */
 .navigation__link { 
   display: flex;
   align-items: center;
@@ -38,7 +37,6 @@
   opacity: 0.8; 
 } 
 
-/* ⚡ LINK MODIFIERS (Double-hyphen notation) */ 
 .navigation__link--active { 
   border-bottom-color: #ffffff; 
 } 
@@ -79,7 +77,6 @@
   opacity: 0.8; 
 } 
 
-/* Structural Element Class Identifiers */
 .navigation__signin-btn {
   min-width: 152px;
   padding: 0 20px;
@@ -89,7 +86,6 @@
   min-width: 112px;
 }
 
-/* ⚡ BUTTON MODIFIERS */
 .navigation__btn--theme-light { 
   color: #1a1b22; 
   border-color: #1a1b22; 
@@ -109,7 +105,6 @@
   vertical-align: middle; 
 } 
 
-/* Hamburger menu activation toggle hidden by default on desktop viewports */
 .navigation__menu-btn {
   display: none;
 }
@@ -148,18 +143,18 @@
     width: 24px; 
     height: 24px; 
     border: none; 
-    background: transparent url('/images/menu-white.svg') center / contain no-repeat; 
+    /* FIXED: Adjusted directory mapping paths relative to the src/images resource layout folder context */
+    background: transparent url('../../images/menu-white.svg') center / contain no-repeat; 
     cursor: pointer; 
     z-index: 30; 
   } 
 
-  /* ⚡ HAMBURGER MENU STATE MODIFIERS */
   .navigation__menu-btn--theme-light { 
-    background-image: url('/images/menu-black.svg'); 
+    background-image: url('../../images/menu-black.svg'); 
   } 
 
   .navigation__menu-btn--close { 
-    background-image: url('/images/close-white.svg'); 
+    background-image: url('../../images/close-white.svg'); 
   } 
 
   .navigation__overlay { 
@@ -176,7 +171,6 @@
     display: none; 
   } 
   
-  /* ⚡ DRAWER CONTAINER OPEN MODIFIER */
   .navigation--opened { 
     display: flex; 
     flex-direction: column; 

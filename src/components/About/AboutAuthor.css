@@ -1,6 +1,3 @@
-/* ==========================================================================
-   📦 BLOCK: about-author
-   ========================================================================== */
 .about-author {
   background-color: #ffffff;
   width: 100%;
@@ -12,37 +9,36 @@
   flex-direction: row;
   align-items: center;
   gap: 56px;
-  max-width: 1232px; /* Standard structural layout width constraint matching grid profiles */
+  max-width: 1232px;
   margin: 0 auto;
-  padding: 80px 40px; /* Reduced side padding to prevent column crushing on smaller monitors */
+  padding: 80px 40px;
   box-sizing: border-box;
 }
 
-/* FIXED: Strict size boundaries to prevent flexible container shrinkage */
 .about-author__image-wrapper {
   width: 464px;
   height: 464px;
-  flex-shrink: 0; /* Prevents text elements from squishing the image wrapper box into an oval */
+  flex-shrink: 0;
   border-radius: 50%;
-  overflow: hidden; /* Guarantees clean boundary mask containment */
+  overflow: hidden;
 }
 
 .about-author__photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block; /* Prevents unwanted baseline inline spacing */
+  display: block;
 }
 
 .about-author__bio-content {
   display: flex;
   flex-direction: column;
   color: #1a1b22;
-  max-width: 600px; /* Locks text layout boundaries cleanly beside the circular image */
+  max-width: 600px;
 }
 
 .about-author__title {
-  font-family: 'Roboto Slab', serif; /* Corrected to point to your semantic design serif headings */
+  font-family: 'Roboto Slab', serif;
   font-size: 40px;
   font-weight: 400;
   line-height: 46px;
@@ -62,9 +58,9 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
-  color: #4d4f54; /* Slate gray styling for body copy legibility */
+  color: #4d4f54;
   margin: 0 0 24px;
-  word-break: break-word; /* Safe text wrapping for specialized jargon/long terms */
+  word-break: break-word;
 }
 
 .about-author__links {
@@ -86,7 +82,7 @@
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  box-sizing: border-box; /* Ensures layout dimensions stay clean with borders */
+  box-sizing: border-box;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -96,9 +92,7 @@
   border-color: #1a1b22;
 }
 
-/* ==========================================================================
-   📱 Tablet & Mobile Responsive Framework (Breakpoints)
-   ========================================================================== */
+/* Tablet Layout Breakpoint */
 @media screen and (max-width: 1023px) {
   .about-author__container {
     gap: 32px;
@@ -117,22 +111,23 @@
   }
 }
 
+/* Mobile Layout Breakpoint */
 @media screen and (max-width: 767px) {
   .about-author__container {
-    flex-direction: column; /* Stack layout components cleanly for compact viewports */
+    flex-direction: column;
     gap: 24px;
     padding: 40px 16px;
-    text-align: left; /* Aligns smoothly with professional left-aligned body text requirements */
+    text-align: left;
   }
 
   .about-author__image-wrapper {
-    margin: 0 auto; /* Centers the profile picture on mobile cards */
+    margin: 0 auto;
   }
 }
 
-/* Mobile Small Optimization (Under 400px viewports) */
+/* Mobile Small Optimization */
 @media screen and (max-width: 400px) {
   .about-author__btn {
-    width: 100%; /* Spans full horizontal container logic nicely on small devices */
+    width: 100%;
   }
 }

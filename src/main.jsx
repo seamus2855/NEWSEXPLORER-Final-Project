@@ -7,8 +7,9 @@ import "./index.css";
 
 const root = createRoot(document.getElementById("root"));
 
-// Safely access the base URL with an optional chaining fallback to prevent runtime crashes
-const baseName = import.meta.env?.BASE_URL || "/";
+// Vite natively populates import.meta.env, so optional chaining isn't strictly necessary.
+// This ensures a clean fallback string for standard builds.
+const baseName = import.meta.env.BASE_URL || "/";
 
 root.render(
   <StrictMode>

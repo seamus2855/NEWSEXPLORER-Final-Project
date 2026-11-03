@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>News Explorer</title>
+    <!-- Fixed: Points directly to the verified nested images subfolder -->
+    <link rel="icon" type="image/svg+xml" href="/images/header.svg" />
 
-    <!-- 🌟 FIXED SYNTAX: Cleared out the broken duplicate markup tags -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <!-- Google Fonts for News Explorer Design System Layouts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +16,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- FIXED: Changed script source to an absolute path so Vite handles production bundler asset mapping correctly -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

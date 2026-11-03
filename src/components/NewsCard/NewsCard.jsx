@@ -1,3 +1,5 @@
+import notFoundImage from "../../images/not-found.svg";
+
 function NewsCard({
   card,
   isLoggedIn,
@@ -11,8 +13,8 @@ function NewsCard({
   const date = card.publishedAt;
   const source = card.source?.name || "Unknown Source";
 
-  // Points cleanly to your local public folder image placeholder asset
-  const image = card.urlToImage || card.image || "/images/not-found.svg";
+  // FIXED: Dynamically matches the root base directory across local dev and live builds
+  const image = card.urlToImage || card.image || notFoundImage;
   const link = card.url || card.link;
   const isSaved = card.isSaved || false;
   const keyword = card.keyword || "";
@@ -42,10 +44,6 @@ function NewsCard({
 
   return (
     <article className="news-card">
-      {/* 
-        FIXED: Wrapped the entire card content inside a single block-level anchor tag.
-        This forces the inner elements to obey your flex-direction column styling flawlessly.
-      */}
       <a
         href={link}
         target="_blank"
@@ -58,8 +56,8 @@ function NewsCard({
           className="news-card__image"
           onError={(e) => {
             e.target.onerror = null;
-            // Fallback backup handles broken external API links cleanly
-            e.target.src = "/images/not-found.svg";
+            // FIXED: Uses compiled import asset target variable instead of hardcoded paths
+            e.target.src = notFoundImage;
           }}
         />
 
@@ -71,10 +69,6 @@ function NewsCard({
         </div>
       </a>
 
-      {/* 
-        Absolute Floating Layer container stands completely clear of the layout stream. 
-        It sits safely outside the main block links so clicking buttons does not trigger redirects.
-      */}
       <div className="news-card__top-container">
         {isSavedNewsPage && keyword && (
           <div className="news-card__keyword">{keyword}</div>

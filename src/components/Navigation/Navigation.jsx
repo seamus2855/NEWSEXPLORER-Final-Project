@@ -2,6 +2,10 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./Navigation.css";
 
+// IMPORTED ASSETS: Resolves absolute string 404 pathing for Vite bundler structures
+import logoutBlack from "../../images/logout-black.svg";
+import logoutWhite from "../../images/logout-white.svg";
+
 function Navigation({
   isLoggedIn,
   userName,
@@ -14,7 +18,6 @@ function Navigation({
 
   const isSavedNews = theme ? theme === "light" : location.pathname === "/saved-news";
 
-  // FIXED: Converted single underscore modifiers to strict BEM double hyphens (--)
   const navThemeMod = isSavedNews ? " navigation--theme-light" : "";
   const navMobileMod = isMobileMenuOpen ? " navigation--opened" : "";
   const menuBtnThemeMod = isSavedNews ? " navigation__menu-btn--theme-light" : "";
@@ -42,7 +45,6 @@ function Navigation({
 
   return (
     <>
-      {/* Mobile Hamburger / Close Button */}
       <button
         type="button"
         className={`navigation__menu-btn${menuBtnThemeMod}${menuBtnCloseMod}`}
@@ -50,7 +52,6 @@ function Navigation({
         aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
       />
 
-      {/* Backdrop overlay for mobile menu */}
       {isMobileMenuOpen && (
         <div
           className="navigation__overlay"
@@ -59,7 +60,6 @@ function Navigation({
         />
       )}
 
-      {/* Main Navigation Container */}
       <nav className={`navigation${navThemeMod}${navMobileMod}`}>
         <NavLink
           to="/"
@@ -94,11 +94,7 @@ function Navigation({
             >
               <span className="navigation__user-name">{userName}</span>
               <img
-                src={
-                  isSavedNews && !isMobileMenuOpen
-                    ? "/images/logout-black.svg"
-                    : "/images/logout-white.svg"
-                }
+                src={isSavedNews && !isMobileMenuOpen ? logoutBlack : logoutWhite}
                 alt="Logout"
                 className="navigation__logout-icon"
               />
