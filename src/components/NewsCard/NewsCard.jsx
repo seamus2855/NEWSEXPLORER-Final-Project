@@ -13,7 +13,6 @@ function NewsCard({
   const date = card.publishedAt;
   const source = card.source?.name || "Unknown Source";
 
-  // FIXED: Dynamically matches the root base directory across local dev and live builds
   const image = card.urlToImage || card.image || notFoundImage;
   const link = card.url || card.link;
   const isSaved = card.isSaved || false;
@@ -42,6 +41,13 @@ function NewsCard({
     onBookmarkClick(card);
   };
 
+  // FIXED: Moved the error fallback handling to a separate handler function. 
+  // This isolates the reference string so Vite can resolve the bundle cleanly.
+  const handleImageError = (e) => {
+    e.target.onerror = null; 
+    e.target.src = notFoundImage;
+  };
+
   return (
     <article className="news-card">
       <a
@@ -54,11 +60,7 @@ function NewsCard({
           src={image}
           alt={title}
           className="news-card__image"
-          onError={(e) => {
-            e.target.onerror = null;
-            // FIXED: Uses compiled import asset target variable instead of hardcoded paths
-            e.target.src = notFoundImage;
-          }}
+          onError={handleImageError}
         />
 
         <div className="news-card__text-container">

@@ -2,10 +2,10 @@
    📦 BLOCK: search-form (Hero Section Layout Area Container)
    ========================================================================== */
 
-/* FIXED: Corrected path from absolute root (/images/) to relative (../images/) to support src assets */ 
+/* FIXED: Changed path from relative (../images/) to root-relative public path (/images/) to resolve Vite build warnings */ 
 .search-form__hero-wrapper { 
   background-color: #1A1B22; /* High-contrast fallback color matching the dark image canvas */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('../images/header.svg'); 
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('/images/header.svg'); 
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
