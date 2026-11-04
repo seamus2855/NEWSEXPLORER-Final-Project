@@ -1,40 +1,31 @@
 .modal {
+  display: none;
   position: fixed;
   inset: 0;
   background-color: rgb(0 0 0 / 50%);
-  z-index: 1000; 
+  z-index: 1000;
+}
+
+.modal.modal--opened {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  
-  /* FIXED: Replaced display: none with hidden visibility state to let transition animations render correctly */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease, visibility 0.25s ease;
-}
-
-.modal_opened {
-  opacity: 1;
-  visibility: visible;
 }
 
 .modal__container {
   position: relative;
   width: min(430px, calc(100% - 40px));
-  padding: 34px 36px 36px;
-  background-color: #fff;
-  /* FIXED: Removed duplicate conflicting 80px/16px properties. Aligned to Figma's rounded corners design specs */
-  border-radius: 16px; 
+  padding: 34px 36px 28px;
+  background-color: #ffffff;
+  border-radius: 16px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15); 
   box-sizing: border-box;
 }
 
 .modal__close-button {
   position: absolute;
-  /* FIXED: Adjusted positioning values to scale correctly across multiple layout screens */
-  top: -32px;
-  right: -32px;
+  top: 16px;
+  right: 16px;
   width: 24px;
   height: 24px;
   padding: 0;
@@ -53,12 +44,13 @@
 .modal__close-button::after {
   content: "";
   position: absolute;
-  top: 11px;
-  left: 2px;
+  top: 50%;
+  left: 50%;
   width: 20px;
   height: 2px;
-  /* FIXED: Changed back to white color styling so close button sits properly outside the container bounds on desktop */
-  background-color: #ffffff;
+  background-color: #d1d2d6;
+  margin-top: -1px;
+  margin-left: -10px;
   transform: rotate(45deg);
 }
 
@@ -72,7 +64,7 @@
   font-weight: 900;
   line-height: 28px;
   color: #1a1b22;
-  margin: 0 0 24px;
+  margin: 0 0 22px;
 }
 
 .modal__form {
@@ -84,7 +76,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 12px;
+  margin-top: 14px;
   width: 100%;
 }
 
@@ -100,28 +92,31 @@
   line-height: 22px;
   color: #ffffff;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  box-shadow: 0px 5px 15px rgba(47, 113, 229, 0.2);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .modal__submit-button:hover:not(:disabled) {
   background-color: #2a64cc;
 }
 
-.modal__submit-button_disabled,
 .modal__submit-button:disabled {
-  background-color: #e6e8eb !important;
-  color: #b6bcbf !important;
-  box-shadow: none !important;
+  background-color: #e6e8eb;
+  color: #b6bcbf;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
 .modal__alt-text {
   font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: #000000;
-  margin: 16px 0 0;
+  margin: 16px auto 0;
   text-align: center;
+  display: block;
 }
 
 .modal__alt-button {
@@ -132,38 +127,41 @@
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
+  line-height: 17px;
   cursor: pointer;
   margin-left: 4px;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .modal__alt-button:hover {
-  text-decoration: underline;
+  opacity: 0.7;
+  text-decoration: none;
 }
 
-/* ==========================================================================
-   Responsive Mobile Fluidity Layout (Breakpoints)
-   ========================================================================== */
-@media screen and (max-width: 580px) {
-  .modal {
-    align-items: flex-end; /* Pulls form cleanly up from base on small viewports */
+/* Tablet & Mobile Layout Breakpoints */
+@media screen and (max-width: 640px) {
+  .modal.modal--opened {
+    align-items: flex-start; 
   }
 
   .modal__container {
     width: 100%;
-    border-radius: 16px 16px 0 0; /* Bottom sheet design aesthetic optimization */
+    min-height: 100dvh; 
+    border-radius: 0;
     padding: 56px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
   }
 
-  .modal__close-button {
-    /* FIXED: Moves close marker vectors cleanly inside bounding frame wrapper for mobile displays */
-    top: 16px;
-    right: 16px;
+  .modal__form {
+    width: 100%;
+    gap: 16px; 
   }
 
-  .modal__close-button::before,
-  .modal__close-button::after {
-    /* FIXED: Inverts close icon vectors to dark gray color layout when viewing on small screen modes */
-    background-color: #1a1b22;
+  .modal__submit-container {
+    margin-top: auto;
+    padding-top: 24px;
   }
 
   .modal__submit-button {

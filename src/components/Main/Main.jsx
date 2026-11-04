@@ -23,7 +23,8 @@ function Main({
 
       {/* 1. Preloader block shown immediately while searching */}
       {isLoading && (
-        <section className="main__results-container main__results-container_status">
+        /* FIXED: Updated single underscore (_) to standard BEM double hyphens (--) for the status modifier */
+        <section className="main__results-container main__results-container--status">
           <div className="main__loader-container">
             <Preloader />
             <p className="main__status-text">Searching for news...</p>
@@ -36,14 +37,16 @@ function Main({
         <>
           {/* 2. Error Message handler */}
           {searchError && (
-            <section className="main__results-container main__results-container_status">
+            /* FIXED: Updated single underscore (_) to standard BEM double hyphens (--) for the status modifier */
+            <section className="main__results-container main__results-container--status">
               <p className="main__error-text">{searchError}</p>
             </section>
           )}
 
           {/* 3. Nothing Found handling */}
           {hasSearched && cards.length === 0 && !searchError && (
-            <section className="main__results-container main__results-container_status">
+            /* FIXED: Updated single underscore (_) to standard BEM double hyphens (--) for the status modifier */
+            <section className="main__results-container main__results-container--status">
               <div className="main__not-found-container">
                 <div className="main__not-found-icon" />
                 <h3 className="main__not-found-title">Nothing Found</h3>
