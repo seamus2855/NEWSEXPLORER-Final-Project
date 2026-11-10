@@ -16,7 +16,7 @@
   box-sizing: border-box;
 }
 
-/* FIXED: State modifier using standard BEM double-hyphen (--) notation */
+/* State modifier using standard BEM double-hyphen (--) notation */
 .main__results-container--status {
   align-items: center;
   justify-content: center;
@@ -40,19 +40,36 @@
   align-items: center;
   max-width: 395px;
   text-align: center;
-  box-sizing: border-box; /* Added to keep internal text bounds tight */
+  box-sizing: border-box;
 }
 
-/* Placeholder for the magnifying glass illustration from Figma */
+/* FIXED: Changed path to root-relative public asset path (/images/) to match your other search component rules */
 .main__not-found-icon {
   width: 96px;
   height: 96px;
-  /* FIXED: Added a second nesting step-out (../../) to accurately traverse into src/images/ */
-  background-image: url("../../images/not-found.svg");
+  background-image: url("/images/not-found.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   margin-bottom: 24px;
+}
+
+/* FIXED: Added clean CSS loading spinner animation rules for the circle preloader */
+.main__circle-loader {
+  width: 74px;
+  height: 74px;
+  border: 4px solid #E6E8EB;
+  border-top-color: #2F71E5;
+  border-radius: 50%;
+  margin-bottom: 24px;
+  animation: spinner 1s linear infinite;
+  box-sizing: border-box;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .main__not-found-title {
@@ -98,7 +115,7 @@
   line-height: 24px;
   color: #1a1b22;
   cursor: pointer;
-  margin-top: 32px; /* Fixed: Safely pushes button down below card grids without absolute overlaps */
+  margin-top: 32px;
   transition: background-color 0.2s ease-in-out;
   box-sizing: border-box;
 }
@@ -108,17 +125,15 @@
 }
 
 /* ==========================================================================
-   Responsive Adaptation Breakpoints (Tablet & Mobile)
+   📱 Responsive Adaptation Breakpoints (Tablet & Mobile)
    ========================================================================== */
 
 /* Tablet Screen Breakpoint */
 @media screen and (max-width: 1023px) {
-  /* FIX: Synced from 1024px to match project layout */
   .main__results-container {
     padding: 40px 40px 48px;
   }
 
-  /* FIXED: Synchronized matching double-hyphen breakpoint rule */
   .main__results-container--status {
     padding: 48px 40px;
   }
@@ -134,6 +149,12 @@
     line-height: 26px;
   }
 
+  .main__circle-loader {
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+  }
+
   .main__show-more-button {
     width: 240px;
     height: 56px;
@@ -143,12 +164,10 @@
 
 /* Mobile Screen Breakpoint */
 @media screen and (max-width: 767px) {
-  /* FIX: Synced from 640px to line up with news grid collapses */
   .main__results-container {
     padding: 32px 16px 40px;
   }
 
-  /* FIXED: Synchronized matching double-hyphen breakpoint rule */
   .main__results-container--status {
     padding: 50px 16px;
   }
@@ -159,6 +178,6 @@
 
   .main__show-more-button {
     width: 100%;
-    margin-top: 24px; /* Slightly condensed margin to pull card blocks closer together */
+    margin-top: 24px;
   }
 }

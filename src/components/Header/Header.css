@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 25; /* Increased z-index to stay above the navigation overlay (15) but below the button (30) */
   box-sizing: border-box;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   background-color: transparent;
@@ -62,5 +62,23 @@
   .header__logo {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  /* Handles the header visibility state when the mobile overlay drawer is active */
+  .header:has(.navigation--opened) {
+    border-bottom: none;
+    background-color: transparent;
+  }
+
+  /* If the menu opens on the main dark page, keep the logo white. 
+     If it opens on the light saved-news route, force the logo text to remain dark. */
+  .header--theme-light:has(.navigation--opened) .header__logo {
+    color: #1A1B22;
+    z-index: 30;
+  }
+  
+  .header:has(.navigation--opened) .header__logo {
+    color: #FFFFFF;
+    z-index: 30;
   }
 }

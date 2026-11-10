@@ -1,206 +1,46 @@
-/* ==========================================================================
-   📦 PARENT GRID CONTAINER (Add this to your parent HTML/JSX wrapper element)
-   ========================================================================== */
-.news-cards-grid {
-  display: grid;
-  /* FIXED: Changed from strict 3-columns to auto-fill to allow cards to wrap naturally */
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  gap: 16px;
-  width: 100%;
-  max-width: 1232px; 
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 0 16px;
-}
-
-/* ==========================================================================
-   🃏 CARD MAIN CONTAINER
-   ========================================================================== */
 .news-card {
-  background-color: #FFFFFF;
+  background: #FFFFFF;
   border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 100%;
-  box-sizing: border-box;
-  transition: box-shadow 0.2s ease;
+  height: 100%;
 }
 
-.news-card:hover {
-  box-shadow: 0px 8px 24px rgba(26, 27, 34, 0.1);
-}
-
-/* ==========================================================================
-   🔗 INTEGRATED CONTENT LINK WRAPPER (Fixed Flex Alignment)
-   ========================================================================== */
-.news-card__main-link {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  flex-grow: 1;
-  text-decoration: none;
-  color: inherit;
-  box-sizing: border-box;
-}
-
-/* ==========================================================================
-   🖼️ CARD IMAGE COMPONENT (Fixed Overflow and Aspect Scaling)
-   ========================================================================== */
+/* Image Container and Control */
 .news-card__image {
   width: 100%;
   height: 272px;
-  max-height: 272px; 
   object-fit: cover;
-  display: block; 
-  flex-shrink: 0; 
+  display: block;
 }
 
-/* ==========================================================================
-   🏷️ BADGES AND TOP ACTIONS LAYOUT (Absolute Floating Layer)
-   ========================================================================== */
-.news-card__top-container {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  pointer-events: none; 
-  z-index: 2; 
-}
-
-.news-card__keyword {
-  pointer-events: auto;
-  background-color: #FFFFFF;
-  border-radius: 10px;
-  padding: 8px 22px;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #1A1B22;
-  box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
-}
-
-.news-card__action-container {
-  pointer-events: auto;
-  display: flex;
-  flex-direction: row-reverse; 
-  align-items: center;
-  margin-left: auto;
-}
-
-/* ==========================================================================
-   💬 TOOLTIP MESSAGE ADJUSTMENTS
-   ========================================================================== */
-.news-card__tooltip {
-  background-color: #FFFFFF;
-  color: #1A1B22;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 14px;
-  padding: 12px 20px;
-  border-radius: 4px;
-  box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  white-space: nowrap;
-  margin-right: 4px; 
-}
-
-.news-card__action-container:has(.news-card__button:hover) .news-card__tooltip {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* ==========================================================================
-   🔘 ROUND ACTION BUTTONS (Bookmark & Trash)
-   ========================================================================== */
-.news-card__button {
-  width: 40px;
-  height: 40px;
-  background-color: #FFFFFF;
-  border: none;
-  border-radius: 8px; 
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
-  padding: 0;
-  flex-shrink: 0;
-  transition: opacity 0.2s ease, background-color 0.2s ease;
-}
-
-/* Bookmark Action States */
-.news-card__button--type-bookmark {
-  background-image: url('/images/card.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 14px 18px;
-}
-
-.news-card__button--type-bookmark:hover {
-  background-image: url('/images/card.svg');
-  background-color: #F5F6F7;
-  opacity: 0.8;
-}
-
-.news-card__button--type-bookmark-marked {
-  background-image: url('/images/card.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 14px 18px;
-  filter: invert(25%) sepia(95%) saturate(1900%) hue-rotate(195deg) brightness(90%) contrast(100%);
-}
-
-/* Trash Action States */
-.news-card__button--type-trash {
-  background-image: url('/images/logout-black.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 16px 16px;
-}
-
-.news-card__button--type-trash:hover {
-  background-image: url('/images/logout-black.svg');
-  background-color: #F5F6F7;
-  opacity: 0.7;
-}
-
-/* ==========================================================================
-   📝 CARD CONTENT DESCRIPTION AREA
-   ========================================================================== */
-.news-card__text-container {
+/* Content Area Control */
+.news-card__content {
   padding: 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  z-index: 1;
-  box-sizing: border-box;
 }
 
 .news-card__date {
-  font-family: 'Source Sans 3', Arial, sans-serif;
-  font-size: 18px;
+  font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
+  font-size: 18px;
   line-height: 24px;
   color: #B6BCBF;
-  margin: 0 0 12px 0;
+  margin: 0 0 12px;
 }
 
 .news-card__title {
-  font-family: 'Roboto Slab', serif;
-  font-size: 22px;
+  font-family: 'Roboto Slabs', serif;
   font-weight: 400;
-  line-height: 24px;
+  font-size: 26px;
+  line-height: 30px;
   color: #1A1B22;
-  margin: 0 0 16px 0;
+  margin: 0 0 16px;
+  /* Truncates text beautifully if titles run excessively long */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -208,12 +48,13 @@
 }
 
 .news-card__text {
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 16px;
+  font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
+  font-size: 16px;
   line-height: 22px;
   color: #1A1B22;
-  margin: 0 0 16px 0;
+  margin: 0 0 16px;
+  flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -221,63 +62,82 @@
 }
 
 .news-card__source {
-  font-family: 'Roboto Slab', serif;
-  font-size: 16px;
+  font-family: 'Roboto Slabs', serif;
   font-weight: 700;
+  font-size: 16px;
   line-height: 20px;
-  color: #B6BCBF;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-top: auto; 
+  color: #B6BCBF;
+  margin-top: auto;
 }
 
-/* ==========================================================================
-   📱 RESPONSIVE MEDIA QUERIES (Breakpoints)
-   ========================================================================== */
-@media screen and (max-width: 1023px) {
-  .news-cards-grid {
-    /* FIXED: Ensured auto-fill layout flows seamlessly on tablet displays */
-    grid-template-columns: repeat(auto-fill, minmax(224px, 1fr));
-    gap: 12px;
-  }
+/* Action Button Container placed over the image */
+.news-card__button-container {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
 
+.news-card__button {
+  width: 40px;
+  height: 40px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
+}
+
+.news-card__button:hover {
+  background: #E6E8EB;
+}
+
+/* Tooltip implementation for unauthenticated states */
+.news-card__tooltip {
+  background: #FFFFFF;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000000;
+  box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  white-space: nowrap;
+}
+
+.news-card__button-container:hover .news-card__tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media screen and (max-width: 768px) {
   .news-card__image {
     height: 150px;
-    max-height: 150px; 
   }
   
-  .news-card__text-container {
+  .news-card__content {
     padding: 16px;
   }
   
-  .news-card__date {
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 8px;
-  }
-  
   .news-card__title {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 24px;
-    margin-bottom: 10px;
   }
   
-  .news-card__text {
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 12px;
-    -webkit-line-clamp: 3;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .news-cards-grid {
-    grid-template-columns: 1fr; 
-    gap: 16px;
-  }
-
-  .news-card__image {
-    height: 196px;
-    max-height: 196px; 
+  .news-card__button-container {
+    top: 8px;
+    right: 8px;
   }
 }

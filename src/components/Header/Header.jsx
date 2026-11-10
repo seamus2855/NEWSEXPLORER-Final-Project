@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom"; // Added useLocation for automatic route checking
+import { Link, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import "./Header.css";
 
@@ -15,7 +15,7 @@ function Header({
   const theme = isSavedNewsRoute ? "light" : "dark";
   const isLight = theme === "light";
   
-  /* FIXED: Kept clean strict BEM double-hyphen (--) modifier conventions */
+  /* FIXED: Clean structural BEM string concat evaluation pattern */
   const headerModifier = isLight ? " header--theme-light" : "";
   const logoModifier = isLight ? " header__logo--theme-light" : "";
 

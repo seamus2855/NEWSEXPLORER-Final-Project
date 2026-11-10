@@ -83,9 +83,9 @@
   color: #B6BCBF; 
 } 
 
-/* FIXED: Added clean double-hyphen modifier layout rules for error context indicators */
+/* FIXED: Replaced border-bottom-color modifier with complete explicit fallback border rules */
 .search-form__input--type-error {
-  border-bottom-color: #FF1A1A;
+  border: 1px solid #FF1A1A !important;
 }
 
 .search-form__button { 
@@ -149,7 +149,6 @@
     margin-bottom: 32px; 
   } 
   
-  /* Sync structural widths across form hierarchy levels to maintain visual balance */ 
   .search-form { 
     max-width: 436px; 
   } 
@@ -171,7 +170,7 @@
 @media screen and (max-width: 767px) { 
   .search-form__container { 
     padding: 86px 16px 32px; 
-    align-items: flex-start; /* Shifts layout cards leftward to match text-align: left */
+    align-items: flex-start; 
   } 
   
   .search-form__title { 
@@ -192,8 +191,8 @@
   
   .search-form { 
     max-width: 100%; 
-    display: flex;          /* Enabled flexbox so order property functions on the error element */
-    flex-direction: column; /* Stacks form components sequentially downwards */
+    display: flex;          
+    flex-direction: column; 
     gap: 8px; 
   } 
   
@@ -203,8 +202,8 @@
     background-color: transparent; 
     border: none; 
     border-radius: 0; 
-    gap: 8px; /* Restructured stacking separation space */ 
-    order: 0; /* Forces input container layout above the error element */
+    gap: 8px; 
+    order: 0; 
   } 
   
   .search-form__input { 
@@ -217,20 +216,23 @@
     width: 100%; 
   } 
   
+  /* FIXED: Added inset reset values (top/right/bottom) to normalize the document layout stream */
   .search-form__button { 
-    position: static; /* Drops absolute framing to span naturally below input on narrow screens */ 
+    position: static; 
+    top: auto;
+    right: auto;
+    bottom: auto;
     width: 100%; 
     padding: 16px 0; 
     font-size: 18px; 
     line-height: 24px; 
     box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2); 
-    order: 2; /* Explicitly forces button underneath the validation error message */
+    order: 2; 
   } 
   
-  /* Safely outputs error into normal block document flow to prevent layout overlapping on text objects */ 
   .search-form__error { 
     position: static; 
     margin: 4px 0 0 24px; 
-    order: 1; /* Places the error message cleanly between the input container and submit button element */ 
+    order: 1; 
   } 
 }

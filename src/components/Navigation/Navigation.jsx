@@ -5,6 +5,10 @@ import "./Navigation.css";
 // IMPORTED ASSETS: Resolves absolute string 404 pathing for Vite bundler structures
 import logoutBlack from "../../images/logout-black.svg";
 import logoutWhite from "../../images/logout-white.svg";
+import menuWhite from "../../images/menu-white.svg";
+import menuBlack from "../../images/menu-black.svg";
+import closeWhite from "../../images/close-white.svg";
+import closeBlack from "../../images/close-black.svg";
 
 function Navigation({
   isLoggedIn,
@@ -24,6 +28,14 @@ function Navigation({
   const menuBtnCloseMod = isMobileMenuOpen ? " navigation__menu-btn--close" : "";
   const linkThemeMod = isSavedNews ? " navigation__link--theme-light" : "";
   const btnThemeMod = isSavedNews ? " navigation__btn--theme-light" : "";
+
+  // Dynamic asset rendering logic for the menu / close icon button
+  const getMenuIcon = () => {
+    if (isMobileMenuOpen) {
+      return isSavedNews ? closeBlack : closeWhite;
+    }
+    return isSavedNews ? menuBlack : menuWhite;
+  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -48,6 +60,7 @@ function Navigation({
       <button
         type="button"
         className={`navigation__menu-btn${menuBtnThemeMod}${menuBtnCloseMod}`}
+        style={{ backgroundImage: `url(${getMenuIcon()})` }}
         onClick={toggleMobileMenu}
         aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
       />

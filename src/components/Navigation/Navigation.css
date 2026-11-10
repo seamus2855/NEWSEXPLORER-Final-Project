@@ -143,18 +143,12 @@
     width: 24px; 
     height: 24px; 
     border: none; 
-    /* FIXED: Adjusted directory mapping paths relative to the src/images resource layout folder context */
-    background: transparent url('../../images/menu-white.svg') center / contain no-repeat; 
+    background-color: transparent;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     cursor: pointer; 
     z-index: 30; 
-  } 
-
-  .navigation__menu-btn--theme-light { 
-    background-image: url('../../images/menu-black.svg'); 
-  } 
-
-  .navigation__menu-btn--close { 
-    background-image: url('../../images/close-white.svg'); 
   } 
 
   .navigation__overlay { 
@@ -186,6 +180,20 @@
     align-items: flex-start; 
     z-index: 20; 
   } 
+
+  /* Light theme variations for mobile drawer setup when running /saved-news */
+  .navigation--theme-light.navigation--opened {
+    background-color: #ffffff;
+  }
+  
+  .navigation--theme-light.navigation--opened .navigation__link {
+    color: #1a1b22;
+  }
+
+  .navigation--theme-light.navigation--opened .navigation__btn {
+    color: #1a1b22;
+    border-color: #1a1b22;
+  }
   
   .navigation__item { 
     width: 100%; 
