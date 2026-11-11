@@ -24,7 +24,7 @@ An interactive, responsive single-page news aggregation search engine applicatio
 
 Follow these instructions to run the application workspace inside your local development environment:
 
-1. **Clone the project repository branch:**
+1. **Clone the project repository:**
 
    ```bash
    git clone https://github.com
@@ -52,6 +52,7 @@ Follow these instructions to run the application workspace inside your local dev
    _Open the printed local network loopback address (typically `http://localhost:5173`) inside your browser window._
 
 5. **Compile a production build manually:**
+
    ```bash
    npm run build
    ```
