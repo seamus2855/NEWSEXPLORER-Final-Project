@@ -1,40 +1,63 @@
-/* NewsCardList.css */
+.news-cards {
+  padding: 48px 0 0;
+  margin: 0 auto;
+  max-width: 1440px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-/* Clean layout grid specifically targeting the <ul> container */
-.news-card-list {
+.news-cards__title {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1A1B22;
+  margin: 0 0 32px;
+}
+
+.news-cards__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
   gap: 16px;
-  width: 100%;
-  list-style: none; /* Removes bullet points from standard <ul> elements */
-  padding: 0;      /* Clears default browser indentations */
-  margin: 0 auto 64px; /* Centers the list block smoothly */
-  max-width: 1440px;
-}
-
-/* Individual list item wrapper settings */
-.news-card-list__item {
-  display: flex;
-  width: 100%;
 }
 
 /* ==========================================================================
-   Responsive Adaptation Guidelines (Breakpoints)
+   📱 Responsive Framework Breakpoints (Tablet Layout)
    ========================================================================== */
-
-/* Tablet Viewports */
-@media screen and (max-width: 1024px) {
-  .news-card-list {
-    gap: 8px;
-    margin-bottom: 32px;
+@media screen and (max-width: 1023px) {
+  .news-cards {
+    padding: 40px 40px 0;
   }
 }
 
-/* Mobile Viewports */
-@media screen and (max-width: 620px) {
-  .news-card-list {
-    grid-template-columns: 1fr; /* Stacks the cards vertically into a single column layout */
+/* ==========================================================================
+   📱 Responsive Framework Breakpoints (Mobile Layouts)
+   ========================================================================== */
+@media screen and (max-width: 767px) {
+  .news-cards {
+    padding: 32px 0 0;
+  }
+  
+  .news-cards__title {
+    font-size: 30px;
+    line-height: 36px;
+    margin-bottom: 24px;
+    padding-left: 16px;
+  }
+  
+  .news-cards__list {
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    padding: 0 16px;
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .news-cards__list {
+    grid-template-columns: 1fr;
     gap: 16px;
-    margin-bottom: 16px;
   }
 }

@@ -1,0 +1,133 @@
+.about-author {
+  background-color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.about-author__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 56px;
+  max-width: 1232px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  box-sizing: border-box;
+}
+
+.about-author__image-wrapper {
+  width: 464px;
+  height: 464px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.about-author__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-author__bio-content {
+  display: flex;
+  flex-direction: column;
+  color: #1a1b22;
+  max-width: 600px;
+}
+
+.about-author__title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 46px;
+  margin: 0 0 24px;
+}
+
+.about-author__name {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0 0 16px;
+}
+
+.about-author__description {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #4d4f54;
+  margin: 0 0 24px;
+  word-break: break-word;
+}
+
+.about-author__links {
+  display: flex;
+}
+
+.about-author__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 24px;
+  background-color: #ffffff;
+  border: 1px solid #1a1b22;
+  border-radius: 80px;
+  color: #1a1b22;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.about-author__btn:hover {
+  background-color: #1a1b22;
+  color: #ffffff;
+  border-color: #1a1b22;
+}
+
+/* Tablet Layout Breakpoint */
+@media screen and (max-width: 1023px) {
+  .about-author__container {
+    gap: 32px;
+    padding: 40px 24px;
+  }
+
+  .about-author__image-wrapper {
+    width: 272px;
+    height: 272px;
+  }
+
+  .about-author__title {
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
+}
+
+/* Mobile Layout Breakpoint */
+@media screen and (max-width: 767px) {
+  .about-author__container {
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 16px;
+    text-align: left;
+  }
+
+  .about-author__image-wrapper {
+    margin: 0 auto;
+  }
+}
+
+/* Mobile Small Optimization */
+@media screen and (max-width: 400px) {
+  .about-author__btn {
+    width: 100%;
+  }
+}

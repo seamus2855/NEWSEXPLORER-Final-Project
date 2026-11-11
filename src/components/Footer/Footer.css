@@ -1,14 +1,13 @@
-/* Footer.css */
-
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1440px;
+  max-width: 1232px;
   width: 100%;
   margin: 0 auto;
-  padding: 32px 104px;
-  background-color: #FFFFFF;
+  padding: 32px 16px;
+  background-color: #ffffff;
+  box-sizing: border-box;
 }
 
 .footer__copyright {
@@ -16,7 +15,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: #B6BCBF;
+  color: #b6bcbf;
   margin: 0;
 }
 
@@ -26,8 +25,8 @@
   gap: 42px;
 }
 
-.footer__links,
-.footer__social-icons {
+.footer__links, 
+.footer__social {
   display: flex;
   align-items: center;
   list-style: none;
@@ -39,8 +38,13 @@
   gap: 40px;
 }
 
-.footer__social-icons {
+.footer__social {
   gap: 27px;
+}
+
+.footer__item {
+  display: flex;
+  align-items: center;
 }
 
 .footer__link {
@@ -48,31 +52,28 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: #1A1B22;
-}
-
-.footer__icon-link {
+  color: #1a1b22;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.2s ease-in-out;
 }
 
-.footer__social-icon {
+.footer__link:hover {
+  opacity: 0.6;
+}
+
+.footer__icon {
   width: 24px;
   height: 24px;
   object-fit: contain;
 }
 
-/* Base interactive transitions */
-.footer__link:hover, 
-.footer__icon-link:hover {
-  opacity: 0.6;
-}
-
 /* Tablet Layout Breakpoint */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   .footer {
-    padding: 32px 40px;
+    padding: 32px 24px;
   }
 
   .footer__navigation {
@@ -84,13 +85,19 @@
   }
 }
 
-/* Mobile Component Responsive Flow */
-@media screen and (max-width: 600px) {
+/* Mobile Layout Breakpoint */
+@media screen and (max-width: 767px) {
   .footer {
     flex-direction: column-reverse;
     align-items: flex-start;
     padding: 20px 16px 38px;
     gap: 40px;
+  }
+
+  .footer__copyright {
+    text-align: left;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   .footer__navigation {
@@ -106,12 +113,12 @@
     gap: 32px;
   }
 
-  .footer__social-icons {
-    gap: 42px;
+  .footer__link {
+    font-size: 18px;
+    line-height: 24px;
   }
 
-  .footer__copyright {
-    font-size: 16px;
-    line-height: 22px;
+  .footer__social {
+    gap: 27px;
   }
 }

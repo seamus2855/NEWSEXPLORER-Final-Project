@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import { HasAuthContext } from "./HasAuthContext.js";
+
+/* 
+   FIXED: Swapped missing custom utility back to your existing utility file.
+   All user management hooks (login, logout, checkToken) are processed here cleanly.
+*/
 import * as auth from "../utils/NewsApi.js";
 
 export function AuthProvider({ children }) {
