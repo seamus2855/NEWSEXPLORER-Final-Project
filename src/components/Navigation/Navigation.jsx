@@ -2,13 +2,12 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./Navigation.css";
 
-// IMPORTED ASSETS: Resolves absolute string 404 pathing for Vite bundler structures
+// IMPORTED ASSETS: Matched strictly to your updated src/images folder contents
 import logoutBlack from "../../images/logout-black.svg";
 import logoutWhite from "../../images/logout-white.svg";
-import menuWhite from "../../images/menu-white.svg";
-import menuBlack from "../../images/menu-black.svg";
+import burgerIcon from "../../images/burger.svg"; 
 import closeWhite from "../../images/close-white.svg";
-import closeBlack from "../../images/close-black.svg";
+import closeBlack from "../../images/close.svg"; // Pointing to your newly added close.svg
 
 function Navigation({
   isLoggedIn,
@@ -34,7 +33,7 @@ function Navigation({
     if (isMobileMenuOpen) {
       return isSavedNews ? closeBlack : closeWhite;
     }
-    return isSavedNews ? menuBlack : menuWhite;
+    return burgerIcon;
   };
 
   const toggleMobileMenu = () => {
@@ -64,24 +63,20 @@ function Navigation({
         onClick={toggleMobileMenu}
         aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
       />
-
+      
       {isMobileMenuOpen && (
-        <div
-          className="navigation__overlay"
-          onClick={closeMobileMenu}
-          aria-hidden="true"
-        />
+        <div className="navigation__overlay" onClick={closeMobileMenu} aria-hidden="true" />
       )}
 
       <nav className={`navigation${navThemeMod}${navMobileMod}`}>
         <NavLink
           to="/"
           onClick={closeMobileMenu}
-          className={({ isActive }) =>
-            `navigation__link${linkThemeMod}${isActive ? " navigation__link--active" : ""}${
-              isActive && isSavedNews ? " navigation__link--active-light" : ""
-            }`
-          }
+          className={({ isActive }) => {
+            const activeMod = isActive ? " navigation__link--active" : "";
+            const activeLightMod = (isActive && isSavedNews) ? " navigation__link--active-light" : "";
+            return `navigation__link${linkThemeMod}${activeMod}${activeLightMod}`;
+          }}
         >
           Home
         </NavLink>
@@ -91,15 +86,15 @@ function Navigation({
             <NavLink
               to="/saved-news"
               onClick={closeMobileMenu}
-              className={({ isActive }) =>
-                `navigation__link${linkThemeMod}${isActive ? " navigation__link--active" : ""}${
-                  isActive && isSavedNews ? " navigation__link--active-light" : ""
-                }`
-              }
+              className={({ isActive }) => {
+                const activeMod = isActive ? " navigation__link--active" : "";
+                const activeLightMod = (isActive && isSavedNews) ? " navigation__link--active-light" : "";
+                return `navigation__link${linkThemeMod}${activeMod}${activeLightMod}`;
+              }}
             >
               Saved articles
             </NavLink>
-
+            
             <button
               type="button"
               className={`navigation__btn navigation__logout-btn${btnThemeMod}`}

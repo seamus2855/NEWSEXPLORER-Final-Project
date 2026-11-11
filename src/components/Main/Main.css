@@ -43,11 +43,11 @@
   box-sizing: border-box;
 }
 
-/* FIXED: Changed path to root-relative public asset path (/images/) to match your other search component rules */
+/* FIXED: Changed to source relative path targeting your actual file name inside src/images */
 .main__not-found-icon {
   width: 96px;
   height: 96px;
-  background-image: url("/images/not-found.svg");
+  background-image: url("../../images/not-found_v1.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

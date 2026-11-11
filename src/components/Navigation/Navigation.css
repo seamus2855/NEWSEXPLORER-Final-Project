@@ -1,5 +1,5 @@
 /* ==========================================================================
-   📦 BLOCK: navigation (Desktop Grid)
+   BLOCK: navigation (Desktop Grid)
    ========================================================================== */
 .navigation { 
   display: flex; 
@@ -110,7 +110,7 @@
 }
 
 /* ==========================================================================
-   📱 Responsive Framework (Tablet Landscape Layout)
+   Responsive Framework (Tablet Landscape Layout)
    ========================================================================== */
 @media screen and (max-width: 1023px) { 
   .navigation { 
@@ -135,7 +135,7 @@
 } 
 
 /* ==========================================================================
-   📱 Responsive Framework (Mobile Drawer <= 767px)
+   Responsive Framework (Mobile Drawer <= 767px)
    ========================================================================== */
 @media screen and (max-width: 767px) { 
   .navigation__menu-btn { 
@@ -144,12 +144,21 @@
     height: 24px; 
     border: none; 
     background-color: transparent;
+    background-image: url('../../images/menu-white.svg');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     cursor: pointer; 
     z-index: 30; 
   } 
+
+  .navigation__menu-btn--theme-light {
+    background-image: url('../../images/menu-black.svg');
+  }
+
+  .navigation__menu-btn--opened {
+    background-image: url('../../images/close.svg');
+  }
 
   .navigation__overlay { 
     position: fixed; 
