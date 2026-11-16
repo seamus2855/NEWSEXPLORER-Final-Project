@@ -28,16 +28,19 @@
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   padding: 34px 36px 28px;
   position: relative;
-  width: min(430px, calc(100% - 32px)); /* FIX: Keeps container layout from clipping screen borders on small viewports */
+  width: min(
+    430px,
+    calc(100% - 32px)
+  ); /* FIX: Keeps container layout from clipping screen borders on small viewports */
   box-sizing: border-box;
 }
 
 .popup__close-button {
   position: absolute;
   top: -36px;
-  right: -36px; 
+  right: -36px;
   /* FIX: Merged your custom asset pathway rule securely into the template */
-  background: transparent url('/images/logout-black.svg') no-repeat center; 
+  background: transparent url("../../images/close-white.svg") no-repeat center;
   background-size: contain;
   border: none;
   width: 24px;
@@ -95,7 +98,7 @@
   background-color: #2f71e5; /* FIX: Brand active baseline color */
   border-radius: 100px;
   border: none;
-  color: #ffffff; 
+  color: #ffffff;
   font-family: "Roboto", Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -107,12 +110,12 @@
 }
 
 .popup__submit-button:hover:not(:disabled) {
-  background-color: #2a65cc; 
+  background-color: #2a65cc;
 }
 
 /* FIX: Mutes components smoothly only when inputs are invalid */
 .popup__submit-button:disabled {
-  background-color: #e6e6e6; 
+  background-color: #e6e6e6;
   color: #a0a0a0;
   cursor: not-allowed;
 }
@@ -156,15 +159,15 @@
     max-width: 100%;
     border-radius: 0;
     padding: 56px 16px 24px;
-    display: flex;          
+    display: flex;
     flex-direction: column;
     box-sizing: border-box;
   }
-  
+
   .popup__form {
-    flex-grow: 1; 
+    flex-grow: 1;
   }
-  
+
   .popup__redirect {
     margin-top: auto; /* FIX: Neatly pins dynamic navigation alternative choices to the screen base */
     padding-top: 16px;

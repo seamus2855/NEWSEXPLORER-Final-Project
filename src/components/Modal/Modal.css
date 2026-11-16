@@ -35,7 +35,7 @@
   right: -40px; 
   width: 24px;
   height: 24px;
-  background: url("../../images/close-button.svg") center no-repeat; /* Updated to match your svg asset pathing setup */
+  background: url("../../images/close-white.svg") center no-repeat; /* Updated to match your svg asset pathing setup */
   background-size: contain;
   border: none; 
   cursor: pointer; 
@@ -76,7 +76,7 @@
     top: 16px; 
     right: 16px; 
     /* Updates asset reference path to dark-themed close icon vector for optimal white background contrast */
-    background-image: url("../../images/close-button-dark.svg"); 
+    background-image: url("../../images/close.svg");
     width: 24px;
     height: 24px;
   } 

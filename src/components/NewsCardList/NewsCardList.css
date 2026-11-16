@@ -1,63 +1,62 @@
 .news-cards {
-  padding: 48px 0 0;
-  margin: 0 auto;
-  max-width: 1440px;
   width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 104px;
   box-sizing: border-box;
+  background-color: #f5f6f7;
 }
 
 .news-cards__title {
-  font-family: 'Roboto Slab', serif;
+  margin: 0 0 64px;
+  font-family: "Roboto Slab", serif;
   font-weight: 400;
   font-size: 40px;
   line-height: 46px;
-  color: #1A1B22;
-  margin: 0 0 32px;
+  color: #1a1b22;
 }
 
 .news-cards__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* ==========================================================================
-   📱 Responsive Framework Breakpoints (Tablet Layout)
-   ========================================================================== */
+/* Tablet Layout (768px – 1023px) */
 @media screen and (max-width: 1023px) {
   .news-cards {
-    padding: 40px 40px 0;
+    padding: 40px;
   }
-}
 
-/* ==========================================================================
-   📱 Responsive Framework Breakpoints (Mobile Layouts)
-   ========================================================================== */
-@media screen and (max-width: 767px) {
-  .news-cards {
-    padding: 32px 0 0;
-  }
-  
   .news-cards__title {
+    margin-bottom: 32px;
     font-size: 30px;
-    line-height: 36px;
-    margin-bottom: 24px;
-    padding-left: 16px;
+    line-height: 34px;
   }
-  
+
   .news-cards__list {
-    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
-    padding: 0 16px;
     gap: 8px;
   }
 }
 
-@media screen and (max-width: 520px) {
+/* Mobile Layout (< 768px) */
+@media screen and (max-width: 767px) {
+  .news-cards {
+    padding: 32px 16px 24px;
+  }
+
+  .news-cards__title {
+    margin-bottom: 58px;
+    font-size: 30px;
+    line-height: 34px;
+  }
+
   .news-cards__list {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
   }
 }

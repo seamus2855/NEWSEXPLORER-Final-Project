@@ -41,7 +41,7 @@ body {
 .page__hero-search {
   /* FIXED: Added a charcoal color fallback to seamlessly transition with the overlay edge colors */
   background-color: #1A1B22;
-  background-image: url('../images/Overlay.svg');
+  background-image: url('../../images/Overlay.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

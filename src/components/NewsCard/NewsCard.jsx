@@ -1,3 +1,4 @@
+import "./NewsCard.css";
 import notFoundImage from "../../images/not-found.svg";
 
 function NewsCard({
@@ -11,17 +12,26 @@ function NewsCard({
   const title = card.title || "Untitled Article";
   const text = card.description || "No preview description available.";
   const date = card.publishedAt;
-  const source = card.source?.name || "Unknown Source";
+  const source =
+    typeof card.source === "string"
+      ? card.source
+      : card.source?.name || "Unknown Source";
 
   const image = card.urlToImage || card.image || notFoundImage;
-  const link = card.url || card.link;
-  const isSaved = card.isSaved || false;
+  const link = card.url || card.link || undefined;
+  const isSaved = Boolean(card.isSaved);
   const keyword = card.keyword || "";
 
   const formatDate = (dateString) => {
     if (!dateString) return "";
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString("en-US", options);
+    const parsedDate = new Date(dateString);
+    if (Number.isNaN(parsedDate.getTime())) return "";
+
+    return parsedDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   };
 
   const handleActionButtonClick = (e) => {
@@ -41,11 +51,9 @@ function NewsCard({
     onBookmarkClick(card);
   };
 
-  // FIXED: Moved the error fallback handling to a separate handler function. 
-  // This isolates the reference string so Vite can resolve the bundle cleanly.
   const handleImageError = (e) => {
-    e.target.onerror = null; 
-    e.target.src = notFoundImage;
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = notFoundImage;
   };
 
   return (
@@ -53,15 +61,17 @@ function NewsCard({
       <a
         href={link}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         className="news-card__main-link"
       >
-        <img
-          src={image}
-          alt={title}
-          className="news-card__image"
-          onError={handleImageError}
-        />
+        <div className="news-card__image-container">
+          <img
+            src={image}
+            alt={title}
+            className="news-card__image"
+            onError={handleImageError}
+          />
+        </div>
 
         <div className="news-card__text-container">
           <p className="news-card__date">{formatDate(date)}</p>

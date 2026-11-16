@@ -1,140 +1,4 @@
 /* ==========================================================================
-   BLOCK: navigation (Desktop Grid)
-   ========================================================================== */
-.navigation { 
-  display: flex; 
-  align-items: center; 
-  list-style: none; 
-  padding: 0; 
-  margin: 0; 
-  gap: 32px; 
-  height: 100%;
-} 
-
-.navigation__item { 
-  display: flex; 
-  align-items: center; 
-  height: 100%;
-} 
-
-.navigation__link { 
-  display: flex;
-  align-items: center;
-  height: 100%;
-  font-family: 'Roboto', Arial, sans-serif; 
-  font-size: 18px; 
-  font-weight: 500; 
-  line-height: 24px; 
-  text-decoration: none; 
-  color: #ffffff; 
-  padding: 0 10px; 
-  border-bottom: 3px solid transparent; 
-  box-sizing: border-box;
-  transition: border-bottom-color 0.2s ease, opacity 0.2s ease; 
-} 
-
-.navigation__link:hover { 
-  opacity: 0.8; 
-} 
-
-.navigation__link--active { 
-  border-bottom-color: #ffffff; 
-} 
-
-.navigation__link--theme-light { 
-  color: #1a1b22; 
-} 
-
-.navigation__link--active-light { 
-  border-bottom-color: #1a1b22; 
-} 
-
-/* ==========================================================================
-   Elements: Header Action Controls (Sign In / Logout)
-   ========================================================================== */
-.navigation__btn { 
-  font-family: 'Roboto', Arial, sans-serif; 
-  font-size: 18px; 
-  font-weight: 500; 
-  line-height: 24px; 
-  background-color: transparent; 
-  color: #ffffff; 
-  border: 1px solid #ffffff; 
-  border-radius: 100px; 
-  padding: 0 18px; 
-  height: 48px;
-  cursor: pointer; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  gap: 12px; 
-  box-sizing: border-box; 
-  white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease; 
-} 
-
-.navigation__btn:hover { 
-  opacity: 0.8; 
-} 
-
-.navigation__signin-btn {
-  min-width: 152px;
-  padding: 0 20px;
-}
-
-.navigation__logout-btn {
-  min-width: 112px;
-}
-
-.navigation__btn--theme-light { 
-  color: #1a1b22; 
-  border-color: #1a1b22; 
-} 
-
-.navigation__user-name {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  color: inherit;
-}
-
-.navigation__logout-icon { 
-  width: 24px; 
-  height: 24px; 
-  object-fit: contain;
-  vertical-align: middle; 
-} 
-
-.navigation__menu-btn {
-  display: none;
-}
-
-/* ==========================================================================
-   Responsive Framework (Tablet Landscape Layout)
-   ========================================================================== */
-@media screen and (max-width: 1023px) { 
-  .navigation { 
-    gap: 16px; 
-  } 
-  
-  .navigation__link { 
-    font-size: 16px; 
-    padding: 0 6px;
-  } 
-  
-  .navigation__btn { 
-    font-size: 16px; 
-    height: 40px;
-    padding: 0 14px; 
-  } 
-
-  .navigation__logout-icon { 
-    width: 20px; 
-    height: 20px; 
-  } 
-} 
-
-/* ==========================================================================
    Responsive Framework (Mobile Drawer <= 767px)
    ========================================================================== */
 @media screen and (max-width: 767px) { 
@@ -142,22 +6,19 @@
     display: block; 
     width: 24px; 
     height: 24px; 
+    padding: 0;
     border: none; 
     background-color: transparent;
-    background-image: url('../../images/menu-white.svg');
     background-position: center;
-    background-size: contain;
+    background-size: 24px 24px;
     background-repeat: no-repeat;
     cursor: pointer; 
     z-index: 30; 
   } 
 
-  .navigation__menu-btn--theme-light {
-    background-image: url('../../images/menu-black.svg');
-  }
-
-  .navigation__menu-btn--opened {
-    background-image: url('../../images/close.svg');
+  /* Invert dark burger.svg to white on the dark home header */
+  .navigation__menu-btn:not(.navigation__menu-btn--theme-light):not(.navigation__menu-btn--close) {
+    filter: invert(1);
   }
 
   .navigation__overlay { 
@@ -182,7 +43,7 @@
     left: 0; 
     width: 100%; 
     height: auto; 
-    background-color: #202222; 
+    background-color: #1a1b22; 
     padding: 72px 16px 24px; 
     box-sizing: border-box; 
     gap: 22px; 
@@ -190,7 +51,7 @@
     z-index: 20; 
   } 
 
-  /* Light theme variations for mobile drawer setup when running /saved-news */
+  /* Light theme variations for mobile drawer on /saved-news */
   .navigation--theme-light.navigation--opened {
     background-color: #ffffff;
   }
@@ -202,6 +63,11 @@
   .navigation--theme-light.navigation--opened .navigation__btn {
     color: #1a1b22;
     border-color: #1a1b22;
+  }
+
+  /* Keep logout icon visible inside the white mobile drawer */
+  .navigation--theme-light.navigation--opened .navigation__logout-icon {
+    filter: invert(1);
   }
   
   .navigation__item { 
