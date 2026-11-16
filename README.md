@@ -31,6 +31,7 @@ Follow these instructions to run the application workspace inside your local dev
    cd NEWSEXPLORER-Final-Project
    ```
 
+
 2. **Install the node module packages:**
 
    ```bash
