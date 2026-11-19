@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useFormAndValidation } from "../../hooks/useFormAndValidation"; // FIXED: Case-sensitivity
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import "./RegisterModal.css";
 
 function RegisterModal({
@@ -13,17 +13,35 @@ function RegisterModal({
   onSignInLinkClick,
   isLoading,
 }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormAndValidation();
 
+  // Reset inputs when modal opens
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !isRegistrationSuccess) {
       resetForm({ email: "", password: "", username: "" });
     }
-  }, [isOpen, resetForm]);
+  }, [isOpen, isRegistrationSuccess, resetForm]);
+
+  // Close success modal on Escape key press
+  useEffect(() => {
+    if (!isRegistrationSuccess) return;
+
+    const handleEscapeClose = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeClose);
+    };
+  }, [isRegistrationSuccess, onClose]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid && !isLoading) { // FIXED: Stop multiple duplicate submissions
+    if (isValid && typeof onRegister === "function") {
       onRegister({
         email: values.email,
         password: values.password,
@@ -32,29 +50,35 @@ function RegisterModal({
     }
   };
 
+  const handleSuccessOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   // High-Fidelity Success Modal View Context
   if (isRegistrationSuccess) {
     return (
-      <div 
-        className="modal modal_opened" 
-        role="dialog" 
-        aria-modal="true" 
+      <div
+        className="modal modal--opened"
+        onClick={handleSuccessOverlayClick}
+        role="dialog"
+        aria-modal="true"
         aria-labelledby="success-title"
-        onClick={(e) => e.target.classList.contains("modal") && onClose()} // FIXED: Close on overlay backdrop click
       >
-        <div className="modal__container register-modal__success-card">
-          <button 
-            type="button" 
-            className="modal__close-button" 
-            onClick={onClose} 
-            aria-label="Close success overlay" 
+        <div className="modal__container modal__container--success">
+          <button
+            type="button"
+            className="modal__close-button"
+            onClick={onClose}
+            aria-label="Close success overlay"
           />
-          <h2 id="success-title" className="register-modal__success-title">
+          <h2 id="success-title" className="modal__title modal__title--success">
             Registration successfully completed!
           </h2>
-          <button 
-            type="button" 
-            className="register-modal__link" 
+          <button
+            type="button"
+            className="modal__link"
             onClick={onSignInLinkClick}
           >
             Sign in
@@ -72,29 +96,30 @@ function RegisterModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Signing up..." : "Sign up"}
-      isButtonDisabled={!isValid || isLoading} // FIXED: Contract alignment to block interactions
-      redirectText="Sign in" // FIXED: Passed parameters to align with standard project modal naming patterns
-      onRedirectClick={handleAltClick} // FIXED: Passed parameters to align with standard project modal naming patterns
+      redirectText="Sign in"
+      onRedirectClick={handleAltClick}
+      isButtonDisabled={!isValid}
     >
       {/* Email input field */}
       <div className="modal__label-container">
-        <label className="modal__label" htmlFor="register-email">Email</label>
+        <label className="modal__label" htmlFor="register-email">
+          Email
+        </label>
         <input
           id="register-email"
           type="email"
           name="email"
-          className={`modal__input ${errors.email ? "modal__input_type_error" : ""}`}
+          className={`modal__input ${errors.email ? "modal__input--type-error" : ""}`}
           placeholder="Enter email"
           required
           value={values.email || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "register-email-error" : undefined}
         />
-        <span 
-          id="register-email-error" 
-          className={`modal__error-message ${errors.email ? "modal__error-message_visible" : ""}`}
+        <span
+          id="register-email-error"
+          className={`modal__error-message ${errors.email ? "modal__error-message--visible" : ""}`}
         >
           {errors.email}
         </span>
@@ -102,24 +127,27 @@ function RegisterModal({
 
       {/* Password input field */}
       <div className="modal__label-container">
-        <label className="modal__label" htmlFor="register-password">Password</label>
+        <label className="modal__label" htmlFor="register-password">
+          Password
+        </label>
         <input
           id="register-password"
           type="password"
           name="password"
-          className={`modal__input ${errors.password ? "modal__input_type_error" : ""}`}
+          className={`modal__input ${errors.password ? "modal__input--type-error" : ""}`}
           placeholder="Enter password"
           required
           minLength="4"
           value={values.password || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.password}
-          aria-describedby={errors.password ? "register-password-error" : undefined}
+          aria-describedby={
+            errors.password ? "register-password-error" : undefined
+          }
         />
-        <span 
-          id="register-password-error" 
-          className={`modal__error-message ${errors.password ? "modal__error-message_visible" : ""}`}
+        <span
+          id="register-password-error"
+          className={`modal__error-message ${errors.password ? "modal__error-message--visible" : ""}`}
         >
           {errors.password}
         </span>
@@ -127,25 +155,28 @@ function RegisterModal({
 
       {/* Username input field */}
       <div className="modal__label-container">
-        <label className="modal__label" htmlFor="register-username">Username</label>
+        <label className="modal__label" htmlFor="register-username">
+          Username
+        </label>
         <input
           id="register-username"
           type="text"
           name="username"
-          className={`modal__input ${errors.username ? "modal__input_type_error" : ""}`}
+          className={`modal__input ${errors.username ? "modal__input--type-error" : ""}`}
           placeholder="Enter your username"
           required
           minLength="2"
           maxLength="30"
           value={values.username || ""}
           onChange={handleChange}
-          disabled={isLoading} // FIXED: Prevent modifications during active processing loops
           aria-invalid={!!errors.username}
-          aria-describedby={errors.username ? "register-username-error" : undefined}
+          aria-describedby={
+            errors.username ? "register-username-error" : undefined
+          }
         />
-        <span 
-          id="register-username-error" 
-          className={`modal__error-message ${errors.username ? "modal__error-message_visible" : ""}`}
+        <span
+          id="register-username-error"
+          className={`modal__error-message ${errors.username ? "modal__error-message--visible" : ""}`}
         >
           {errors.username}
         </span>
@@ -153,7 +184,12 @@ function RegisterModal({
 
       {/* Shared Server Fallback Exception Messaging */}
       {serverError && (
-        <span className="register-modal__form-error" role="alert">{serverError}</span>
+        <span
+          className="modal__error-message modal__error-message--server"
+          role="alert"
+        >
+          {serverError}
+        </span>
       )}
     </ModalWithForm>
   );

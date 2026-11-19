@@ -15,6 +15,7 @@ function Main({
   onCardSave,
   onCardDelete,
   isLoggedIn,
+  onAuthModalOpen,
 }) {
   return (
     <main className="main">
@@ -23,7 +24,7 @@ function Main({
 
       {/* 1. Preloader block shown immediately while searching */}
       {isLoading && (
-        <section className="main__results-container main__results-container_status">
+        <section className="main__results-container main__results-container--status">
           <div className="main__loader-container">
             <Preloader />
             <p className="main__status-text">Searching for news...</p>
@@ -36,14 +37,14 @@ function Main({
         <>
           {/* 2. Error Message handler */}
           {searchError && (
-            <section className="main__results-container main__results-container_status">
+            <section className="main__results-container main__results-container--status">
               <p className="main__error-text">{searchError}</p>
             </section>
           )}
 
           {/* 3. Nothing Found handling */}
           {hasSearched && cards.length === 0 && !searchError && (
-            <section className="main__results-container main__results-container_status">
+            <section className="main__results-container main__results-container--status">
               <div className="main__not-found-container">
                 <div className="main__not-found-icon" />
                 <h3 className="main__not-found-title">Nothing Found</h3>
@@ -60,10 +61,10 @@ function Main({
               <h2 className="main__title">Search results</h2>
               <NewsCardList
                 cards={cards.slice(0, visibleCount)}
-                isSearching={isLoading}
                 onCardSave={onCardSave}
                 onCardDelete={onCardDelete}
                 isLoggedIn={isLoggedIn}
+                onAuthModalOpen={onAuthModalOpen}
               />
               {/* 5. Pagination control hidden if elements are exhausted */}
               {visibleCount < cards.length && (

@@ -1,160 +1,71 @@
 .news-card {
-  background-color: #FFFFFF;
-  border-radius: 16px;
-  overflow: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
   width: 100%;
-  min-height: 440px;
+  height: 576px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(8, 29, 45, 0.05);
   transition: box-shadow 0.2s ease;
 }
 
 .news-card:hover {
-  box-shadow: 0px 8px 24px rgba(26, 27, 34, 0.1);
+  box-shadow: 0 8px 24px rgba(8, 29, 45, 0.12);
 }
 
-/* Added: Wrap link block to anchor positioning elements perfectly */
-.news-card__link {
-  display: block;
-  width: 100%;
+.news-card__main-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
+  color: inherit;
+}
+
+/* Image Header */
+.news-card__image-container {
+  width: 100%;
+  height: 272px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: #f5f6f7;
 }
 
 .news-card__image {
+  display: block;
   width: 100%;
-  height: 272px;
+  height: 100%;
   object-fit: cover;
-  display: block; /* Fixed: Prevents unwanted default line-height gap underneath images */
+  object-position: center;
 }
 
-/* Badges and Top Actions Layout */
-.news-card__top-container {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  pointer-events: none; /* Allows clicks to pass through to children */
-  z-index: 2; /* Fixed: Prevents descriptive links from swallowing tooltips or button hover areas */
-}
-
-.news-card__keyword {
-  pointer-events: auto;
-  background-color: #FFFFFF;
-  border-radius: 10px;
-  padding: 8px 22px;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #1A1B22;
-  box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
-}
-
-.news-card__action-container {
-  pointer-events: auto;
-  display: flex;
-  flex-direction: row-reverse; /* Places the tooltip to the left of the button naturally */
-  align-items: center;
-  margin-left: auto;
-}
-
-/* Tooltip message adjustments */
-.news-card__tooltip {
-  background-color: #FFFFFF;
-  color: #1A1B22;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 14px;
-  padding: 12px 20px;
-  border-radius: 4px;
-  box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  white-space: nowrap;
-  margin-right: 4px; /* Generates clean breathing room separating the tip from the icon asset */
-}
-
-/* Show tooltip when hovering over button */
-.news-card__button:hover ~ .news-card__tooltip {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Round Action Buttons (Bookmark & Trash) */
-.news-card__button {
-  width: 40px;
-  height: 40px;
-  background-color: #FFFFFF;
-  border: none;
-  border-radius: 8px; /* Note: adjust to circular if required by your Figma mockup (e.g. 50%) */
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.05);
-  padding: 0;
-  flex-shrink: 0; /* Ensures the button never squishes next to long text */
-}
-
-/* Bookmark Button Icon States */
-.news-card__button_type_bookmark {
-  background-image: url('../../images/bookmark-normal.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.news-card__button_type_bookmark:hover {
-  background-image: url('../../images/bookmark-hover.svg');
-}
-
-.news-card__button_type_bookmark-marked {
-  background-image: url('../../images/bookmark-marked.svg');
-}
-
-/* Trash Button Icon States (Saved News Page) */
-.news-card__button_type_trash {
-  background-image: url('../../images/trash-normal.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.news-card__button_type_trash:hover {
-  background-image: url('../../images/trash-hover.svg');
-}
-
-/* Card Content Description Area */
+/* Content Area */
 .news-card__text-container {
-  padding: 24px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  text-decoration: none;
-  color: inherit;
-  z-index: 1; /* Sits beneath the absolute overlay actions panel */
+  padding: 20px 24px 24px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .news-card__date {
-  font-family: 'Source Sans 3', Arial, sans-serif; /* Fixed: Corrected to modern typography standard */
-  font-size: 18px;
+  margin: 0 0 12px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
   font-weight: 400;
+  font-size: 18px;
   line-height: 24px;
-  color: #B6BCBF;
-  margin: 0 0 12px 0;
+  color: #b6bcbf;
 }
 
 .news-card__title {
-  font-family: 'Roboto Slab', serif;
-  font-size: 22px;
+  margin: 0 0 16px;
+  font-family: "Roboto Slab", serif;
   font-weight: 400;
-  line-height: 24px;
-  color: #1A1B22;
-  margin: 0 0 16px 0;
+  font-size: 26px;
+  line-height: 30px;
+  color: #1a1b22;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -162,12 +73,12 @@
 }
 
 .news-card__text {
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 16px;
+  margin: 0 0 18px;
+  font-family: "Roboto", Arial, sans-serif;
   font-weight: 400;
+  font-size: 16px;
   line-height: 22px;
-  color: #1A1B22;
-  margin: 0 0 16px 0;
+  color: #1a1b22;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -175,50 +86,181 @@
 }
 
 .news-card__source {
-  font-family: 'Roboto Slab', serif;
-  font-size: 16px;
+  margin: auto 0 0;
+  font-family: "Roboto Slab", serif;
   font-weight: 700;
+  font-size: 16px;
   line-height: 20px;
-  color: #B6BCBF;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: auto;
+  color: #b6bcbf;
 }
 
-/* ==========================================================================
-   Responsive Grid Adapters (Breakpoints)
-   ========================================================================== */
+/* Top Overlay Controls (Keyword + Save/Delete Button) */
+.news-card__top-container {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.news-card__keyword {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  max-width: 180px;
+  padding: 0 22px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 22px rgba(59, 74, 116, 0.1);
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: auto;
+}
+
+.news-card__action-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  pointer-events: auto;
+}
+
+.news-card__button {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  padding: 0;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 10px 22px rgba(59, 74, 116, 0.1);
+  cursor: pointer;
+  transition: background-image 0.2s ease, background-color 0.2s ease;
+}
+
+/* Bookmark Default */
+/* Bookmark Default */
+.news-card__button--type-bookmark {
+  background-image: url("../../images/bookmark.svg");
+  opacity: 0.7;
+}
+
+.news-card__button--type-bookmark:hover {
+  opacity: 1;
+}
+
+/* Bookmark Active / Saved */
+.news-card__button--type-bookmark-marked {
+  background-image: url("../../images/bookmark-blue.svg");
+  opacity: 1;
+}
+
+/* Trash Icon (Saved News Page) */
+.news-card__button--type-trash {
+  background-image: url("../../images/trash.svg");
+  opacity: 0.7;
+}
+
+.news-card__button--type-trash:hover {
+  opacity: 1;
+}
+
+
+/* Tooltip */
+.news-card__tooltip {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 22px rgba(59, 74, 116, 0.1);
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000000;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.news-card__button:hover + .news-card__tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Tablet Breakpoint */
 @media screen and (max-width: 1023px) {
-  .news-card__image {
+  .news-card {
+    height: 420px;
+    border-radius: 12px;
+  }
+
+  .news-card__image-container {
     height: 150px;
   }
-  
+
   .news-card__text-container {
     padding: 16px;
   }
-  
-  .news-card__date {
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 8px;
-  }
-  
+
   .news-card__title {
-    font-size: 20px;
-    line-height: 24px;
     margin-bottom: 10px;
+    font-size: 22px;
+    line-height: 24px;
+    -webkit-line-clamp: 3;
   }
-  
+
   .news-card__text {
-    font-size: 14px;
-    line-height: 20px;
     margin-bottom: 12px;
     -webkit-line-clamp: 3;
   }
+
+  .news-card__top-container {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+  }
+
+  .news-card__keyword {
+    padding: 0 16px;
+    max-width: 120px;
+  }
 }
 
+/* Mobile Breakpoint */
 @media screen and (max-width: 767px) {
-  .news-card__image {
+  .news-card {
+    height: 440px;
+  }
+
+  .news-card__image-container {
     height: 196px;
+  }
+
+  .news-card__top-container {
+    top: 16px;
+    left: 16px;
+    right: 16px;
   }
 }

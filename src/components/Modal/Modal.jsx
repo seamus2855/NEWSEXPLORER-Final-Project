@@ -31,15 +31,16 @@ export default function Modal({ isOpen, onClose, children }) {
 
   return (
     <div
-      className="modal-overlay"
+      /* FIXED: Unified block and element layout markup using strict BEM naming rules */
+      className="modal"
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
     >
-      <div className="modal-container">
+      <div className="modal__container">
         {/* Close Button */}
         <button
-          className="modal-close-btn"
+          className="modal__close-button"
           onClick={onClose}
           type="button"
           aria-label="Close modal"
@@ -48,7 +49,7 @@ export default function Modal({ isOpen, onClose, children }) {
         </button>
         
         {/* Modal Content */}
-        <div className="modal-content">
+        <div className="modal__content">
           {children}
         </div>
       </div>

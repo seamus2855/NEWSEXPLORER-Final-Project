@@ -1,23 +1,18 @@
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-
-// Point to the hook file inside your contexts folder
 import { useAuth } from "../../hooks/useAuth.js";
-
 import Main from "../Main/Main";
 import SavedNews from "../SavedNews/SavedNews";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-
-// Modals layer
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-
-// Correct path and case-sensitivity for your News API utility
-import { searchNews } from "../../utils/newsApi.js";
+import { searchNews } from "../../utils/NewsApi.js";
+import "./App.css";
 
 function App() {
-  // --- Destructure Globally Managed Global Auth Context States ---
+  // --- Destructure Globally Managed Auth Context States ---
   const {
     isLoggedIn,
     currentUser,
@@ -28,7 +23,8 @@ function App() {
 
   // --- Core Layout & Search Engine UI State ---
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // Used to track API request pending states
+  const [isNewsLoading, setIsNewsLoading] = useState(false);
+  const [isFormLoading, setIsFormLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [searchError, setSearchError] = useState("");
   const [visibleCount, setVisibleCount] = useState(3);
@@ -36,8 +32,8 @@ function App() {
   // --- Structural Context Modals Layer ---
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false); // Added for the registration success view
-  const [serverError, setServerError] = useState(""); // Added to pass down server exception details if needed
+  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   // --- Local UI Storage for Saved Cards Persistence Layer ---
   const [savedArticles, setSavedArticles] = useState([]);
@@ -45,17 +41,20 @@ function App() {
 
   // --- Modal Navigation State Controls ---
   const handleSignInClick = () => {
+    setServerError("");
     setIsRegistrationSuccess(false);
     setIsRegisterModalOpen(false);
     setIsLoginModalOpen(true);
   };
 
   const handleRegisterClick = () => {
+    setServerError("");
     setIsLoginModalOpen(false);
     setIsRegisterModalOpen(true);
   };
 
   const closeAllModals = () => {
+    setServerError("");
     setIsLoginModalOpen(false);
     setIsRegisterModalOpen(false);
     setIsRegistrationSuccess(false);
@@ -63,7 +62,7 @@ function App() {
 
   // --- API Search Handling Core Logic ---
   const handleSearchSubmit = (keyword) => {
-    setIsLoading(true);
+    setIsNewsLoading(true);
     setHasSearched(true);
     setSearchError("");
     setArticles([]);
@@ -89,7 +88,7 @@ function App() {
         );
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsNewsLoading(false);
       });
   };
 
@@ -131,27 +130,24 @@ function App() {
 
   // --- Handle Context Action Mapping Pipelines ---
   const handleLoginSubmit = (values) => {
-    setIsLoading(true);
+    setIsFormLoading(true);
     setServerError("");
-    // Simulating an asynchronous network callback action
     setTimeout(() => {
       login(
         { name: "Explorer", email: values.email, password: values.password },
         "simulated-session-web-token",
       );
-      setIsLoading(false);
+      setIsFormLoading(false);
       closeAllModals();
     }, 1000);
   };
 
   const handleRegisterSubmit = () => {
-    setIsLoading(true);
+    setIsFormLoading(true);
     setServerError("");
-    // Simulating an asynchronous registration callback action
     setTimeout(() => {
-      // Toggle successful registration state view flag
       setIsRegistrationSuccess(true);
-      setIsLoading(false);
+      setIsFormLoading(false);
     }, 1000);
   };
 
@@ -161,7 +157,7 @@ function App() {
   };
 
   if (isAuthLoading) {
-    return <div className="loading-screen">Loading layout...</div>;
+    return <div className="page__loading">Loading layout...</div>;
   }
 
   return (
@@ -172,7 +168,6 @@ function App() {
         onLogoutClick={handleLogoutClick}
         onSignInClick={handleSignInClick}
       />
-
       <Routes>
         <Route
           path="/"
@@ -181,7 +176,7 @@ function App() {
               onSearchSubmit={handleSearchSubmit}
               onShowMore={handleShowMore}
               cards={articles}
-              isLoading={isLoading}
+              isLoading={isNewsLoading}
               hasSearched={hasSearched}
               searchError={searchError}
               visibleCount={visibleCount}
@@ -192,24 +187,21 @@ function App() {
             />
           }
         />
-
         <Route
           path="/saved-news"
           element={
-            isLoggedIn ? (
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
               <SavedNews
                 savedCards={savedArticles}
                 onCardDelete={handleCardDelete}
                 isLoggedIn={isLoggedIn}
                 currentUser={currentUser}
               />
-            ) : (
-              <Navigate to="/" replace />
-            )
+            </ProtectedRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-
       <Footer />
 
       {/* --- Overlay Modals Injection Layer --- */}
@@ -217,12 +209,12 @@ function App() {
         <LoginModal
           isOpen={isLoginModalOpen}
           onClose={closeAllModals}
-          onSubmit={handleLoginSubmit}
-          onRedirectClick={handleRegisterClick}
-          isLoading={isLoading}
+          onLogin={handleLoginSubmit}
+          handleAltClick={handleRegisterClick}
+          isLoading={isFormLoading}
+          serverError={serverError}
         />
       )}
-
       {(isRegisterModalOpen || isRegistrationSuccess) && (
         <RegisterModal
           isOpen={isRegisterModalOpen || isRegistrationSuccess}
@@ -232,7 +224,7 @@ function App() {
           onSignInLinkClick={handleSignInClick}
           isRegistrationSuccess={isRegistrationSuccess}
           serverError={serverError}
-          isLoading={isLoading}
+          isLoading={isFormLoading}
         />
       )}
     </div>
