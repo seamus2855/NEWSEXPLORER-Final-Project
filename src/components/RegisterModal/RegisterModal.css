@@ -1,165 +1,148 @@
 /* ==========================================================================
-   📦 BLOCK MODIFIERS: modal (Registration Success Layout States)
+   Input & Label Rules (Self-contained so RegisterModal works standalone)
    ========================================================================== */
-
-/* Base container for the modal overlay */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.modal__label-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s 0.2s, opacity 0.2s linear;
-  z-index: 999;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 22px;
+  margin-bottom: 12px;
 }
 
-/* Modifier to trigger the visible layout state */
-.modal--opened {
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 0s, opacity 0.2s linear;
+.modal__label {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  color: #b6bcbf;
+  margin-bottom: 8px;
 }
 
-/* Background overlay mask layer */
-.modal__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-}
-
-/* FIXED: Unified structural dimensions to keep the card stable across all forms */
-.modal__container--success { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 14px; 
-  background-color: #FFFFFF;
-  border-radius: 16px;
+.modal__input {
   width: 100%;
-  max-width: 430px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  color: #000000;
+  background-color: transparent;
+  outline: none;
+  transition: border-bottom-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.modal__input::placeholder {
+  color: #b6bcbf;
+  opacity: 1;
+}
+
+.modal__input:focus {
+  border-bottom-color: #1a1b22;
+}
+
+.modal__input--type-error {
+  border-bottom-color: #ff0000;
+}
+
+.modal__error-message {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  color: #ff0000;
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.modal__error-message--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal__error-message--server {
+  position: static;
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 14px;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   Registration Success Modal Layout States
+   ========================================================================== */
+.modal__container--success {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  width: min(430px, calc(100% - 40px));
   padding: 43px 36px 51px;
   box-sizing: border-box;
   position: relative;
   z-index: 2;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-} 
+}
 
-/* FIXED: Replaced broken truncated code with a clean, fully formatted inline SVG string */
-.modal__close-button {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 24px;
-  height: 24px;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='24' height='24' fill='none' xmlns='http://w3.org d='M18.364 5.636L5.636 18.364M18.364 18.364L5.636 5.636' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
+.modal__title--success {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 28px;
+  color: #000000;
+  margin: 0;
+}
+
+.modal__link {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #2f71e5;
+  background: none;
   border: none;
-  background-color: transparent;
+  padding: 0;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  text-align: left;
+  align-self: flex-start;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.modal__close-button:hover {
-  opacity: 0.6;
-}
-
-/* FIXED: Synced title class syntax to utilize standardized double-hyphen modifier notation */
-.modal__title--success { 
-  font-family: 'Roboto Slab', serif; 
-  font-size: 26px; 
-  font-weight: 700; /* Fixed: Changed from 900 to 700 to match standard font-weight limits */
-  line-height: 30px; 
-  color: #000000; 
-  margin: 0; 
-} 
-
-/* FIXED: Formatted the standalone inline navigation trigger block element text link */
-.modal__link { 
-  font-family: 'Inter', Arial, sans-serif; 
-  font-size: 18px; 
-  font-weight: 500; 
-  line-height: 22px; 
-  color: #2F71E5; 
-  background: none; 
-  border: none; 
-  padding: 0; 
-  cursor: pointer; 
-  text-align: left; 
-  align-self: flex-start; /* Keeps button click area bounded flush to text width */
-  transition: color 0.2s ease, opacity 0.2s ease; 
-} 
-
-.modal__link:hover { 
-  color: #2A64CC;
-  text-decoration: underline; /* Clear interactive affordance for link action conversion */
-} 
-
-/* ==========================================================================
-   ⚠️ EXCEPTION STATES: Dynamic Validation Hooks
-   ========================================================================== */
-
-.modal__input--type-error {
-  border-bottom: 1px solid #FF0000; /* Highlight invalid fields red */
-}
-
-.modal__error-message {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 12px;
-  line-height: 15px;
-  color: #FF0000;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s linear;
-}
-
-.modal__error-message--visible {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Shared Server Fallback Exception Messaging modifier */
-.modal__error-message--server {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
+.modal__link:hover {
+  color: #2a64cc;
+  text-decoration: underline;
 }
 
 /* ==========================================================================
-   📱 Responsive Adaptations (Mobile Viewports)
+   Responsive Adaptations (Mobile Viewports <= 640px)
    ========================================================================== */
-@media screen and (max-width: 580px) { /* Aligned breakpoint width with your base modal layout (580px) */
-  
-  /* FIXED: Adjusted properties to overlay cleanly full-screen on mobile browsers */
+@media screen and (max-width: 640px) {
   .modal__container--success {
+    width: 100%;
     max-width: 100%;
-    height: 100%;
+    min-height: 100dvh;
     border-radius: 0;
-    padding: 124px 16px 32px; /* Generates spacing below the top close button area */
+    padding: 80px 16px 32px;
     justify-content: flex-start;
   }
 
-  .modal__close-button {
-    top: 24px;
-    right: 16px;
+  .modal__title--success {
+    font-size: 24px;
+    line-height: 28px;
   }
 
-  .modal__title--success { 
-    font-size: 22px; 
-    line-height: 26px; 
-  } 
-  
-  .modal__link { 
-    font-size: 16px; 
-    line-height: 20px; 
-    margin-top: 14px; /* Increases tap target separation for mobile users */
-  } 
+  .modal__link {
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 14px;
+  }
 }

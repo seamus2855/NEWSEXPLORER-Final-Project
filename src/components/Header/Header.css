@@ -16,9 +16,9 @@
 }
 
 .header--theme-light {
-  position: absolute;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #E6E8EB;
+  position: relative;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e6e8eb;
 }
 
 .header__logo {
@@ -28,7 +28,7 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
   transition: opacity 0.2s ease, color 0.2s ease;
 }
@@ -38,12 +38,8 @@
 }
 
 .header__logo--theme-light {
-  color: #1A1B22;
+  color: #1a1b22;
 }
-
-/* ==========================================================================
-   Responsive Adaptations
-   ========================================================================== */
 
 @media screen and (max-width: 1023px) {
   .header {
@@ -63,18 +59,15 @@
     line-height: 24px;
   }
 
-  /* Keep header background transparent so the mobile drawer background shows cleanly */
   .header:has(.navigation--opened) {
     background-color: transparent;
   }
 
-  /* Default dark theme open menu: keep logo white */
   .header:has(.navigation--opened) .header__logo {
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
-  /* Light theme (/saved-news) open menu: keep logo dark (placed after dark rule to win cascade) */
   .header--theme-light:has(.navigation--opened) .header__logo {
-    color: #1A1B22;
+    color: #1a1b22;
   }
 }

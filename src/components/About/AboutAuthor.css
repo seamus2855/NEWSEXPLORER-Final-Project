@@ -9,9 +9,9 @@
   flex-direction: row;
   align-items: center;
   gap: 56px;
-  max-width: 1232px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 80px 40px;
+  padding: 80px 104px;
   box-sizing: border-box;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .about-author__title {
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   font-size: 40px;
   font-weight: 400;
   line-height: 46px;
@@ -46,7 +46,7 @@
 }
 
 .about-author__name {
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -54,7 +54,7 @@
 }
 
 .about-author__description {
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
@@ -77,7 +77,7 @@
   border: 1px solid #1a1b22;
   border-radius: 80px;
   color: #1a1b22;
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
@@ -92,11 +92,11 @@
   border-color: #1a1b22;
 }
 
-/* Tablet Layout Breakpoint */
+/* Tablet Layout Breakpoint (768px – 1023px) */
 @media screen and (max-width: 1023px) {
   .about-author__container {
     gap: 32px;
-    padding: 40px 24px;
+    padding: 40px;
   }
 
   .about-author__image-wrapper {
@@ -106,21 +106,24 @@
 
   .about-author__title {
     font-size: 30px;
-    line-height: 40px;
+    line-height: 34px;
     margin-bottom: 16px;
   }
 }
 
-/* Mobile Layout Breakpoint */
+/* Mobile Layout Breakpoint (< 768px) */
 @media screen and (max-width: 767px) {
   .about-author__container {
     flex-direction: column;
     gap: 24px;
-    padding: 40px 16px;
+    padding: 32px 16px 80px;
     text-align: left;
   }
 
   .about-author__image-wrapper {
+    width: 272px;
+    height: 272px;
+    max-width: 100%;
     margin: 0 auto;
   }
 }

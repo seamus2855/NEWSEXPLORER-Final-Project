@@ -13,18 +13,35 @@ function RegisterModal({
   onSignInLinkClick,
   isLoading,
 }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormAndValidation();
 
-  // Reset inputs when modal opens or closes
+  // Reset inputs when modal opens
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !isRegistrationSuccess) {
       resetForm({ email: "", password: "", username: "" });
     }
-  }, [isOpen, resetForm]);
+  }, [isOpen, isRegistrationSuccess, resetForm]);
+
+  // Close success modal on Escape key press
+  useEffect(() => {
+    if (!isRegistrationSuccess) return;
+
+    const handleEscapeClose = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeClose);
+    };
+  }, [isRegistrationSuccess, onClose]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid) {
+    if (isValid && typeof onRegister === "function") {
       onRegister({
         email: values.email,
         password: values.password,
@@ -33,22 +50,37 @@ function RegisterModal({
     }
   };
 
+  const handleSuccessOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   // High-Fidelity Success Modal View Context
   if (isRegistrationSuccess) {
     return (
-      <div className="modal modal--opened" role="dialog" aria-modal="true" aria-labelledby="success-title">
-        <div className="modal__overlay" onClick={onClose} />
+      <div
+        className="modal modal--opened"
+        onClick={handleSuccessOverlayClick}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="success-title"
+      >
         <div className="modal__container modal__container--success">
-          <button 
-            type="button" 
-            className="modal__close-button" 
-            onClick={onClose} 
-            aria-label="Close success overlay" 
+          <button
+            type="button"
+            className="modal__close-button"
+            onClick={onClose}
+            aria-label="Close success overlay"
           />
           <h2 id="success-title" className="modal__title modal__title--success">
             Registration successfully completed!
           </h2>
-          <button type="button" className="modal__link" onClick={onSignInLinkClick}>
+          <button
+            type="button"
+            className="modal__link"
+            onClick={onSignInLinkClick}
+          >
             Sign in
           </button>
         </div>
@@ -70,7 +102,9 @@ function RegisterModal({
     >
       {/* Email input field */}
       <div className="modal__label-container">
-        <label className="modal__label" htmlFor="register-email">Email</label>
+        <label className="modal__label" htmlFor="register-email">
+          Email
+        </label>
         <input
           id="register-email"
           type="email"
@@ -93,7 +127,9 @@ function RegisterModal({
 
       {/* Password input field */}
       <div className="modal__label-container">
-        <label className="modal__label" htmlFor="register-password">Password</label>
+        <label className="modal__label" htmlFor="register-password">
+          Password
+        </label>
         <input
           id="register-password"
           type="password"
@@ -105,7 +141,9 @@ function RegisterModal({
           value={values.password || ""}
           onChange={handleChange}
           aria-invalid={!!errors.password}
-          aria-describedby={errors.password ? "register-password-error" : undefined}
+          aria-describedby={
+            errors.password ? "register-password-error" : undefined
+          }
         />
         <span
           id="register-password-error"
@@ -117,7 +155,9 @@ function RegisterModal({
 
       {/* Username input field */}
       <div className="modal__label-container">
-        <label className="modal__label" htmlFor="register-username">Username</label>
+        <label className="modal__label" htmlFor="register-username">
+          Username
+        </label>
         <input
           id="register-username"
           type="text"
@@ -130,7 +170,9 @@ function RegisterModal({
           value={values.username || ""}
           onChange={handleChange}
           aria-invalid={!!errors.username}
-          aria-describedby={errors.username ? "register-username-error" : undefined}
+          aria-describedby={
+            errors.username ? "register-username-error" : undefined
+          }
         />
         <span
           id="register-username-error"
@@ -142,7 +184,10 @@ function RegisterModal({
 
       {/* Shared Server Fallback Exception Messaging */}
       {serverError && (
-        <span className="modal__error-message modal__error-message--server" role="alert">
+        <span
+          className="modal__error-message modal__error-message--server"
+          role="alert"
+        >
           {serverError}
         </span>
       )}

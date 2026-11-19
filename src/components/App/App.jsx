@@ -1,20 +1,18 @@
-import { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-// Point to the hook file inside your contexts folder
-import { useAuth } from '../../hooks/useAuth.js';
-import Main from '../Main/Main';
-import SavedNews from '../SavedNews/SavedNews';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx"; 
-// Modals layer
-import LoginModal from '../LoginModal/LoginModal';
-import RegisterModal from '../RegisterModal/RegisterModal';
-// Correct path and case-sensitivity for your News API utility
-import { searchNews } from '../../utils/NewsApi.js';
+import { useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth.js";
+import Main from "../Main/Main";
+import SavedNews from "../SavedNews/SavedNews";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import { searchNews } from "../../utils/NewsApi.js";
+import "./App.css";
 
 function App() {
-  // --- Destructure Globally Managed Global Auth Context States ---
+  // --- Destructure Globally Managed Auth Context States ---
   const {
     isLoggedIn,
     currentUser,
@@ -25,35 +23,38 @@ function App() {
 
   // --- Core Layout & Search Engine UI State ---
   const [articles, setArticles] = useState([]);
-  const [isNewsLoading, setIsNewsLoading] = useState(false); 
-  const [isFormLoading, setIsFormLoading] = useState(false); 
+  const [isNewsLoading, setIsNewsLoading] = useState(false);
+  const [isFormLoading, setIsFormLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
-  const [searchError, setSearchError] = useState('');
+  const [searchError, setSearchError] = useState("");
   const [visibleCount, setVisibleCount] = useState(3);
 
   // --- Structural Context Modals Layer ---
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false); 
-  const [serverError, setServerError] = useState(''); 
+  const [isRegistrationSuccess, setIsRegistrationSuccess] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   // --- Local UI Storage for Saved Cards Persistence Layer ---
   const [savedArticles, setSavedArticles] = useState([]);
-  const [currentKeyword, setCurrentKeyword] = useState('');
+  const [currentKeyword, setCurrentKeyword] = useState("");
 
   // --- Modal Navigation State Controls ---
   const handleSignInClick = () => {
+    setServerError("");
     setIsRegistrationSuccess(false);
     setIsRegisterModalOpen(false);
     setIsLoginModalOpen(true);
   };
 
   const handleRegisterClick = () => {
+    setServerError("");
     setIsLoginModalOpen(false);
     setIsRegisterModalOpen(true);
   };
 
   const closeAllModals = () => {
+    setServerError("");
     setIsLoginModalOpen(false);
     setIsRegisterModalOpen(false);
     setIsRegistrationSuccess(false);
@@ -61,13 +62,13 @@ function App() {
 
   // --- API Search Handling Core Logic ---
   const handleSearchSubmit = (keyword) => {
-    setIsNewsLoading(true); 
+    setIsNewsLoading(true);
     setHasSearched(true);
-    setSearchError('');
+    setSearchError("");
     setArticles([]);
     setVisibleCount(3);
     setCurrentKeyword(keyword);
-    
+
     searchNews(keyword)
       .then((data) => {
         if (data.articles) {
@@ -83,11 +84,11 @@ function App() {
       .catch((err) => {
         console.error(err);
         setSearchError(
-          'Sorry, something went wrong during the request. Please try again later.'
+          "Sorry, something went wrong during the request. Please try again later.",
         );
       })
       .finally(() => {
-        setIsNewsLoading(false); 
+        setIsNewsLoading(false);
       });
   };
 
@@ -117,7 +118,7 @@ function App() {
     const cardWithMeta = {
       ...card,
       isSaved: true,
-      keyword: currentKeyword || 'General',
+      keyword: currentKeyword || "General",
     };
     setSavedArticles((prev) => [cardWithMeta, ...prev]);
     setArticles((prev) =>
@@ -129,24 +130,24 @@ function App() {
 
   // --- Handle Context Action Mapping Pipelines ---
   const handleLoginSubmit = (values) => {
-    setIsFormLoading(true); 
-    setServerError('');
+    setIsFormLoading(true);
+    setServerError("");
     setTimeout(() => {
       login(
-        { name: 'Explorer', email: values.email, password: values.password },
-        'simulated-session-web-token',
+        { name: "Explorer", email: values.email, password: values.password },
+        "simulated-session-web-token",
       );
-      setIsFormLoading(false); 
+      setIsFormLoading(false);
       closeAllModals();
     }, 1000);
   };
 
   const handleRegisterSubmit = () => {
-    setIsFormLoading(true); 
-    setServerError('');
+    setIsFormLoading(true);
+    setServerError("");
     setTimeout(() => {
       setIsRegistrationSuccess(true);
-      setIsFormLoading(false); 
+      setIsFormLoading(false);
     }, 1000);
   };
 
@@ -175,7 +176,7 @@ function App() {
               onSearchSubmit={handleSearchSubmit}
               onShowMore={handleShowMore}
               cards={articles}
-              isLoading={isNewsLoading} 
+              isLoading={isNewsLoading}
               hasSearched={hasSearched}
               searchError={searchError}
               visibleCount={visibleCount}
@@ -186,7 +187,6 @@ function App() {
             />
           }
         />
-        {/* FIXED: Replaced loose inline conditional rendering statements with the ProtectedRoute container */}
         <Route
           path="/saved-news"
           element={
@@ -200,7 +200,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* Wildcard Fallback redirection catch-all link */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
@@ -212,7 +211,7 @@ function App() {
           onClose={closeAllModals}
           onLogin={handleLoginSubmit}
           handleAltClick={handleRegisterClick}
-          isLoading={isFormLoading} 
+          isLoading={isFormLoading}
           serverError={serverError}
         />
       )}
@@ -225,7 +224,7 @@ function App() {
           onSignInLinkClick={handleSignInClick}
           isRegistrationSuccess={isRegistrationSuccess}
           serverError={serverError}
-          isLoading={isFormLoading} 
+          isLoading={isFormLoading}
         />
       )}
     </div>

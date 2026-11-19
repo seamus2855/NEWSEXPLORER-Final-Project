@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
 import { HasAuthContext } from "./HasAuthContext.js";
-
-/* 
-   FIXED: Swapped missing custom utility back to your existing utility file.
-   All user management hooks (login, logout, checkToken) are processed here cleanly.
-*/
 import * as auth from "../utils/NewsApi.js";
 
 export function AuthProvider({ children }) {
@@ -18,27 +13,35 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem("jwt");
     if (!token) return;
 
+    const savedUserRaw = localStorage.getItem("user");
+    const savedUser = savedUserRaw ? JSON.parse(savedUserRaw) : null;
+
     auth
       .checkToken(token)
       .then((user) => {
-        setCurrentUser(user);
+        setCurrentUser(user || savedUser || { name: "Explorer" });
         setIsLoggedIn(true);
       })
       .catch((err) => {
         console.error("Token validation failed:", err);
         localStorage.removeItem("jwt");
+        localStorage.removeItem("user");
       })
       .finally(() => setIsLoading(false));
   }, []);
 
   const login = (userData, token) => {
     localStorage.setItem("jwt", token);
+    if (userData) {
+      localStorage.setItem("user", JSON.stringify(userData));
+    }
     setCurrentUser(userData);
     setIsLoggedIn(true);
   };
 
   const logout = () => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("user");
     setCurrentUser(null);
     setIsLoggedIn(false);
   };

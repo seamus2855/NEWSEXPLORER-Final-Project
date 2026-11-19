@@ -1,5 +1,3 @@
-/* app.css */
-
 /* Universal Border-Box Reset */
 *,
 *::before,
@@ -8,61 +6,57 @@
 }
 
 /* Base Body and Document Styles */
-body {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', 'Inter', Arial, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  font-family: "Roboto", "Inter", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F5F6F7;
-  color: #1A1B22;
+  background-color: #f5f6f7;
+  color: #1a1b22;
 }
 
 /* ==========================================================================
-   📦 BLOCK: page (Master Layout Wrapper)
+   BLOCK: page (Master Layout Wrapper)
    ========================================================================== */
 .page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Forces footer to the bottom of the view */
+  min-height: 100vh;
   width: 100%;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Sticky Footer Strategy 
-   Targets the main wrapper component or direct center elements to flex fill space */
+/* Sticky Footer Strategy */
 .page > main,
 .main {
-  flex: 1 0 auto; /* Keeps the middle content growing dynamically */
+  flex: 1 0 auto;
 }
 
 /* Hero / Search Section Background Implementation */
 .page__hero-search {
-  /* FIXED: Added a charcoal color fallback to seamlessly transition with the overlay edge colors */
-  background-color: #1A1B22;
-  background-image: url('../../images/Overlay.svg');
+  background-color: #1a1b22;
+  background-image: url("../../images/Overlay.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  
-  /* OPTIMIZED: Standardized minimum viewport coverage height limits */
-  min-height: 536px; 
-
-  /* FIXED: Increased top padding from 80px to 160px to clear the absolute height 
-     of your header/navigation bar cleanly without forcing content card overflow shifts */
+  min-height: 576px;
   padding: 160px 24px 80px;
-
-  /* Centers the page title and search form inside the container */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  /* Text color override so your title remains readable against the background */
-  color: #FFFFFF;
+  color: #ffffff;
   position: relative;
 }
 
@@ -73,39 +67,31 @@ body {
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   font-size: 18px;
-  color: #1A1B22;
-  background-color: #F5F6F7;
+  color: #1a1b22;
+  background-color: #f5f6f7;
 }
 
 /* ==========================================================================
-   ⚡ MODIFIERS: Strict BEM uses double hyphens (--) for states/themes
+   MODIFIERS: Theme Variants
    ========================================================================== */
 .page--theme-dark {
-  background-color: #1A1B22;
-  color: #FFFFFF;
+  background-color: #1a1b22;
+  color: #ffffff;
 }
 
 .page--theme-light {
-  background-color: #FFFFFF;
-  color: #1A1B22;
+  background-color: #ffffff;
+  color: #1a1b22;
 }
 
 /* ==========================================================================
-   Global Interactive Resets
+   Safe Global Element Defaults (Non-destructive to component borders/colors)
    ========================================================================== */
 button {
   cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
   font-family: inherit;
-  transition: opacity 0.2s ease-in-out;
-}
-
-button:hover {
-  opacity: 0.7;
 }
 
 button:disabled {
@@ -115,12 +101,6 @@ button:disabled {
 
 a {
   text-decoration: none;
-  color: inherit;
-  transition: opacity 0.2s ease-in-out;
-}
-
-a:hover {
-  opacity: 0.7;
 }
 
 img {
@@ -130,18 +110,18 @@ img {
 }
 
 /* ==========================================================================
-   📱 RESPONSIVE MEDIA QUERIES (Breakpoints)
+   RESPONSIVE MEDIA QUERIES (Breakpoints)
    ========================================================================== */
 @media screen and (max-width: 1023px) {
   .page__hero-search {
     padding: 120px 24px 48px;
-    min-height: 452px;
+    min-height: 400px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .page__hero-search {
-    padding: 84px 16px 32px;
-    min-height: 412px;
+    padding: 86px 16px 32px;
+    min-height: 536px;
   }
 }
